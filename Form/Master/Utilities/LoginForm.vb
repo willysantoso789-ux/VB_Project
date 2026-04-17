@@ -5,10 +5,18 @@
             Exit Sub
         End If
 
-        ' Hardcode for now, no SQL yet
-        If txtUsername.Text = "a" And txtPassword.Text = "a" Then
+        ' Hardcode — nanti ganti ke DB
+        ' admin   / admin   → role Admin
+        ' resep01 / resep01 → role Resepsionis
+        If txtUsername.Text = "admin" AndAlso txtPassword.Text = "admin" Then
             MainForm.LoggedIn = True
             MainForm.ActiveUser = txtUsername.Text
+            MainForm.SessionRole = "Admin"
+            Me.Close()
+        ElseIf txtUsername.Text = "resep01" AndAlso txtPassword.Text = "resep01" Then
+            MainForm.LoggedIn = True
+            MainForm.ActiveUser = txtUsername.Text
+            MainForm.SessionRole = "Resepsionis"
             Me.Close()
         Else
             MsgBox("Username atau Password salah!", MsgBoxStyle.Critical, "Login Gagal")

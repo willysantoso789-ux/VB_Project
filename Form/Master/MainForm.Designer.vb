@@ -69,6 +69,16 @@ Partial Class MainForm
         Me.picCheckIn = New System.Windows.Forms.PictureBox()
         Me.picCheckOut = New System.Windows.Forms.PictureBox()
         Me.picLaporan = New System.Windows.Forms.PictureBox()
+        Me.pnlCardTipeKamar = New System.Windows.Forms.Panel()
+        Me.picTipeKamar = New System.Windows.Forms.PictureBox()
+        Me.lblCardTipeKamarTitle = New System.Windows.Forms.Label()
+        Me.lblCardTipeKamarDesc = New System.Windows.Forms.Label()
+        Me.btnTipeKamar = New System.Windows.Forms.Button()
+        Me.pnlCardProperti = New System.Windows.Forms.Panel()
+        Me.picProperti = New System.Windows.Forms.PictureBox()
+        Me.lblCardPropertiTitle = New System.Windows.Forms.Label()
+        Me.lblCardPropertiDesc = New System.Windows.Forms.Label()
+        Me.btnProperti = New System.Windows.Forms.Button()
         Me.mnuMain.SuspendLayout()
         Me.ssBottom.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
@@ -84,6 +94,8 @@ Partial Class MainForm
         CType(Me.picCheckIn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picCheckOut, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picLaporan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picTipeKamar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picProperti, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -217,6 +229,8 @@ Partial Class MainForm
         Me.pnlDashboard.Controls.Add(Me.pnlCardCheckIn)
         Me.pnlDashboard.Controls.Add(Me.pnlCardCheckOut)
         Me.pnlDashboard.Controls.Add(Me.pnlCardLaporan)
+        Me.pnlDashboard.Controls.Add(Me.pnlCardTipeKamar)
+        Me.pnlDashboard.Controls.Add(Me.pnlCardProperti)
         Me.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDashboard.Location = New System.Drawing.Point(0, 36)
         Me.pnlDashboard.Name = "pnlDashboard"
@@ -631,6 +645,105 @@ Partial Class MainForm
         Me.picLaporan.TabIndex = 0
         Me.picLaporan.TabStop = False
         '
+        'pnlCardTipeKamar  — Row 3, Col 1
+        '
+        Me.pnlCardTipeKamar.Name = "pnlCardTipeKamar"
+        Me.pnlCardTipeKamar.Location = New System.Drawing.Point(24, 568)
+        Me.pnlCardTipeKamar.Size = New System.Drawing.Size(280, 200)
+        Me.pnlCardTipeKamar.BackColor = System.Drawing.Color.White
+        Me.pnlCardTipeKamar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlCardTipeKamar.Visible = False
+        Me.pnlCardTipeKamar.Controls.Add(Me.picTipeKamar)
+        Me.pnlCardTipeKamar.Controls.Add(Me.lblCardTipeKamarTitle)
+        Me.pnlCardTipeKamar.Controls.Add(Me.lblCardTipeKamarDesc)
+        Me.pnlCardTipeKamar.Controls.Add(Me.btnTipeKamar)
+
+        Me.picTipeKamar.Name = "picTipeKamar"
+        Me.picTipeKamar.Location = New System.Drawing.Point(16, 16)
+        Me.picTipeKamar.Size = New System.Drawing.Size(44, 44)
+        Me.picTipeKamar.BackColor = System.Drawing.Color.FromArgb(240, 253, 244)
+        Me.picTipeKamar.TabStop = False
+
+        Me.lblCardTipeKamarTitle.Name = "lblCardTipeKamarTitle"
+        Me.lblCardTipeKamarTitle.AutoSize = False
+        Me.lblCardTipeKamarTitle.Size = New System.Drawing.Size(248, 22)
+        Me.lblCardTipeKamarTitle.Location = New System.Drawing.Point(16, 70)
+        Me.lblCardTipeKamarTitle.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCardTipeKamarTitle.ForeColor = System.Drawing.Color.FromArgb(22, 101, 52)
+        Me.lblCardTipeKamarTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblCardTipeKamarTitle.Text = "Tipe Kamar"
+
+        Me.lblCardTipeKamarDesc.Name = "lblCardTipeKamarDesc"
+        Me.lblCardTipeKamarDesc.AutoSize = False
+        Me.lblCardTipeKamarDesc.Size = New System.Drawing.Size(248, 50)
+        Me.lblCardTipeKamarDesc.Location = New System.Drawing.Point(16, 96)
+        Me.lblCardTipeKamarDesc.Font = New System.Drawing.Font("Segoe UI", 8.5!)
+        Me.lblCardTipeKamarDesc.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
+        Me.lblCardTipeKamarDesc.BackColor = System.Drawing.Color.Transparent
+        Me.lblCardTipeKamarDesc.Text = "Kelola tipe kamar dan harga per malam."
+
+        Me.btnTipeKamar.Name = "btnTipeKamar"
+        Me.btnTipeKamar.Text = "Buka"
+        Me.btnTipeKamar.Location = New System.Drawing.Point(16, 152)
+        Me.btnTipeKamar.Size = New System.Drawing.Size(90, 32)
+        Me.btnTipeKamar.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.btnTipeKamar.BackColor = System.Drawing.Color.FromArgb(22, 101, 52)
+        Me.btnTipeKamar.ForeColor = System.Drawing.Color.White
+        Me.btnTipeKamar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTipeKamar.FlatAppearance.BorderSize = 0
+        Me.btnTipeKamar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnTipeKamar.UseVisualStyleBackColor = False
+
+        '
+        'pnlCardProperti — Row 3, Col 2
+        '
+        Me.pnlCardProperti.Name = "pnlCardProperti"
+        Me.pnlCardProperti.Location = New System.Drawing.Point(324, 568)
+        Me.pnlCardProperti.Size = New System.Drawing.Size(280, 200)
+        Me.pnlCardProperti.BackColor = System.Drawing.Color.White
+        Me.pnlCardProperti.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlCardProperti.Visible = False
+        Me.pnlCardProperti.Controls.Add(Me.picProperti)
+        Me.pnlCardProperti.Controls.Add(Me.lblCardPropertiTitle)
+        Me.pnlCardProperti.Controls.Add(Me.lblCardPropertiDesc)
+        Me.pnlCardProperti.Controls.Add(Me.btnProperti)
+
+        Me.picProperti.Name = "picProperti"
+        Me.picProperti.Location = New System.Drawing.Point(16, 16)
+        Me.picProperti.Size = New System.Drawing.Size(44, 44)
+        Me.picProperti.BackColor = System.Drawing.Color.FromArgb(237, 233, 254)
+        Me.picProperti.TabStop = False
+
+        Me.lblCardPropertiTitle.Name = "lblCardPropertiTitle"
+        Me.lblCardPropertiTitle.AutoSize = False
+        Me.lblCardPropertiTitle.Size = New System.Drawing.Size(248, 22)
+        Me.lblCardPropertiTitle.Location = New System.Drawing.Point(16, 70)
+        Me.lblCardPropertiTitle.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCardPropertiTitle.ForeColor = System.Drawing.Color.FromArgb(91, 33, 182)
+        Me.lblCardPropertiTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblCardPropertiTitle.Text = "Properti Kamar"
+
+        Me.lblCardPropertiDesc.Name = "lblCardPropertiDesc"
+        Me.lblCardPropertiDesc.AutoSize = False
+        Me.lblCardPropertiDesc.Size = New System.Drawing.Size(248, 50)
+        Me.lblCardPropertiDesc.Location = New System.Drawing.Point(16, 96)
+        Me.lblCardPropertiDesc.Font = New System.Drawing.Font("Segoe UI", 8.5!)
+        Me.lblCardPropertiDesc.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
+        Me.lblCardPropertiDesc.BackColor = System.Drawing.Color.Transparent
+        Me.lblCardPropertiDesc.Text = "Kelola master properti dan assign ke kamar."
+
+        Me.btnProperti.Name = "btnProperti"
+        Me.btnProperti.Text = "Buka"
+        Me.btnProperti.Location = New System.Drawing.Point(16, 152)
+        Me.btnProperti.Size = New System.Drawing.Size(90, 32)
+        Me.btnProperti.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.btnProperti.BackColor = System.Drawing.Color.FromArgb(91, 33, 182)
+        Me.btnProperti.ForeColor = System.Drawing.Color.White
+        Me.btnProperti.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProperti.FlatAppearance.BorderSize = 0
+        Me.btnProperti.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnProperti.UseVisualStyleBackColor = False
+        '
         'MainForm
         '
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(238, Byte), Integer), CType(CType(245, Byte), Integer))
@@ -662,6 +775,8 @@ Partial Class MainForm
         CType(Me.picCheckIn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picCheckOut, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picLaporan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picTipeKamar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picProperti, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -721,4 +836,14 @@ Partial Class MainForm
     Friend WithEvents lblCardLaporanTitle As System.Windows.Forms.Label
     Friend WithEvents lblCardLaporanDesc As System.Windows.Forms.Label
     Friend WithEvents btnLaporan As System.Windows.Forms.Button
+    Friend WithEvents pnlCardTipeKamar As System.Windows.Forms.Panel
+    Friend WithEvents picTipeKamar As System.Windows.Forms.PictureBox
+    Friend WithEvents lblCardTipeKamarTitle As System.Windows.Forms.Label
+    Friend WithEvents lblCardTipeKamarDesc As System.Windows.Forms.Label
+    Friend WithEvents btnTipeKamar As System.Windows.Forms.Button
+    Friend WithEvents pnlCardProperti As System.Windows.Forms.Panel
+    Friend WithEvents picProperti As System.Windows.Forms.PictureBox
+    Friend WithEvents lblCardPropertiTitle As System.Windows.Forms.Label
+    Friend WithEvents lblCardPropertiDesc As System.Windows.Forms.Label
+    Friend WithEvents btnProperti As System.Windows.Forms.Button
 End Class
