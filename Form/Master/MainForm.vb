@@ -112,15 +112,13 @@
     End Sub
 
     ' ── Cards admin only ──────────────────────────────────
-    Private Sub btnTipeKamar_Click(sender As Object, e As EventArgs) Handles btnTipeKamar.Click
-        MsgBox("Tipe kamar — coming soon", MsgBoxStyle.Information)
-        'OpenChild(New TipeKamar())
-    End Sub
+    'Private Sub btnTipeKamar_Click(sender As Object, e As EventArgs) Handles btnTipeKamar.Click
+    '    OpenChild(New TipeKamar())
+    'End Sub
 
-    Private Sub btnProperti_Click(sender As Object, e As EventArgs) Handles btnProperti.Click
-        MsgBox("Properti — coming soon", MsgBoxStyle.Information)
-        'OpenChild(New Properti())
-    End Sub
+    'Private Sub btnProperti_Click(sender As Object, e As EventArgs) Handles btnProperti.Click
+    '    OpenChild(New Properti())
+    'End Sub
 
     ' ── Helper ────────────────────────────────────────────
     Private Sub OpenChild(frm As Form)
