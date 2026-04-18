@@ -93,6 +93,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property crown() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("crown", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property group() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("group", resourceCulture)
@@ -116,6 +126,16 @@ Namespace My.Resources
         Friend ReadOnly Property sleeping() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("sleeping", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property television() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("television", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

@@ -79,10 +79,28 @@
     <Compile Include="Form\Master\Admin\DataKamarForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Master\Admin\DataProperti.Designer.vb">
+      <DependentUpon>DataProperti.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Master\Admin\DataProperti.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Master\Admin\DataPropertiKamar.Designer.vb">
+      <DependentUpon>DataPropertiKamar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Master\Admin\DataPropertiKamar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Master\Admin\DataTamuForm.Designer.vb">
       <DependentUpon>DataTamuForm.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Master\Admin\DataTamuForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Master\Admin\DataTipeKamar.Designer.vb">
+      <DependentUpon>DataTipeKamar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Master\Admin\DataTipeKamar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Master\Customer\CheckIn.Designer.vb">
@@ -191,6 +209,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\television.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

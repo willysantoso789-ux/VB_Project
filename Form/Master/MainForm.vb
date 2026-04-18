@@ -112,13 +112,13 @@
     End Sub
 
     ' ── Cards admin only ──────────────────────────────────
-    'Private Sub btnTipeKamar_Click(sender As Object, e As EventArgs) Handles btnTipeKamar.Click
-    '    OpenChild(New TipeKamar())
-    'End Sub
+    Private Sub btnTipeKamar_Click(sender As Object, e As EventArgs) Handles btnTipeKamar.Click
+        OpenChild(New DataTipeKamar())
+    End Sub
 
-    'Private Sub btnProperti_Click(sender As Object, e As EventArgs) Handles btnProperti.Click
-    '    OpenChild(New Properti())
-    'End Sub
+    Private Sub btnProperti_Click(sender As Object, e As EventArgs) Handles btnProperti.Click
+        OpenChild(New DataProperti())
+    End Sub
 
     ' ── Helper ────────────────────────────────────────────
     Private Sub OpenChild(frm As Form)
@@ -135,5 +135,4 @@
         frm.Show()
         pnlDashboard.Visible = False
     End Sub
-
 End Class
