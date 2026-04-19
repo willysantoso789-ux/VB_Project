@@ -48,6 +48,12 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.6.2\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.5, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.5\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -127,6 +133,12 @@
     <Compile Include="Form\Master\Customer\Reservasi.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Master\Laporan\Laporan.Designer.vb">
+      <DependentUpon>Laporan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Master\Laporan\Laporan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\Master\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -189,10 +201,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Form\Master\Staff\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\group.png" />
   </ItemGroup>
   <ItemGroup>

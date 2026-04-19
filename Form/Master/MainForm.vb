@@ -108,7 +108,7 @@
     End Sub
 
     Private Sub btnLaporan_Click(sender As Object, e As EventArgs) Handles btnLaporan.Click
-        MsgBox("Laporan — coming soon", MsgBoxStyle.Information)
+        OpenChild(New Laporan())
     End Sub
 
     ' ── Cards admin only ──────────────────────────────────
