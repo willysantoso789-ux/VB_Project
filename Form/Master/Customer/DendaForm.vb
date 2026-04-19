@@ -1,4 +1,4 @@
-﻿Public Class Denda
+﻿Public Class DendaForm
 
     Public Property TotalDendaKerusakan As Decimal = 0
 

@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class Reservasi
+Public Class ReservasiForm
 
     Private dtReservasi As New DataTable()
     Private isEdit As Boolean = False

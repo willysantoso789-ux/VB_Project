@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class DataKamarForm
+Public Class KamarForm
     Private dtKamar As New DataTable()
     Private isEdit As Boolean = False
 

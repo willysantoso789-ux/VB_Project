@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class CheckIn
+Public Class CheckInForm
 
     Private dtCheckin As New DataTable()
     Private selectedId As Integer = -1
@@ -25,12 +25,12 @@ Public Class CheckIn
         dtCheckin.Columns.Add("status", GetType(String))
 
         ' Kalau ReservasiForm belum dibuka, pakai dummy
-        If Not Reservasi.IsSharedLoaded Then
+        If Not ReservasiForm.IsSharedLoaded Then
             dtCheckin.Rows.Add(1, "Budi Santoso", "101", "Walk-in (Langsung)", 350000D, DateTime.Today, DateTime.Today.AddDays(2), "Confirmed")
             dtCheckin.Rows.Add(2, "Siti Rahayu", "201", "Online / Contact", 600000D, DateTime.Today.AddDays(3), DateTime.Today.AddDays(5), "Pending")
             dtCheckin.Rows.Add(3, "Agus Prasetyo", "301", "Online / Contact", 1200000D, DateTime.Today.AddDays(1), DateTime.Today.AddDays(4), "Confirmed")
         Else
-            For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+            For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                 dtCheckin.Rows.Add(
                     dr("id_reservasi"),
                     dr("nama_tamu"),
@@ -196,8 +196,8 @@ Public Class CheckIn
             Next
 
             ' Sync balik ke ReservasiForm shared
-            If Reservasi.IsSharedLoaded Then
-                For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+            If ReservasiForm.IsSharedLoaded Then
+                For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                     If Convert.ToInt32(dr("id_reservasi")) = selectedId Then
                         dr("tgl_checkin") = dtpTglCheckin.Value.Date
                         dr("tgl_checkout") = dtpTglCheckout.Value.Date

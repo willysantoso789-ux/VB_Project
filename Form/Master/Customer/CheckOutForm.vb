@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class CheckOut
+Public Class CheckOutForm
 
     Private dtCheckOut As New DataTable()
     Private selectedId As Integer = -1
@@ -27,11 +27,11 @@ Public Class CheckOut
         dtCheckOut.Columns.Add("tgl_checkout", GetType(DateTime))
         dtCheckOut.Columns.Add("status", GetType(String))
 
-        If Not Reservasi.IsSharedLoaded Then
+        If Not ReservasiForm.IsSharedLoaded Then
             dtCheckOut.Rows.Add(1, "Budi Santoso", "101", 350000D, DateTime.Today.AddDays(-2), DateTime.Today, "Checked-In")
             dtCheckOut.Rows.Add(2, "Agus Prasetyo", "301", 1200000D, DateTime.Today.AddDays(-3), DateTime.Today.AddDays(1), "Checked-In")
         Else
-            For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+            For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                 dtCheckOut.Rows.Add(
                     dr("id_reservasi"),
                     dr("nama_tamu"),
@@ -203,7 +203,7 @@ Public Class CheckOut
             hariTelat = (tglCO - tglCheckoutRencana).Days
         End If
 
-        Dim frm As New Denda()
+        Dim frm As New DendaForm()
         frm.SetData(
             selectedId,
             txtNamaTamu.Text,
@@ -254,8 +254,8 @@ Public Class CheckOut
             Next
 
             ' Sync ke ReservasiForm
-            If Reservasi.IsSharedLoaded Then
-                For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+            If ReservasiForm.IsSharedLoaded Then
+                For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                     If Convert.ToInt32(dr("id_reservasi")) = selectedId Then
                         dr("status") = "Checked-Out"
                         Exit For

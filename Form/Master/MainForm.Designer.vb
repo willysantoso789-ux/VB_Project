@@ -26,6 +26,21 @@ Partial Class MainForm
         Me.mnuLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSep2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuItemOperasional = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavTamu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavKamar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavReservasi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavCheckIn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavCheckOut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuItemMaster = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavTipeKamar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavProperti = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuItemLaporanNav = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNavLaporan = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuItemSettings = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSettingsPreferensi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSettingsBackup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSettingsAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.ssBottom = New System.Windows.Forms.StatusStrip()
         Me.lblStatusDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblStatusSep1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -79,16 +94,6 @@ Partial Class MainForm
         Me.lblCardPropertiTitle = New System.Windows.Forms.Label()
         Me.lblCardPropertiDesc = New System.Windows.Forms.Label()
         Me.btnProperti = New System.Windows.Forms.Button()
-        Me.MasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataTamuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataKamarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TipeKamarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PropertiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TransaksiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReservasiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckInToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CheckOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuMain.SuspendLayout()
         Me.ssBottom.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
@@ -117,7 +122,7 @@ Partial Class MainForm
         Me.mnuMain.ForeColor = System.Drawing.Color.White
         Me.mnuMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuMain.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuItemMain, Me.MasterToolStripMenuItem, Me.TransaksiToolStripMenuItem})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuItemMain, Me.mnuItemOperasional, Me.mnuItemMaster, Me.mnuItemLaporanNav, Me.mnuItemSettings})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(947, 33)
@@ -167,6 +172,81 @@ Partial Class MainForm
         Me.mnuExit.Name = "mnuExit"
         Me.mnuExit.Size = New System.Drawing.Size(270, 34)
         Me.mnuExit.Text = "Keluar"
+
+        ' ── Menu: Operasional ─────────────────────────────────
+        Me.mnuItemOperasional.Text = "Operasional"
+        Me.mnuItemOperasional.Name = "mnuItemOperasional"
+        Me.mnuItemOperasional.ForeColor = System.Drawing.Color.White
+        Me.mnuItemOperasional.Visible = False
+        Me.mnuItemOperasional.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
+            Me.mnuNavTamu,
+            Me.mnuNavKamar,
+            Me.mnuNavReservasi,
+            Me.mnuNavCheckIn,
+            Me.mnuNavCheckOut
+        })
+
+        Me.mnuNavTamu.Text = "Data Tamu         Ctrl+T"
+        Me.mnuNavTamu.Name = "mnuNavTamu"
+
+        Me.mnuNavKamar.Text = "Data Kamar        Ctrl+K"
+        Me.mnuNavKamar.Name = "mnuNavKamar"
+
+        Me.mnuNavReservasi.Text = "Reservasi          Ctrl+R"
+        Me.mnuNavReservasi.Name = "mnuNavReservasi"
+
+        Me.mnuNavCheckIn.Text = "Check-In           Ctrl+I"
+        Me.mnuNavCheckIn.Name = "mnuNavCheckIn"
+
+        Me.mnuNavCheckOut.Text = "Check-Out          Ctrl+O"
+        Me.mnuNavCheckOut.Name = "mnuNavCheckOut"
+
+        ' ── Menu: Master (Admin only) ─────────────────────────
+        Me.mnuItemMaster.Text = "Master"
+        Me.mnuItemMaster.Name = "mnuItemMaster"
+        Me.mnuItemMaster.ForeColor = System.Drawing.Color.White
+        Me.mnuItemMaster.Visible = False
+        Me.mnuItemMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
+            Me.mnuNavTipeKamar,
+            Me.mnuNavProperti
+        })
+
+        Me.mnuNavTipeKamar.Text = "Tipe Kamar        Ctrl+Y"
+        Me.mnuNavTipeKamar.Name = "mnuNavTipeKamar"
+
+        Me.mnuNavProperti.Text = "Properti Kamar    Ctrl+P"
+        Me.mnuNavProperti.Name = "mnuNavProperti"
+
+        ' ── Menu: Laporan ─────────────────────────────────────
+        Me.mnuItemLaporanNav.Text = "Laporan"
+        Me.mnuItemLaporanNav.Name = "mnuItemLaporanNav"
+        Me.mnuItemLaporanNav.ForeColor = System.Drawing.Color.White
+        Me.mnuItemLaporanNav.Visible = False
+        Me.mnuItemLaporanNav.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
+            Me.mnuNavLaporan
+        })
+
+        Me.mnuNavLaporan.Text = "Lihat Laporan     Ctrl+L"
+        Me.mnuNavLaporan.Name = "mnuNavLaporan"
+
+        ' ── Menu: Settings ────────────────────────────────────
+        Me.mnuItemSettings.Text = "Settings"
+        Me.mnuItemSettings.Name = "mnuItemSettings"
+        Me.mnuItemSettings.ForeColor = System.Drawing.Color.White
+        Me.mnuItemSettings.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
+            Me.mnuSettingsPreferensi,
+            Me.mnuSettingsBackup,
+            Me.mnuSettingsAbout
+        })
+
+        Me.mnuSettingsPreferensi.Text = "Preferensi"
+        Me.mnuSettingsPreferensi.Name = "mnuSettingsPreferensi"
+
+        Me.mnuSettingsBackup.Text = "Backup Data"
+        Me.mnuSettingsBackup.Name = "mnuSettingsBackup"
+
+        Me.mnuSettingsAbout.Text = "Tentang Aplikasi"
+        Me.mnuSettingsAbout.Name = "mnuSettingsAbout"
         '
         'ssBottom
         '
@@ -781,67 +861,6 @@ Partial Class MainForm
         Me.btnProperti.Text = "Buka"
         Me.btnProperti.UseVisualStyleBackColor = False
         '
-        'MasterToolStripMenuItem
-        '
-        Me.MasterToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataTamuToolStripMenuItem, Me.DataKamarToolStripMenuItem, Me.ToolStripSeparator1, Me.TipeKamarToolStripMenuItem, Me.PropertiToolStripMenuItem})
-        Me.MasterToolStripMenuItem.Name = "MasterToolStripMenuItem"
-        Me.MasterToolStripMenuItem.Size = New System.Drawing.Size(82, 29)
-        Me.MasterToolStripMenuItem.Text = "Master"
-        '
-        'DataTamuToolStripMenuItem
-        '
-        Me.DataTamuToolStripMenuItem.Name = "DataTamuToolStripMenuItem"
-        Me.DataTamuToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.DataTamuToolStripMenuItem.Text = "Data Tamu"
-        '
-        'DataKamarToolStripMenuItem
-        '
-        Me.DataKamarToolStripMenuItem.Name = "DataKamarToolStripMenuItem"
-        Me.DataKamarToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.DataKamarToolStripMenuItem.Text = "Data Kamar"
-        '
-        'TipeKamarToolStripMenuItem
-        '
-        Me.TipeKamarToolStripMenuItem.Name = "TipeKamarToolStripMenuItem"
-        Me.TipeKamarToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.TipeKamarToolStripMenuItem.Text = "Tipe Kamar"
-        '
-        'PropertiToolStripMenuItem
-        '
-        Me.PropertiToolStripMenuItem.Name = "PropertiToolStripMenuItem"
-        Me.PropertiToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.PropertiToolStripMenuItem.Text = "Properti"
-        '
-        'TransaksiToolStripMenuItem
-        '
-        Me.TransaksiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReservasiToolStripMenuItem, Me.CheckInToolStripMenuItem, Me.CheckOutToolStripMenuItem})
-        Me.TransaksiToolStripMenuItem.Name = "TransaksiToolStripMenuItem"
-        Me.TransaksiToolStripMenuItem.Size = New System.Drawing.Size(98, 29)
-        Me.TransaksiToolStripMenuItem.Text = "Transaksi"
-        '
-        'ReservasiToolStripMenuItem
-        '
-        Me.ReservasiToolStripMenuItem.Name = "ReservasiToolStripMenuItem"
-        Me.ReservasiToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.ReservasiToolStripMenuItem.Text = "Reservasi"
-        '
-        'CheckInToolStripMenuItem
-        '
-        Me.CheckInToolStripMenuItem.Name = "CheckInToolStripMenuItem"
-        Me.CheckInToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.CheckInToolStripMenuItem.Text = "Check-In"
-        '
-        'CheckOutToolStripMenuItem
-        '
-        Me.CheckOutToolStripMenuItem.Name = "CheckOutToolStripMenuItem"
-        Me.CheckOutToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
-        Me.CheckOutToolStripMenuItem.Text = "Check-Out"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(267, 6)
-        '
         'MainForm
         '
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(238, Byte), Integer), CType(CType(245, Byte), Integer))
@@ -946,14 +965,20 @@ Partial Class MainForm
     Friend WithEvents lblCardPropertiTitle As System.Windows.Forms.Label
     Friend WithEvents lblCardPropertiDesc As System.Windows.Forms.Label
     Friend WithEvents btnProperti As System.Windows.Forms.Button
-    Friend WithEvents MasterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DataTamuToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DataKamarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TipeKamarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PropertiToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TransaksiToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReservasiToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CheckInToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CheckOutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    ' ── MenuStrip tambahan ────────────────────────────────
+    Friend WithEvents mnuItemOperasional As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavTamu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavKamar As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavReservasi As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavCheckIn As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavCheckOut As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuItemMaster As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavTipeKamar As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavProperti As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuItemLaporanNav As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNavLaporan As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuItemSettings As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuSettingsPreferensi As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuSettingsBackup As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuSettingsAbout As System.Windows.Forms.ToolStripMenuItem
 End Class

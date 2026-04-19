@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Text
 
-Public Class Laporan
+Public Class LaporanForm
 
     Private currentDt As New DataTable()
     Private currentJenis As String = ""
@@ -59,8 +59,8 @@ Public Class Laporan
         currentDt.Columns.Add("Harga/Malam", GetType(Decimal))
         currentDt.Columns.Add("Status", GetType(String))
 
-        If Reservasi.IsSharedLoaded Then
-            For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+        If ReservasiForm.IsSharedLoaded Then
+            For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                 Dim tgl As DateTime = Convert.ToDateTime(dr("tgl_reservasi"))
                 If tgl.Date >= dtpDari.Value.Date AndAlso tgl.Date <= dtpSampai.Value.Date Then
                     currentDt.Rows.Add(
@@ -114,8 +114,8 @@ Public Class Laporan
         currentDt.Columns.Add("Subtotal", GetType(Decimal))
         currentDt.Columns.Add("Status", GetType(String))
 
-        If Reservasi.IsSharedLoaded Then
-            For Each dr As DataRow In Reservasi.dtReservasiShared.Rows
+        If ReservasiForm.IsSharedLoaded Then
+            For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
                 Dim tglCI As DateTime = Convert.ToDateTime(dr("tgl_checkin"))
                 Dim tglCO As DateTime = Convert.ToDateTime(dr("tgl_checkout"))
                 Dim status As String = dr("status").ToString()

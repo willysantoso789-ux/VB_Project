@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class DataProperti
+Public Class PropertiForm
 
     Private dtProperti As New DataTable()
     Private isEdit As Boolean = False
@@ -137,7 +137,7 @@ Public Class DataProperti
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
         If selectedId = -1 Then Exit Sub
         Dim namaProp As String = txtNamaProperti.Text
-        Dim frm As New DataPropertiKamar()
+        Dim frm As New PropertiKamarForm()
         frm.SetProperti(selectedId, namaProp)
         frm.ShowDialog()
     End Sub

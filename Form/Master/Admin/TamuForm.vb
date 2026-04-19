@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class DataTamuForm
+Public Class TamuForm
 
     Private dtTamu As New DataTable()
     Private isEdit As Boolean = False

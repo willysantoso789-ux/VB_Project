@@ -1,6 +1,6 @@
 ﻿Imports System.Data
 
-Public Class DataPropertiKamar
+Public Class PropertiKamarForm
 
     Private idProperti As Integer = -1
     Private namaProperti As String = ""
@@ -35,8 +35,8 @@ Public Class DataPropertiKamar
         txtNamaProp.Text = namaProperti
 
         ' Cari biaya denda dari shared data
-        If DataProperti.IsSharedLoaded Then
-            For Each dr As DataRow In DataProperti.dtPropertiShared.Rows
+        If PropertiForm.IsSharedLoaded Then
+            For Each dr As DataRow In PropertiForm.dtPropertiShared.Rows
                 If Convert.ToInt32(dr("id_properti")) = idProperti Then
                     txtBiaya.Text = "Rp " & Convert.ToDecimal(dr("biaya_denda")).ToString("N0")
                     Exit For

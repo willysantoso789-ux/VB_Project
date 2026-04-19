@@ -79,64 +79,64 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\Master\Admin\DataKamarForm.Designer.vb">
-      <DependentUpon>DataKamarForm.vb</DependentUpon>
+    <Compile Include="Form\Master\Admin\KamarForm.Designer.vb">
+      <DependentUpon>KamarForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataKamarForm.vb">
+    <Compile Include="Form\Master\Admin\KamarForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataProperti.Designer.vb">
-      <DependentUpon>DataProperti.vb</DependentUpon>
+    <Compile Include="Form\Master\Admin\PropertiForm.Designer.vb">
+      <DependentUpon>PropertiForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataProperti.vb">
+    <Compile Include="Form\Master\Admin\PropertiForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataPropertiKamar.Designer.vb">
-      <DependentUpon>DataPropertiKamar.vb</DependentUpon>
+    <Compile Include="Form\Master\Admin\PropertiKamarForm.Designer.vb">
+      <DependentUpon>PropertiKamarForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataPropertiKamar.vb">
+    <Compile Include="Form\Master\Admin\PropertiKamarForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataTamuForm.Designer.vb">
-      <DependentUpon>DataTamuForm.vb</DependentUpon>
+    <Compile Include="Form\Master\Admin\TamuForm.Designer.vb">
+      <DependentUpon>TamuForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataTamuForm.vb">
+    <Compile Include="Form\Master\Admin\TamuForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataTipeKamar.Designer.vb">
-      <DependentUpon>DataTipeKamar.vb</DependentUpon>
+    <Compile Include="Form\Master\Admin\TipeKamarForm.Designer.vb">
+      <DependentUpon>TipeKamarForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\DataTipeKamar.vb">
+    <Compile Include="Form\Master\Admin\TipeKamarForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Customer\CheckIn.Designer.vb">
-      <DependentUpon>CheckIn.vb</DependentUpon>
+    <Compile Include="Form\Master\Customer\CheckInForm.Designer.vb">
+      <DependentUpon>CheckInForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Customer\CheckIn.vb">
+    <Compile Include="Form\Master\Customer\CheckInForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Customer\CheckOut.Designer.vb">
-      <DependentUpon>CheckOut.vb</DependentUpon>
+    <Compile Include="Form\Master\Customer\CheckOutForm.Designer.vb">
+      <DependentUpon>CheckOutForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Customer\CheckOut.vb">
+    <Compile Include="Form\Master\Customer\CheckOutForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Customer\Denda.Designer.vb">
-      <DependentUpon>Denda.vb</DependentUpon>
+    <Compile Include="Form\Master\Customer\DendaForm.Designer.vb">
+      <DependentUpon>DendaForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Customer\Denda.vb">
+    <Compile Include="Form\Master\Customer\DendaForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Customer\Reservasi.Designer.vb">
-      <DependentUpon>Reservasi.vb</DependentUpon>
+    <Compile Include="Form\Master\Customer\ReservasiForm.Designer.vb">
+      <DependentUpon>ReservasiForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Customer\Reservasi.vb">
+    <Compile Include="Form\Master\Customer\ReservasiForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Laporan\Laporan.Designer.vb">
-      <DependentUpon>Laporan.vb</DependentUpon>
+    <Compile Include="Form\Master\Laporan\LaporanForm.Designer.vb">
+      <DependentUpon>LaporanForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Laporan\Laporan.vb">
+    <Compile Include="Form\Master\Laporan\LaporanForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\Master\MainForm.vb">
@@ -150,6 +150,12 @@
       <DependentUpon>LoginForm.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\Master\Utilities\LoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Master\Utilities\SettingsForm.Designer.vb">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Master\Utilities\SettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -170,11 +176,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form\Master\Admin\DataKamarForm.resx">
-      <DependentUpon>DataKamarForm.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Master\Admin\KamarForm.resx">
+      <DependentUpon>KamarForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Master\Admin\DataTamuForm.resx">
-      <DependentUpon>DataTamuForm.vb</DependentUpon>
+    <EmbeddedResource Include="Form\Master\Admin\TamuForm.resx">
+      <DependentUpon>TamuForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
