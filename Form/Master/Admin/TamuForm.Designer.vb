@@ -24,6 +24,8 @@ Partial Class TamuForm
         Me.lblFormTitle = New System.Windows.Forms.Label()
         Me.lblIdTamu = New System.Windows.Forms.Label()
         Me.txtIdTamu = New System.Windows.Forms.TextBox()
+        Me.lblNIK = New System.Windows.Forms.Label()
+        Me.txtNIK = New System.Windows.Forms.TextBox()
         Me.lblNama = New System.Windows.Forms.Label()
         Me.txtNama = New System.Windows.Forms.TextBox()
         Me.lblEmail = New System.Windows.Forms.Label()
@@ -95,6 +97,8 @@ Partial Class TamuForm
         Me.pnlLeft.Controls.Add(Me.lblFormTitle)
         Me.pnlLeft.Controls.Add(Me.lblIdTamu)
         Me.pnlLeft.Controls.Add(Me.txtIdTamu)
+        Me.pnlLeft.Controls.Add(Me.lblNIK)
+        Me.pnlLeft.Controls.Add(Me.txtNIK)
         Me.pnlLeft.Controls.Add(Me.lblNama)
         Me.pnlLeft.Controls.Add(Me.txtNama)
         Me.pnlLeft.Controls.Add(Me.lblEmail)
@@ -143,11 +147,30 @@ Partial Class TamuForm
         Me.txtIdTamu.Text = "(auto)"
 
         '
+        'lblNIK
+        '
+        Me.lblNIK.Name = "lblNIK"
+        Me.lblNIK.AutoSize = True
+        Me.lblNIK.Location = New System.Drawing.Point(16, 104)
+        Me.lblNIK.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblNIK.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
+        Me.lblNIK.Text = "NIK"
+
+        '
+        'txtNIK
+        '
+        Me.txtNIK.Name = "txtNIK"
+        Me.txtNIK.Location = New System.Drawing.Point(16, 122)
+        Me.txtNIK.Size = New System.Drawing.Size(262, 24)
+        Me.txtNIK.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtNIK.MaxLength = 16
+
+        '
         'lblNama
         '
         Me.lblNama.Name = "lblNama"
         Me.lblNama.AutoSize = True
-        Me.lblNama.Location = New System.Drawing.Point(16, 104)
+        Me.lblNama.Location = New System.Drawing.Point(16, 158)
         Me.lblNama.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblNama.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
         Me.lblNama.Text = "Nama Lengkap"
@@ -156,7 +179,7 @@ Partial Class TamuForm
         'txtNama
         '
         Me.txtNama.Name = "txtNama"
-        Me.txtNama.Location = New System.Drawing.Point(16, 122)
+        Me.txtNama.Location = New System.Drawing.Point(16, 176)
         Me.txtNama.Size = New System.Drawing.Size(262, 24)
         Me.txtNama.Font = New System.Drawing.Font("Segoe UI", 9.0!)
 
@@ -165,7 +188,7 @@ Partial Class TamuForm
         '
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.AutoSize = True
-        Me.lblEmail.Location = New System.Drawing.Point(16, 158)
+        Me.lblEmail.Location = New System.Drawing.Point(16, 212)
         Me.lblEmail.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblEmail.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
         Me.lblEmail.Text = "Email"
@@ -174,7 +197,7 @@ Partial Class TamuForm
         'txtEmail
         '
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Location = New System.Drawing.Point(16, 176)
+        Me.txtEmail.Location = New System.Drawing.Point(16, 230)
         Me.txtEmail.Size = New System.Drawing.Size(262, 24)
         Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 9.0!)
 
@@ -183,7 +206,7 @@ Partial Class TamuForm
         '
         Me.lblNoHp.Name = "lblNoHp"
         Me.lblNoHp.AutoSize = True
-        Me.lblNoHp.Location = New System.Drawing.Point(16, 212)
+        Me.lblNoHp.Location = New System.Drawing.Point(16, 266)
         Me.lblNoHp.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblNoHp.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
         Me.lblNoHp.Text = "No. HP"
@@ -192,7 +215,7 @@ Partial Class TamuForm
         'txtNoHp
         '
         Me.txtNoHp.Name = "txtNoHp"
-        Me.txtNoHp.Location = New System.Drawing.Point(16, 230)
+        Me.txtNoHp.Location = New System.Drawing.Point(16, 284)
         Me.txtNoHp.Size = New System.Drawing.Size(262, 24)
         Me.txtNoHp.Font = New System.Drawing.Font("Segoe UI", 9.0!)
 
@@ -201,7 +224,7 @@ Partial Class TamuForm
         '
         Me.lblGender.Name = "lblGender"
         Me.lblGender.AutoSize = True
-        Me.lblGender.Location = New System.Drawing.Point(16, 266)
+        Me.lblGender.Location = New System.Drawing.Point(16, 320)
         Me.lblGender.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblGender.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
         Me.lblGender.Text = "Jenis Kelamin"
@@ -210,7 +233,7 @@ Partial Class TamuForm
         'cboGender
         '
         Me.cboGender.Name = "cboGender"
-        Me.cboGender.Location = New System.Drawing.Point(16, 284)
+        Me.cboGender.Location = New System.Drawing.Point(16, 338)
         Me.cboGender.Size = New System.Drawing.Size(262, 24)
         Me.cboGender.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.cboGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -221,7 +244,7 @@ Partial Class TamuForm
         '
         Me.lblAlamat.Name = "lblAlamat"
         Me.lblAlamat.AutoSize = True
-        Me.lblAlamat.Location = New System.Drawing.Point(16, 320)
+        Me.lblAlamat.Location = New System.Drawing.Point(16, 374)
         Me.lblAlamat.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblAlamat.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60)
         Me.lblAlamat.Text = "Alamat"
@@ -230,7 +253,7 @@ Partial Class TamuForm
         'txtAlamat
         '
         Me.txtAlamat.Name = "txtAlamat"
-        Me.txtAlamat.Location = New System.Drawing.Point(16, 338)
+        Me.txtAlamat.Location = New System.Drawing.Point(16, 392)
         Me.txtAlamat.Size = New System.Drawing.Size(262, 70)
         Me.txtAlamat.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtAlamat.Multiline = True
@@ -241,7 +264,7 @@ Partial Class TamuForm
         '
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Text = "Simpan"
-        Me.btnSimpan.Location = New System.Drawing.Point(16, 424)
+        Me.btnSimpan.Location = New System.Drawing.Point(16, 478)
         Me.btnSimpan.Size = New System.Drawing.Size(120, 32)
         Me.btnSimpan.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSimpan.BackColor = System.Drawing.Color.FromArgb(26, 86, 219)
@@ -256,7 +279,7 @@ Partial Class TamuForm
         '
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Text = "Batal"
-        Me.btnBatal.Location = New System.Drawing.Point(144, 424)
+        Me.btnBatal.Location = New System.Drawing.Point(144, 478)
         Me.btnBatal.Size = New System.Drawing.Size(134, 32)
         Me.btnBatal.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btnBatal.BackColor = System.Drawing.Color.FromArgb(220, 220, 220)
@@ -271,7 +294,7 @@ Partial Class TamuForm
         '
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Text = "Hapus Data"
-        Me.btnHapus.Location = New System.Drawing.Point(16, 466)
+        Me.btnHapus.Location = New System.Drawing.Point(16, 520)
         Me.btnHapus.Size = New System.Drawing.Size(262, 32)
         Me.btnHapus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnHapus.BackColor = System.Drawing.Color.FromArgb(153, 27, 27)
@@ -409,6 +432,8 @@ Partial Class TamuForm
     Friend WithEvents lblFormTitle As System.Windows.Forms.Label
     Friend WithEvents lblIdTamu As System.Windows.Forms.Label
     Friend WithEvents txtIdTamu As System.Windows.Forms.TextBox
+    Friend WithEvents lblNIK As System.Windows.Forms.Label
+    Friend WithEvents txtNIK As System.Windows.Forms.TextBox
     Friend WithEvents lblNama As System.Windows.Forms.Label
     Friend WithEvents txtNama As System.Windows.Forms.TextBox
     Friend WithEvents lblEmail As System.Windows.Forms.Label

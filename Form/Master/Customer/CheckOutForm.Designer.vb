@@ -38,7 +38,7 @@ Partial Class CheckOutForm
         Me.pnlDivider1 = New System.Windows.Forms.Panel()
         Me.lblBiayaTitle = New System.Windows.Forms.Label()
         Me.lblTglAktual = New System.Windows.Forms.Label()
-        Me.dtpTglAktual = New System.Windows.Forms.DateTimePicker()
+        Me.txtTglAktual = New System.Windows.Forms.TextBox()
         Me.lblMalam = New System.Windows.Forms.Label()
         Me.txtMalam = New System.Windows.Forms.TextBox()
         Me.lblBiayaKamar = New System.Windows.Forms.Label()
@@ -129,7 +129,7 @@ Partial Class CheckOutForm
         Me.pnlLeft.Controls.Add(Me.pnlDivider1)
         Me.pnlLeft.Controls.Add(Me.lblBiayaTitle)
         Me.pnlLeft.Controls.Add(Me.lblTglAktual)
-        Me.pnlLeft.Controls.Add(Me.dtpTglAktual)
+        Me.pnlLeft.Controls.Add(Me.txtTglAktual)
         Me.pnlLeft.Controls.Add(Me.lblMalam)
         Me.pnlLeft.Controls.Add(Me.txtMalam)
         Me.pnlLeft.Controls.Add(Me.lblBiayaKamar)
@@ -322,14 +322,16 @@ Partial Class CheckOutForm
         Me.lblTglAktual.Text = "Tanggal Check-Out Aktual"
 
         '
-        'dtpTglAktual
+        'txtTglAktual
         '
-        Me.dtpTglAktual.Name = "dtpTglAktual"
-        Me.dtpTglAktual.Location = New System.Drawing.Point(16, 436)
-        Me.dtpTglAktual.Size = New System.Drawing.Size(282, 24)
-        Me.dtpTglAktual.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.dtpTglAktual.Format = System.Windows.Forms.DateTimePickerFormat.Short
-        Me.dtpTglAktual.Value = DateTime.Today
+        Me.txtTglAktual.Name = "txtTglAktual"
+        Me.txtTglAktual.Location = New System.Drawing.Point(16, 436)
+        Me.txtTglAktual.Size = New System.Drawing.Size(282, 24)
+        Me.txtTglAktual.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.txtTglAktual.BackColor = System.Drawing.Color.FromArgb(240, 240, 240)
+        Me.txtTglAktual.ForeColor = System.Drawing.Color.FromArgb(45, 74, 138)
+        Me.txtTglAktual.ReadOnly = True
+        Me.txtTglAktual.Text = DateTime.Today.ToString("dd/MM/yyyy") & " (Hari Ini)"
 
         '
         'lblMalam
@@ -664,7 +666,7 @@ Partial Class CheckOutForm
     Friend WithEvents pnlDivider1 As System.Windows.Forms.Panel
     Friend WithEvents lblBiayaTitle As System.Windows.Forms.Label
     Friend WithEvents lblTglAktual As System.Windows.Forms.Label
-    Friend WithEvents dtpTglAktual As System.Windows.Forms.DateTimePicker
+    Friend WithEvents txtTglAktual As System.Windows.Forms.TextBox
     Friend WithEvents lblMalam As System.Windows.Forms.Label
     Friend WithEvents txtMalam As System.Windows.Forms.TextBox
     Friend WithEvents lblBiayaKamar As System.Windows.Forms.Label

@@ -28,7 +28,7 @@
     ' ── Dipanggil dari CheckOutForm ───────────────────────
     Public Sub SetData(idReservasi As Integer, namaTamu As String,
                        kamar As String, hariTelatVal As Integer,
-                       dendaPerHariVal As Decimal, existingKerusakan As Decimal)
+                       dendaPerHariVal As Decimal, existingKerusakan As Decimal, dendaKerusakanTotal As Decimal)
 
         dendaPerHari = dendaPerHariVal
         hariTelat = hariTelatVal
