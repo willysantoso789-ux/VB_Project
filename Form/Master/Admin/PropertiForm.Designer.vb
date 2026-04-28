@@ -28,10 +28,13 @@ Partial Class PropertiForm
         Me.txtNamaProperti = New System.Windows.Forms.TextBox()
         Me.lblBiayaDenda = New System.Windows.Forms.Label()
         Me.txtBiayaDenda = New System.Windows.Forms.TextBox()
-        Me.lblDivider = New System.Windows.Forms.Panel()
-        Me.lblAssignTitle = New System.Windows.Forms.Label()
-        Me.lblAssignNote = New System.Windows.Forms.Label()
+        Me.pnlDiv1 = New System.Windows.Forms.Panel()
+        Me.lblActionTitle = New System.Windows.Forms.Label()
+        Me.lblActionNote = New System.Windows.Forms.Label()
         Me.btnAssign = New System.Windows.Forms.Button()
+        Me.btnUnassign = New System.Windows.Forms.Button()
+        Me.btnAdjustStatus = New System.Windows.Forms.Button()
+        Me.pnlDiv2 = New System.Windows.Forms.Panel()
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.btnBatal = New System.Windows.Forms.Button()
         Me.btnHapus = New System.Windows.Forms.Button()
@@ -74,14 +77,14 @@ Partial Class PropertiForm
         Me.lblSubTitle.Font = New System.Drawing.Font("Segoe UI", 8.0!)
         Me.lblSubTitle.ForeColor = System.Drawing.Color.FromArgb(221, 214, 254)
         Me.lblSubTitle.BackColor = System.Drawing.Color.Transparent
-        Me.lblSubTitle.Text = "Kelola master properti dan assign ke kamar"
+        Me.lblSubTitle.Text = "Kelola master properti, assign, unassign, dan kondisi per kamar"
 
         '
         'pnlLeft
         '
         Me.pnlLeft.Name = "pnlLeft"
         Me.pnlLeft.Location = New System.Drawing.Point(0, 56)
-        Me.pnlLeft.Size = New System.Drawing.Size(300, 560)
+        Me.pnlLeft.Size = New System.Drawing.Size(300, 620)
         Me.pnlLeft.BackColor = System.Drawing.Color.White
         Me.pnlLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlLeft.Controls.Add(Me.lblFormTitle)
@@ -91,10 +94,13 @@ Partial Class PropertiForm
         Me.pnlLeft.Controls.Add(Me.txtNamaProperti)
         Me.pnlLeft.Controls.Add(Me.lblBiayaDenda)
         Me.pnlLeft.Controls.Add(Me.txtBiayaDenda)
-        Me.pnlLeft.Controls.Add(Me.lblDivider)
-        Me.pnlLeft.Controls.Add(Me.lblAssignTitle)
-        Me.pnlLeft.Controls.Add(Me.lblAssignNote)
+        Me.pnlLeft.Controls.Add(Me.pnlDiv1)
+        Me.pnlLeft.Controls.Add(Me.lblActionTitle)
+        Me.pnlLeft.Controls.Add(Me.lblActionNote)
         Me.pnlLeft.Controls.Add(Me.btnAssign)
+        Me.pnlLeft.Controls.Add(Me.btnUnassign)
+        Me.pnlLeft.Controls.Add(Me.btnAdjustStatus)
+        Me.pnlLeft.Controls.Add(Me.pnlDiv2)
         Me.pnlLeft.Controls.Add(Me.btnSimpan)
         Me.pnlLeft.Controls.Add(Me.btnBatal)
         Me.pnlLeft.Controls.Add(Me.btnHapus)
@@ -147,29 +153,31 @@ Partial Class PropertiForm
         Me.txtBiayaDenda.Size = New System.Drawing.Size(262, 24)
         Me.txtBiayaDenda.Font = New System.Drawing.Font("Segoe UI", 9.0!)
 
-        Me.lblDivider.Name = "lblDivider"
-        Me.lblDivider.Location = New System.Drawing.Point(16, 214)
-        Me.lblDivider.Size = New System.Drawing.Size(262, 1)
-        Me.lblDivider.BackColor = System.Drawing.Color.FromArgb(210, 215, 225)
+        '── Divider 1 ──
+        Me.pnlDiv1.Name = "pnlDiv1"
+        Me.pnlDiv1.Location = New System.Drawing.Point(16, 216)
+        Me.pnlDiv1.Size = New System.Drawing.Size(262, 1)
+        Me.pnlDiv1.BackColor = System.Drawing.Color.FromArgb(210, 215, 225)
 
-        Me.lblAssignTitle.Name = "lblAssignTitle"
-        Me.lblAssignTitle.AutoSize = False
-        Me.lblAssignTitle.Size = New System.Drawing.Size(262, 18)
-        Me.lblAssignTitle.Location = New System.Drawing.Point(16, 224)
-        Me.lblAssignTitle.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Bold)
-        Me.lblAssignTitle.ForeColor = System.Drawing.Color.FromArgb(91, 33, 182)
-        Me.lblAssignTitle.BackColor = System.Drawing.Color.Transparent
-        Me.lblAssignTitle.Text = "ASSIGN KE KAMAR"
+        Me.lblActionTitle.Name = "lblActionTitle"
+        Me.lblActionTitle.AutoSize = False
+        Me.lblActionTitle.Size = New System.Drawing.Size(262, 18)
+        Me.lblActionTitle.Location = New System.Drawing.Point(16, 226)
+        Me.lblActionTitle.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Bold)
+        Me.lblActionTitle.ForeColor = System.Drawing.Color.FromArgb(91, 33, 182)
+        Me.lblActionTitle.BackColor = System.Drawing.Color.Transparent
+        Me.lblActionTitle.Text = "MANAJEMEN KAMAR"
 
-        Me.lblAssignNote.Name = "lblAssignNote"
-        Me.lblAssignNote.AutoSize = False
-        Me.lblAssignNote.Size = New System.Drawing.Size(262, 32)
-        Me.lblAssignNote.Location = New System.Drawing.Point(16, 246)
-        Me.lblAssignNote.Font = New System.Drawing.Font("Segoe UI", 8.0!)
-        Me.lblAssignNote.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
-        Me.lblAssignNote.BackColor = System.Drawing.Color.Transparent
-        Me.lblAssignNote.Text = "Pilih properti dari daftar lalu klik Assign untuk mengelola kamar."
+        Me.lblActionNote.Name = "lblActionNote"
+        Me.lblActionNote.AutoSize = False
+        Me.lblActionNote.Size = New System.Drawing.Size(262, 28)
+        Me.lblActionNote.Location = New System.Drawing.Point(16, 248)
+        Me.lblActionNote.Font = New System.Drawing.Font("Segoe UI", 7.5!)
+        Me.lblActionNote.ForeColor = System.Drawing.Color.FromArgb(120, 120, 120)
+        Me.lblActionNote.BackColor = System.Drawing.Color.Transparent
+        Me.lblActionNote.Text = "Pilih properti dari tabel kanan terlebih dahulu"
 
+        '── Assign ──
         Me.btnAssign.Name = "btnAssign"
         Me.btnAssign.Text = "Assign ke Kamar"
         Me.btnAssign.Location = New System.Drawing.Point(16, 284)
@@ -183,9 +191,43 @@ Partial Class PropertiForm
         Me.btnAssign.Enabled = False
         Me.btnAssign.UseVisualStyleBackColor = False
 
+        '── Unassign ──
+        Me.btnUnassign.Name = "btnUnassign"
+        Me.btnUnassign.Text = "Unassign dari Kamar"
+        Me.btnUnassign.Location = New System.Drawing.Point(16, 324)
+        Me.btnUnassign.Size = New System.Drawing.Size(262, 32)
+        Me.btnUnassign.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnUnassign.BackColor = System.Drawing.Color.FromArgb(153, 27, 27)
+        Me.btnUnassign.ForeColor = System.Drawing.Color.White
+        Me.btnUnassign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUnassign.FlatAppearance.BorderSize = 0
+        Me.btnUnassign.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUnassign.Enabled = False
+        Me.btnUnassign.UseVisualStyleBackColor = False
+
+        '── Adjust Status ──
+        Me.btnAdjustStatus.Name = "btnAdjustStatus"
+        Me.btnAdjustStatus.Text = "Adjust Kondisi Properti"
+        Me.btnAdjustStatus.Location = New System.Drawing.Point(16, 364)
+        Me.btnAdjustStatus.Size = New System.Drawing.Size(262, 32)
+        Me.btnAdjustStatus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnAdjustStatus.BackColor = System.Drawing.Color.FromArgb(45, 74, 138)
+        Me.btnAdjustStatus.ForeColor = System.Drawing.Color.White
+        Me.btnAdjustStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdjustStatus.FlatAppearance.BorderSize = 0
+        Me.btnAdjustStatus.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAdjustStatus.Enabled = False
+        Me.btnAdjustStatus.UseVisualStyleBackColor = False
+
+        '── Divider 2 ──
+        Me.pnlDiv2.Name = "pnlDiv2"
+        Me.pnlDiv2.Location = New System.Drawing.Point(16, 412)
+        Me.pnlDiv2.Size = New System.Drawing.Size(262, 1)
+        Me.pnlDiv2.BackColor = System.Drawing.Color.FromArgb(210, 215, 225)
+
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Text = "Simpan"
-        Me.btnSimpan.Location = New System.Drawing.Point(16, 332)
+        Me.btnSimpan.Location = New System.Drawing.Point(16, 424)
         Me.btnSimpan.Size = New System.Drawing.Size(120, 32)
         Me.btnSimpan.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSimpan.BackColor = System.Drawing.Color.FromArgb(91, 33, 182)
@@ -197,7 +239,7 @@ Partial Class PropertiForm
 
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Text = "Batal"
-        Me.btnBatal.Location = New System.Drawing.Point(144, 332)
+        Me.btnBatal.Location = New System.Drawing.Point(144, 424)
         Me.btnBatal.Size = New System.Drawing.Size(134, 32)
         Me.btnBatal.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btnBatal.BackColor = System.Drawing.Color.FromArgb(220, 220, 220)
@@ -209,7 +251,7 @@ Partial Class PropertiForm
 
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Text = "Hapus Properti"
-        Me.btnHapus.Location = New System.Drawing.Point(16, 374)
+        Me.btnHapus.Location = New System.Drawing.Point(16, 466)
         Me.btnHapus.Size = New System.Drawing.Size(262, 32)
         Me.btnHapus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnHapus.BackColor = System.Drawing.Color.FromArgb(153, 27, 27)
@@ -225,7 +267,7 @@ Partial Class PropertiForm
         '
         Me.pnlRight.Name = "pnlRight"
         Me.pnlRight.Location = New System.Drawing.Point(304, 56)
-        Me.pnlRight.Size = New System.Drawing.Size(676, 560)
+        Me.pnlRight.Size = New System.Drawing.Size(676, 620)
         Me.pnlRight.BackColor = System.Drawing.Color.White
         Me.pnlRight.Anchor = System.Windows.Forms.AnchorStyles.Top Or
                                 System.Windows.Forms.AnchorStyles.Bottom Or
@@ -239,7 +281,7 @@ Partial Class PropertiForm
 
         Me.lblGridTitle.Name = "lblGridTitle"
         Me.lblGridTitle.AutoSize = False
-        Me.lblGridTitle.Size = New System.Drawing.Size(300, 24)
+        Me.lblGridTitle.Size = New System.Drawing.Size(400, 24)
         Me.lblGridTitle.Location = New System.Drawing.Point(12, 12)
         Me.lblGridTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lblGridTitle.ForeColor = System.Drawing.Color.FromArgb(91, 33, 182)
@@ -275,9 +317,10 @@ Partial Class PropertiForm
         Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnRefresh.UseVisualStyleBackColor = False
 
+        '── DataGridView ──
         Me.dgvProperti.Name = "dgvProperti"
         Me.dgvProperti.Location = New System.Drawing.Point(12, 80)
-        Me.dgvProperti.Size = New System.Drawing.Size(650, 464)
+        Me.dgvProperti.Size = New System.Drawing.Size(650, 524)
         Me.dgvProperti.Anchor = System.Windows.Forms.AnchorStyles.Top Or
                                            System.Windows.Forms.AnchorStyles.Bottom Or
                                            System.Windows.Forms.AnchorStyles.Left Or
@@ -304,8 +347,8 @@ Partial Class PropertiForm
         'PropertiForm
         '
         Me.BackColor = System.Drawing.Color.FromArgb(245, 247, 250)
-        Me.ClientSize = New System.Drawing.Size(980, 616)
-        Me.MinimumSize = New System.Drawing.Size(900, 550)
+        Me.ClientSize = New System.Drawing.Size(980, 676)
+        Me.MinimumSize = New System.Drawing.Size(900, 600)
         Me.Name = "PropertiForm"
         Me.Text = "Master Properti"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -335,10 +378,13 @@ Partial Class PropertiForm
     Friend WithEvents txtNamaProperti As System.Windows.Forms.TextBox
     Friend WithEvents lblBiayaDenda As System.Windows.Forms.Label
     Friend WithEvents txtBiayaDenda As System.Windows.Forms.TextBox
-    Friend WithEvents lblDivider As System.Windows.Forms.Panel
-    Friend WithEvents lblAssignTitle As System.Windows.Forms.Label
-    Friend WithEvents lblAssignNote As System.Windows.Forms.Label
+    Friend WithEvents pnlDiv1 As System.Windows.Forms.Panel
+    Friend WithEvents lblActionTitle As System.Windows.Forms.Label
+    Friend WithEvents lblActionNote As System.Windows.Forms.Label
     Friend WithEvents btnAssign As System.Windows.Forms.Button
+    Friend WithEvents btnUnassign As System.Windows.Forms.Button
+    Friend WithEvents btnAdjustStatus As System.Windows.Forms.Button
+    Friend WithEvents pnlDiv2 As System.Windows.Forms.Panel
     Friend WithEvents btnSimpan As System.Windows.Forms.Button
     Friend WithEvents btnBatal As System.Windows.Forms.Button
     Friend WithEvents btnHapus As System.Windows.Forms.Button
