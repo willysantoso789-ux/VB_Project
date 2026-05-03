@@ -1,87 +1,68 @@
 ﻿Public Class SettingsForm
 
-    ' Settings disimpan di My.Settings
-    ' Tambahkan di Project → Properties → Settings:
-    ' NamaHotel     (String)
-    ' AlamatHotel   (String)
-    ' TelpHotel     (String)
-    ' DendaPersen   (Integer) default 50
-    ' ConfirmLogout (Boolean) default True
-    ' ConfirmHapus  (Boolean) default True
-    ' ShowClock     (Boolean) default True
-    ' DbServer      (String)  default localhost\SQLEXPRESS
-    ' DbName        (String)  default HotelDB
-    ' Tema          (String)  default Biru (Default)
-    ' Bahasa        (String)  default Bahasa Indonesia
-
-    Public Shared NamaHotel As String = "Hotel Receptionist System"
-    Public Shared AlamatHotel As String = ""
-    Public Shared TelpHotel As String = ""
-    Public Shared DendaPersen As Integer = 50
-    Public Shared ConfirmLogout As Boolean = True
-    Public Shared ConfirmHapus As Boolean = True
-
     Private Sub SettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadSettings()
+        lblUserInfo.Text = "User aktif: " & MainForm.ActiveUser &
+                               "  |  Role: " & MainForm.SessionRole
+        chkShowClock.Checked = AppSettingsManager.ShowClock
+        chkConfirmLogout.Checked = AppSettingsManager.ConfirmLogout
+        chkConfirmHapus.Checked = AppSettingsManager.ConfirmHapus
+        nudDendaPersen.Value = Math.Max(100, AppSettingsManager.PersenDenda)
     End Sub
 
-    Private Sub LoadSettings()
-        txtNamaHotel.Text = NamaHotel
-        txtAlamatHotel.Text = AlamatHotel
-        txtTelpHotel.Text = TelpHotel
-        nudDendaPersen.Value = DendaPersen
-        chkConfirmLogout.Checked = ConfirmLogout
-        chkConfirmHapus.Checked = ConfirmHapus
-        chkShowClock.Checked = True
-        cboBahasa.SelectedIndex = 0
-        cboTema.SelectedIndex = 0
-        txtDbServer.Text = "localhost\SQLEXPRESS"
-        txtDbName.Text = "HotelDB"
+    Private Sub nudDendaPersen_ValueChanged(sender As Object, e As EventArgs) Handles nudDendaPersen.ValueChanged
+        ' Real-time feedback warna
+        If nudDendaPersen.Value = 100 Then
+            lblDendaWarning.Text = "100% = tepat harga kamar per malam (minimum)"
+            lblDendaWarning.ForeColor = System.Drawing.Color.FromArgb(22, 101, 52)
+        ElseIf nudDendaPersen.Value <= 200 Then
+            lblDendaWarning.Text = nudDendaPersen.Value & "% per hari"
+            lblDendaWarning.ForeColor = System.Drawing.Color.FromArgb(146, 64, 14)
+        Else
+            lblDendaWarning.Text = nudDendaPersen.Value & "% per hari (denda tinggi)"
+            lblDendaWarning.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
+        End If
     End Sub
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        NamaHotel = txtNamaHotel.Text.Trim()
-        AlamatHotel = txtAlamatHotel.Text.Trim()
-        TelpHotel = txtTelpHotel.Text.Trim()
-        DendaPersen = Convert.ToInt32(nudDendaPersen.Value)
-        ConfirmLogout = chkConfirmLogout.Checked
-        ConfirmHapus = chkConfirmHapus.Checked
+        Dim persen As Integer = Convert.ToInt32(nudDendaPersen.Value)
 
-        MsgBox("Settings berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
-        Me.Close()
-    End Sub
+        ' Double-check validasi
+        If persen < 100 Then
+            MsgBox("Persentase denda minimum adalah 100%." & vbNewLine &
+                   "Hotel akan rugi jika denda di bawah harga kamar.",
+                   MsgBoxStyle.Exclamation, "Validasi Denda")
+            nudDendaPersen.Value = 100
+            nudDendaPersen.Focus()
+            Return
+        End If
 
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
+        AppSettingsManager.ShowClock = chkShowClock.Checked
+        AppSettingsManager.ConfirmLogout = chkConfirmLogout.Checked
+        AppSettingsManager.ConfirmHapus = chkConfirmHapus.Checked
+        AppSettingsManager.PersenDenda = persen
+
+        AppSettingsManager.SaveSettings(MainForm.ActiveUser)
+
+        MsgBox("Preferensi berhasil disimpan untuk user: " & MainForm.ActiveUser,
+               MsgBoxStyle.Information, "Tersimpan")
         Me.Close()
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
-        If MsgBox("Reset semua settings ke default?",
+        If MsgBox("Reset preferensi ke default untuk user " & MainForm.ActiveUser & "?",
                   MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Reset") = MsgBoxResult.Yes Then
-            NamaHotel = "Hotel Receptionist System"
-            AlamatHotel = ""
-            TelpHotel = ""
-            DendaPersen = 50
-            ConfirmLogout = True
-            ConfirmHapus = True
-            LoadSettings()
-            MsgBox("Settings berhasil direset.", MsgBoxStyle.Information, "Reset")
+            AppSettingsManager.ResetToDefault(MainForm.ActiveUser)
+            ' Reload ke UI
+            chkShowClock.Checked = True
+            chkConfirmLogout.Checked = True
+            chkConfirmHapus.Checked = True
+            nudDendaPersen.Value = 100
+            MsgBox("Preferensi direset ke default.", MsgBoxStyle.Information, "Reset")
         End If
     End Sub
 
-    Private Sub btnTestConn_Click(sender As Object, e As EventArgs) Handles btnTestConn.Click
-        Try
-            Dim connStr As String = "Data Source=" & txtDbServer.Text &
-                                    ";Initial Catalog=" & txtDbName.Text &
-                                    ";Integrated Security=True;"
-            Using conn As New System.Data.SqlClient.SqlConnection(connStr)
-                conn.Open()
-                MsgBox("Koneksi database berhasil!", MsgBoxStyle.Information, "Koneksi OK")
-            End Using
-        Catch ex As Exception
-            MsgBox("Koneksi gagal:" & vbNewLine & ex.Message,
-                   MsgBoxStyle.Critical, "Koneksi Gagal")
-        End Try
+    Private Sub btnTutup_Click(sender As Object, e As EventArgs) Handles btnTutup.Click
+        Me.Close()
     End Sub
 
 End Class

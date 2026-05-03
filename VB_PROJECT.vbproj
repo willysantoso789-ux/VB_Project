@@ -79,6 +79,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingsManager.vb" />
+    <Compile Include="Database.vb" />
     <Compile Include="Form\Master\Admin\KamarForm.Designer.vb">
       <DependentUpon>KamarForm.vb</DependentUpon>
     </Compile>
@@ -199,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\Utilities\LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Utilities\SettingsForm.resx">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
