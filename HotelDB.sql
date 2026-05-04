@@ -579,17 +579,21 @@ AS
 BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
-        IF LEN(LTRIM(RTRIM(ISNULL(@nik,'')))) <> 16
+        IF LEN(LTRIM(RTRIM(ISNULL(@nik, '')))) <> 16
             THROW 50010, 'NIK harus 16 karakter.', 1;
-        IF @nik NOT LIKE '%[^0-9]%' -- semua digit
-            BEGIN END -- valid
-        ELSE
+
+        -- Cek semua karakter adalah digit
+        -- Pattern: NIK valid = TIDAK mengandung karakter non-digit
+        IF @nik LIKE '%[^0-9]%'
             THROW 50011, 'NIK harus berisi angka saja.', 1;
+
         IF EXISTS (SELECT 1 FROM Tamu WHERE nik = @nik)
             THROW 50012, 'NIK sudah terdaftar.', 1;
-        IF LTRIM(RTRIM(ISNULL(@nama,''))) = ''
+
+        IF LTRIM(RTRIM(ISNULL(@nama, ''))) = ''
             THROW 50013, 'Nama tidak boleh kosong.', 1;
-        IF @gender NOT IN ('Laki-laki','Perempuan')
+
+        IF @gender NOT IN ('Laki-laki', 'Perempuan')
             THROW 50014, 'Gender tidak valid.', 1;
 
         INSERT INTO Tamu (nik, nama, email, no_hp, gender, alamat)
@@ -597,7 +601,9 @@ BEGIN
 
         SELECT SCOPE_IDENTITY() AS id_tamu;
     END TRY
-    BEGIN CATCH THROW; END CATCH
+    BEGIN CATCH
+        THROW;
+    END CATCH
 END;
 GO
 
@@ -1194,14 +1200,20 @@ BEGIN
     SET NOCOUNT ON;
     BEGIN TRY
         DECLARE @currentStatus NVARCHAR(20);
-        SELECT @currentStatus = status FROM Reservasi WHERE id_reservasi = @id_reservasi;
+
+        SELECT @currentStatus = status
+        FROM   Reservasi
+        WHERE  id_reservasi = @id_reservasi;
 
         IF @currentStatus IS NULL
             THROW 50210, 'Reservasi tidak ditemukan.', 1;
-        IF @currentStatus NOT IN ('Pending','Confirmed')
-            THROW 50211, 'Status tidak memungkinkan check-in (saat ini: ' + @currentStatus + ').', 1;
+
+        -- Tidak pakai string concatenation di THROW
+        IF @currentStatus NOT IN ('Pending', 'Confirmed')
+            THROW 50211, 'Status reservasi tidak memungkinkan untuk check-in. Pastikan status Pending atau Confirmed.', 1;
+
         IF @tgl_checkout <= @tgl_checkin
-            THROW 50212, 'Tanggal checkout harus setelah checkin.', 1;
+            THROW 50212, 'Tanggal checkout harus setelah tanggal checkin.', 1;
 
         UPDATE Reservasi
         SET status           = 'Checked-In',
@@ -1209,10 +1221,15 @@ BEGIN
             tanggal_checkout = @tgl_checkout
         WHERE id_reservasi = @id_reservasi;
 
-        UPDATE Kamar SET status = 'Terisi'
-        WHERE id_kamar IN (SELECT id_kamar FROM DetailReservasi WHERE id_reservasi = @id_reservasi);
+        UPDATE Kamar
+        SET    status = 'Terisi'
+        WHERE  id_kamar IN (
+            SELECT id_kamar FROM DetailReservasi WHERE id_reservasi = @id_reservasi
+        );
     END TRY
-    BEGIN CATCH THROW; END CATCH
+    BEGIN CATCH
+        THROW;
+    END CATCH
 END;
 GO
 
