@@ -5,6 +5,7 @@ Public Class KamarForm
 
     Private isEdit As Boolean = False
     Private selectedId As Integer = -1
+    Private selectedNomorKamar As String = ""
 
     Private Sub DataKamarForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadTipeKamar()
@@ -19,8 +20,7 @@ Public Class KamarForm
             For Each row As DataRow In dt.Rows
                 cboIdTipe.Items.Add(New TipeItem(
                     Convert.ToInt32(row("id_tipe")),
-                    row("nama_tipe").ToString()
-                ))
+                    row("nama_tipe").ToString()))
             Next
             cboIdTipe.DisplayMember = "Nama"
             cboIdTipe.ValueMember = "Id"
@@ -50,8 +50,12 @@ Public Class KamarForm
         If dgvKamar.Columns.Count = 0 Then Exit Sub
 
         Dim headers As New Dictionary(Of String, String) From {
-            {"id_kamar", "ID"}, {"id_tipe", "ID Tipe"}, {"nama_tipe", "Tipe Kamar"},
-            {"nomor_kamar", "Nomor Kamar"}, {"status", "Status"}, {"harga", "Harga/Malam"}
+            {"id_kamar", "ID"},
+            {"id_tipe", "ID Tipe"},
+            {"nama_tipe", "Tipe Kamar"},
+            {"nomor_kamar", "Nomor Kamar"},
+            {"status", "Status"},
+            {"harga", "Harga/Malam"}
         }
         For Each kv In headers
             If dgvKamar.Columns.Contains(kv.Key) Then
@@ -61,6 +65,9 @@ Public Class KamarForm
 
         If dgvKamar.Columns.Contains("harga") Then
             dgvKamar.Columns("harga").DefaultCellStyle.Format = "N0"
+        End If
+        If dgvKamar.Columns.Contains("id_tipe") Then
+            dgvKamar.Columns("id_tipe").Visible = False
         End If
 
         For Each row As DataGridViewRow In dgvKamar.Rows
@@ -78,24 +85,14 @@ Public Class KamarForm
         Next
     End Sub
 
-    Private Sub ClearForm()
-        txtIdKamar.Text = "(auto)"
-        cboIdTipe.SelectedIndex = -1
-        txtNomorKamar.Clear()
-        cboStatus.SelectedIndex = -1
-        btnHapus.Enabled = False
-        btnSimpan.Text = "Simpan"
-        isEdit = False
-        selectedId = -1
-        txtNomorKamar.Focus()
-    End Sub
-
     Private Sub dgvKamar_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvKamar.CellClick
         If e.RowIndex < 0 Then Exit Sub
         Dim row As DataGridViewRow = dgvKamar.Rows(e.RowIndex)
+
         selectedId = Convert.ToInt32(row.Cells("id_kamar").Value)
+        selectedNomorKamar = row.Cells("nomor_kamar").Value?.ToString()
         txtIdKamar.Text = selectedId.ToString()
-        txtNomorKamar.Text = row.Cells("nomor_kamar").Value?.ToString()
+        txtNomorKamar.Text = selectedNomorKamar
         cboStatus.SelectedItem = row.Cells("status").Value?.ToString()
 
         Dim idTipe As Integer = Convert.ToInt32(row.Cells("id_tipe").Value)
@@ -106,8 +103,36 @@ Public Class KamarForm
         Next
 
         btnHapus.Enabled = True
+        btnKondisi.Enabled = True
         btnSimpan.Text = "Update"
         isEdit = True
+    End Sub
+
+    '── Adjust Kondisi Properti (dari sini, bukan dari PropertiForm) ──
+    'Private Sub btnKondisi_Click(sender As Object, e As EventArgs) Handles btnKondisi.Click
+    '    If selectedId = -1 Then
+    '        MsgBox("Pilih kamar dari tabel terlebih dahulu.", MsgBoxStyle.Exclamation)
+    '        Exit Sub
+    '    End If
+
+    '    Dim frm As New KondisiPropertiForm()
+    '    frm.SetKamar(selectedId, selectedNomorKamar)
+    '    frm.ShowDialog()
+    '    LoadGrid()
+    'End Sub
+
+    Private Sub ClearForm()
+        txtIdKamar.Text = "(auto)"
+        cboIdTipe.SelectedIndex = -1
+        txtNomorKamar.Clear()
+        cboStatus.SelectedIndex = -1
+        btnHapus.Enabled = False
+        btnKondisi.Enabled = False
+        btnSimpan.Text = "Simpan"
+        isEdit = False
+        selectedId = -1
+        selectedNomorKamar = ""
+        txtNomorKamar.Focus()
     End Sub
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
@@ -115,21 +140,21 @@ Public Class KamarForm
         Dim tipe As TipeItem = CType(cboIdTipe.SelectedItem, TipeItem)
         Try
             If isEdit Then
-                Dim params As New Dictionary(Of String, Object) From {
-                    {"@id_kamar", selectedId},
-                    {"@id_tipe", tipe.Id},
-                    {"@nomor_kamar", txtNomorKamar.Text.Trim()},
-                    {"@status", cboStatus.SelectedItem.ToString()}
-                }
-                Database.ExecuteNonQuery("sp_UpdateKamar", params)
+                Database.ExecuteNonQuery("sp_UpdateKamar",
+                    New Dictionary(Of String, Object) From {
+                        {"@id_kamar", selectedId},
+                        {"@id_tipe", tipe.Id},
+                        {"@nomor_kamar", txtNomorKamar.Text.Trim()},
+                        {"@status", cboStatus.SelectedItem.ToString()}
+                    })
                 MsgBox("Data kamar berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
             Else
-                Dim params As New Dictionary(Of String, Object) From {
-                    {"@id_tipe", tipe.Id},
-                    {"@nomor_kamar", txtNomorKamar.Text.Trim()},
-                    {"@status", cboStatus.SelectedItem.ToString()}
-                }
-                Database.ExecuteNonQuery("sp_InsertKamar", params)
+                Database.ExecuteNonQuery("sp_InsertKamar",
+                    New Dictionary(Of String, Object) From {
+                        {"@id_tipe", tipe.Id},
+                        {"@nomor_kamar", txtNomorKamar.Text.Trim()},
+                        {"@status", cboStatus.SelectedItem.ToString()}
+                    })
                 MsgBox("Data kamar berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
             End If
             LoadGrid() : ClearForm()
@@ -159,24 +184,15 @@ Public Class KamarForm
     Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
         ClearForm()
     End Sub
-
     Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
         LoadGrid(txtCari.Text.Trim())
     End Sub
-
     Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
         If e.KeyCode = Keys.Enter Then LoadGrid(txtCari.Text.Trim())
     End Sub
-
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         txtCari.Clear() : LoadGrid() : ClearForm()
     End Sub
-
-    ' Buka form kelola kondisi properti per kamar
-    'Private Sub btnKondisiProperti_Click(sender As Object, e As EventArgs) Handles btnKondisiProperti.Click
-    '    Dim frm As New KondisiPropertiKamarForm()
-    '    frm.ShowDialog()
-    'End Sub
 
     Private Function ValidateForm() As Boolean
         If cboIdTipe.SelectedIndex = -1 Then
@@ -193,11 +209,14 @@ Public Class KamarForm
 
 End Class
 
+'── Helper class TipeItem ──────────────────────────────────
 Public Class TipeItem
     Public Property Id As Integer
     Public Property Nama As String
     Public Sub New(id As Integer, nama As String)
-        Me.Id = id
-        Me.Nama = nama
+        Me.Id = id : Me.Nama = nama
     End Sub
+    Public Overrides Function ToString() As String
+        Return Nama
+    End Function
 End Class

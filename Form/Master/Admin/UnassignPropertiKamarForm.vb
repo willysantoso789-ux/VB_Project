@@ -1,17 +1,9 @@
 ﻿Imports System.Data
 
-Public Class UnassignPropertiKamarForm
+Public Class UnassignPropertiForm
 
     Private idProperti As Integer = -1
     Private namaProperti As String = ""
-
-    Private ReadOnly KamarData As New Dictionary(Of Integer, String()) From {
-        {1, New String() {"101", "Standard"}},
-        {2, New String() {"102", "Standard"}},
-        {3, New String() {"201", "Deluxe"}},
-        {4, New String() {"202", "Deluxe"}},
-        {5, New String() {"301", "Suite"}}
-    }
 
     Public Sub SetProperti(id As Integer, nama As String)
         idProperti = id
@@ -25,37 +17,45 @@ Public Class UnassignPropertiKamarForm
 
     Private Sub LoadAssignedKamar()
         dgvUnassign.Rows.Clear()
+        Try
+            ' Ambil semua kamar, cek mana yang punya properti ini
+            Dim dtAllKamar As DataTable = Database.ExecuteQuery("sp_GetAllKamar", Nothing)
+            Dim found As Boolean = False
 
-        If Not PropertiKamarForm.IsAssignLoaded Then
-            lblNote.Text = "Properti ini belum ter-assign ke kamar manapun."
-            Return
-        End If
+            For Each drKamar As DataRow In dtAllKamar.Rows
+                Dim idKamar As Integer = Convert.ToInt32(drKamar("id_kamar"))
 
-        Dim found As Boolean = False
-        For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-            If Convert.ToInt32(dr("id_properti")) = idProperti Then
-                Dim idKamar As Integer = Convert.ToInt32(dr("id_kamar"))
-                Dim kondisi As String = dr("kondisi").ToString()
-                Dim noKamar As String = If(KamarData.ContainsKey(idKamar), KamarData(idKamar)(0), "?")
-                Dim tipe As String = If(KamarData.ContainsKey(idKamar), KamarData(idKamar)(1), "?")
+                ' Cek apakah kamar ini punya properti yang dicari
+                Dim dtProp As DataTable = Database.ExecuteQuery("sp_GetPropertiByKamar",
+                    New Dictionary(Of String, Object) From {{"@id_kamar", idKamar}})
 
-                Dim i As Integer = dgvUnassign.Rows.Add()
-                dgvUnassign.Rows(i).Cells("colCek").Value = False
-                dgvUnassign.Rows(i).Cells("colIdKamar").Value = idKamar
-                dgvUnassign.Rows(i).Cells("colNoKamar").Value = noKamar
-                dgvUnassign.Rows(i).Cells("colTipe").Value = tipe
-                dgvUnassign.Rows(i).Cells("colKondisi").Value = kondisi
-                dgvUnassign.Rows(i).Tag = idKamar
+                For Each drProp As DataRow In dtProp.Rows
+                    If Convert.ToInt32(drProp("id_properti")) = idProperti Then
+                        ' Kamar ini ter-assign
+                        Dim kondisi As String = drProp("kondisi").ToString()
+                        Dim i As Integer = dgvUnassign.Rows.Add()
+                        dgvUnassign.Rows(i).Cells("colCek").Value = False
+                        dgvUnassign.Rows(i).Cells("colIdKamar").Value = idKamar
+                        dgvUnassign.Rows(i).Cells("colNoKamar").Value = drKamar("nomor_kamar").ToString()
+                        dgvUnassign.Rows(i).Cells("colTipe").Value = drKamar("nama_tipe").ToString()
+                        dgvUnassign.Rows(i).Cells("colKondisi").Value = kondisi
+                        dgvUnassign.Rows(i).Tag = idKamar
 
-                StyleKondisiCell(dgvUnassign.Rows(i), kondisi)
-                found = True
+                        StyleKondisiCell(dgvUnassign.Rows(i), kondisi)
+                        found = True
+                        Exit For
+                    End If
+                Next
+            Next
+
+            If Not found Then
+                lblNote.Text = "Properti ini belum ter-assign ke kamar manapun."
+                lblNote.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
             End If
-        Next
 
-        If Not found Then
-            lblNote.Text = "Properti ini belum ter-assign ke kamar manapun."
-            lblNote.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
-        End If
+        Catch ex As Exception
+            MsgBox("Gagal load data: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Sub StyleKondisiCell(row As DataGridViewRow, kondisi As String)
@@ -95,7 +95,7 @@ Public Class UnassignPropertiKamarForm
         For Each row As DataGridViewRow In dgvUnassign.Rows
             If Convert.ToBoolean(row.Cells("colCek").Value) Then
                 toUnassign.Add(Convert.ToInt32(row.Tag))
-                noKamarList.Add("No." & row.Cells("colNoKamar").Value.ToString())
+                noKamarList.Add("No." & row.Cells("colNoKamar").Value?.ToString())
             End If
         Next
 
@@ -104,23 +104,30 @@ Public Class UnassignPropertiKamarForm
         End If
 
         If MsgBox("Unassign " & namaProperti & " dari:" & vbNewLine &
-                  String.Join(", ", noKamarList) & vbNewLine & vbNewLine &
-                  "Properti akan dicopot dari kamar tersebut. Lanjutkan?",
-                  MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Konfirmasi Unassign") = MsgBoxResult.Yes Then
+                  String.Join(", ", noKamarList) & vbNewLine & vbNewLine & "Lanjutkan?",
+                  MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Konfirmasi") = MsgBoxResult.Yes Then
 
-            Dim toRemove As New List(Of DataRow)
-            For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-                If Convert.ToInt32(dr("id_properti")) = idProperti AndAlso
-                   toUnassign.Contains(Convert.ToInt32(dr("id_kamar"))) Then
-                    toRemove.Add(dr)
-                End If
-            Next
-            For Each dr As DataRow In toRemove
-                PropertiKamarForm.dtAssignment.Rows.Remove(dr)
+            Dim errors As New List(Of String)
+            For Each idKamar As Integer In toUnassign
+                Try
+                    Database.ExecuteNonQuery("sp_UnassignPropertiKamar",
+                        New Dictionary(Of String, Object) From {
+                            {"@id_properti", idProperti},
+                            {"@id_kamar", idKamar}
+                        })
+                Catch ex As Exception
+                    errors.Add(ex.Message)
+                End Try
             Next
 
-            MsgBox("Unassign berhasil dari: " & String.Join(", ", noKamarList),
-                   MsgBoxStyle.Information, "Berhasil")
+            If errors.Count = 0 Then
+                MsgBox("Unassign berhasil dari: " & String.Join(", ", noKamarList),
+                       MsgBoxStyle.Information, "Berhasil")
+            Else
+                MsgBox("Sebagian gagal: " & String.Join(vbNewLine, errors),
+                       MsgBoxStyle.Exclamation, "Error")
+            End If
+
             LoadAssignedKamar()
         End If
     End Sub

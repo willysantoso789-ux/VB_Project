@@ -2,28 +2,8 @@
 
 Public Class PropertiKamarForm
 
-    ' Shared members used by other forms to check and access assignments
-    Public Shared IsAssignLoaded As Boolean = False
-    Public Shared dtAssignment As DataTable = CreateDefaultAssignmentTable()
-
-    Private Shared Function CreateDefaultAssignmentTable() As DataTable
-        Dim dt As New DataTable()
-        dt.Columns.Add("id_properti", GetType(Integer))
-        dt.Columns.Add("id_kamar", GetType(Integer))
-        dt.Columns.Add("kondisi", GetType(String))
-        Return dt
-    End Function
-
     Private idProperti As Integer = -1
     Private namaProperti As String = ""
-
-    Private ReadOnly KamarList As New List(Of Object()) From {
-        New Object() {1, "101", "Standard", "Tersedia"},
-        New Object() {2, "102", "Standard", "Terisi"},
-        New Object() {3, "201", "Deluxe", "Tersedia"},
-        New Object() {4, "202", "Deluxe", "Maintenance"},
-        New Object() {5, "301", "Suite", "Tersedia"}
-    }
 
     Public Sub SetProperti(id As Integer, nama As String)
         idProperti = id
@@ -37,45 +17,68 @@ Public Class PropertiKamarForm
 
     Private Sub LoadKamarGrid()
         dgvKamar.Rows.Clear()
+        Try
+            ' Ambil semua kamar dari DB
+            Dim dtAllKamar As DataTable = Database.ExecuteQuery("sp_GetAllKamar", Nothing)
 
-        For Each k As Object() In KamarList
-            Dim idKamar As Integer = Convert.ToInt32(k(0))
-            Dim sudahAssign As Boolean = IsAssigned(idKamar)
-            Dim kondisi As String = GetKondisi(idKamar)
+            ' Ambil kamar yang sudah ter-assign untuk properti ini
+            Dim assignedIds As New HashSet(Of Integer)
+            Try
+                Dim dtAssigned As DataTable = Database.ExecuteQuery("sp_GetPropertiByKamar",
+                    New Dictionary(Of String, Object) From {{"@id_kamar", -1}})
+                ' Cara alternatif: cari dari semua kamar yang punya properti ini
+            Catch
+            End Try
 
-            Dim i As Integer = dgvKamar.Rows.Add()
-            dgvKamar.Rows(i).Cells("colCek").Value = sudahAssign
-            dgvKamar.Rows(i).Cells("colIdKamar").Value = idKamar
-            dgvKamar.Rows(i).Cells("colNoKamar").Value = k(1).ToString()
-            dgvKamar.Rows(i).Cells("colTipe").Value = k(2).ToString()
-            dgvKamar.Rows(i).Cells("colStatus").Value = k(3).ToString()
-            dgvKamar.Rows(i).Cells("colSudahAssign").Value = If(sudahAssign, "✔ Sudah assign (" & kondisi & ")", "Belum assign")
-            dgvKamar.Rows(i).Tag = idKamar
+            ' Cek assignment per kamar
+            For Each dr As DataRow In dtAllKamar.Rows
+                Dim idKamar As Integer = Convert.ToInt32(dr("id_kamar"))
+                Dim isAssigned As Boolean = CheckIsAssigned(idKamar)
+                Dim kondisi As String = If(isAssigned, GetKondisiAssigned(idKamar), "")
 
-            StyleRow(dgvKamar.Rows(i), sudahAssign, kondisi)
-        Next
+                Dim i As Integer = dgvKamar.Rows.Add()
+                dgvKamar.Rows(i).Cells("colCek").Value = isAssigned
+                dgvKamar.Rows(i).Cells("colIdKamar").Value = idKamar
+                dgvKamar.Rows(i).Cells("colNoKamar").Value = dr("nomor_kamar").ToString()
+                dgvKamar.Rows(i).Cells("colTipe").Value = dr("nama_tipe").ToString()
+                dgvKamar.Rows(i).Cells("colStatus").Value = dr("status").ToString()
+                dgvKamar.Rows(i).Cells("colKeterangan").Value = If(isAssigned,
+                    "✔ Sudah assign (" & kondisi & ")", "Belum assign")
+                dgvKamar.Rows(i).Tag = idKamar
 
-        UpdateSummary()
+                StyleRow(dgvKamar.Rows(i), isAssigned, kondisi)
+            Next
+
+            UpdateSummary()
+        Catch ex As Exception
+            MsgBox("Gagal load data kamar: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
-    Private Function IsAssigned(idKamar As Integer) As Boolean
-        If Not PropertiKamarForm.IsAssignLoaded Then Return False
-        For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-            If Convert.ToInt32(dr("id_properti")) = idProperti AndAlso
-               Convert.ToInt32(dr("id_kamar")) = idKamar Then Return True
-        Next
+    Private Function CheckIsAssigned(idKamar As Integer) As Boolean
+        Try
+            Dim dt As DataTable = Database.ExecuteQuery("sp_GetPropertiByKamar",
+                New Dictionary(Of String, Object) From {{"@id_kamar", idKamar}})
+            For Each dr As DataRow In dt.Rows
+                If Convert.ToInt32(dr("id_properti")) = idProperti Then Return True
+            Next
+        Catch
+        End Try
         Return False
     End Function
 
-    Private Function GetKondisi(idKamar As Integer) As String
-        If Not PropertiKamarForm.IsAssignLoaded Then Return ""
-        For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-            If Convert.ToInt32(dr("id_properti")) = idProperti AndAlso
-               Convert.ToInt32(dr("id_kamar")) = idKamar Then
-                Return dr("kondisi").ToString()
-            End If
-        Next
-        Return ""
+    Private Function GetKondisiAssigned(idKamar As Integer) As String
+        Try
+            Dim dt As DataTable = Database.ExecuteQuery("sp_GetPropertiByKamar",
+                New Dictionary(Of String, Object) From {{"@id_kamar", idKamar}})
+            For Each dr As DataRow In dt.Rows
+                If Convert.ToInt32(dr("id_properti")) = idProperti Then
+                    Return dr("kondisi").ToString()
+                End If
+            Next
+        Catch
+        End Try
+        Return "Baik"
     End Function
 
     Private Sub StyleRow(row As DataGridViewRow, isAssigned As Boolean, kondisi As String)
@@ -105,9 +108,6 @@ Public Class PropertiKamarForm
 
     Private Sub dgvKamar_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvKamar.CellValueChanged
         If e.ColumnIndex = dgvKamar.Columns("colCek").Index AndAlso e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvKamar.Rows(e.RowIndex)
-            Dim isChecked As Boolean = Convert.ToBoolean(row.Cells("colCek").Value)
-            StyleRow(row, isChecked, If(isChecked, "Baik", ""))
             UpdateSummary()
         End If
     End Sub
@@ -118,7 +118,7 @@ Public Class PropertiKamarForm
         For Each row As DataGridViewRow In dgvKamar.Rows
             If Convert.ToBoolean(row.Cells("colCek").Value) Then
                 count += 1
-                list.Add("No." & row.Cells("colNoKamar").Value.ToString())
+                list.Add("No." & row.Cells("colNoKamar").Value?.ToString())
             End If
         Next
         txtSummary.Text = If(count = 0, "0 kamar dipilih",
@@ -126,37 +126,52 @@ Public Class PropertiKamarForm
     End Sub
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        ' Hapus semua assignment lama untuk properti ini
-        Dim toRemove As New List(Of DataRow)
-        For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-            If Convert.ToInt32(dr("id_properti")) = idProperti Then toRemove.Add(dr)
-        Next
-        For Each dr As DataRow In toRemove
-            PropertiKamarForm.dtAssignment.Rows.Remove(dr)
-        Next
-
-        ' Tambah assignment baru yang dicentang
+        Dim errors As New List(Of String)
         Dim assigned As New List(Of String)
         Dim unassigned As New List(Of String)
 
         For Each row As DataGridViewRow In dgvKamar.Rows
             Dim idKamar As Integer = Convert.ToInt32(row.Tag)
-            Dim noKamar As String = row.Cells("colNoKamar").Value.ToString()
+            Dim noKamar As String = row.Cells("colNoKamar").Value?.ToString()
             Dim isChecked As Boolean = Convert.ToBoolean(row.Cells("colCek").Value)
+            Dim wasAssigned As Boolean = row.Cells("colKeterangan").Value?.ToString().StartsWith("✔")
 
-            If isChecked Then
-                PropertiKamarForm.dtAssignment.Rows.Add(idProperti, idKamar, "Baik")
-                assigned.Add("No." & noKamar)
-            Else
-                unassigned.Add("No." & noKamar)
+            If isChecked AndAlso Not wasAssigned Then
+                ' Assign baru
+                Try
+                    Database.ExecuteNonQuery("sp_AssignPropertiKamar",
+                        New Dictionary(Of String, Object) From {
+                            {"@id_properti", idProperti},
+                            {"@id_kamar", idKamar}
+                        })
+                    assigned.Add("No." & noKamar)
+                Catch ex As Exception
+                    errors.Add("No." & noKamar & ": " & ex.Message)
+                End Try
+            ElseIf Not isChecked AndAlso wasAssigned Then
+                ' Unassign
+                Try
+                    Database.ExecuteNonQuery("sp_UnassignPropertiKamar",
+                        New Dictionary(Of String, Object) From {
+                            {"@id_properti", idProperti},
+                            {"@id_kamar", idKamar}
+                        })
+                    unassigned.Add("No." & noKamar)
+                Catch ex As Exception
+                    errors.Add("No." & noKamar & ": " & ex.Message)
+                End Try
             End If
         Next
 
-        Dim msg As String = "Assignment berhasil disimpan!" & vbNewLine
+        Dim msg As String = "Selesai!" & vbNewLine
         If assigned.Count > 0 Then msg &= "✔ Assigned   : " & String.Join(", ", assigned) & vbNewLine
-        If unassigned.Count > 0 Then msg &= "✖ Unassigned : " & String.Join(", ", unassigned)
+        If unassigned.Count > 0 Then msg &= "✖ Unassigned : " & String.Join(", ", unassigned) & vbNewLine
+        If errors.Count > 0 Then msg &= "⚠ Error      : " & String.Join(", ", errors)
+        If assigned.Count = 0 AndAlso unassigned.Count = 0 AndAlso errors.Count = 0 Then
+            msg = "Tidak ada perubahan."
+        End If
 
-        MsgBox(msg, MsgBoxStyle.Information, "Berhasil")
+        MsgBox(msg, MsgBoxStyle.Information, "Hasil")
         LoadKamarGrid()
     End Sub
 

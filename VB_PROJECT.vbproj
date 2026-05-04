@@ -90,9 +90,7 @@
     <Compile Include="Form\Master\Admin\KondisiPropertiForm.Designer.vb">
       <DependentUpon>KondisiPropertiForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\Master\Admin\KondisiPropertiForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form\Master\Admin\KondisiPropertiForm.vb" />
     <Compile Include="Form\Master\Admin\PropertiForm.Designer.vb">
       <DependentUpon>PropertiForm.vb</DependentUpon>
     </Compile>

@@ -1,123 +1,124 @@
 ﻿Imports System.Data
 
-Public Class KondisiPropertiForm
+'Public Class KondisiPropertiForm
 
-    Private idProperti As Integer = -1
-    Private namaProperti As String = ""
+'    Private idKamar As Integer = -1
+'    Private nomorKamar As String = ""
 
-    Private ReadOnly KamarData As New Dictionary(Of Integer, String()) From {
-        {1, New String() {"101", "Standard"}},
-        {2, New String() {"102", "Standard"}},
-        {3, New String() {"201", "Deluxe"}},
-        {4, New String() {"202", "Deluxe"}},
-        {5, New String() {"301", "Suite"}}
-    }
+'    Public Sub SetKamar(id As Integer, nomor As String)
+'        idKamar = id
+'        nomorKamar = nomor
+'    End Sub
 
-    Public Sub SetProperti(id As Integer, nama As String)
-        idProperti = id
-        namaProperti = nama
-    End Sub
+'    Private Sub KondisiPropertiKamarForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+'        lblTitle.Text = "Kondisi Properti — Kamar No. " & nomorKamar
+'        lblSubTitle.Text = "Ubah kondisi properti yang ter-assign di kamar No. " & nomorKamar
+'        LoadGrid()
+'    End Sub
 
-    Private Sub AdjustKondisiForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        txtNamaProp.Text = namaProperti
-        LoadGrid()
-    End Sub
+'    Private Sub LoadGrid()
+'        dgvKondisi.Rows.Clear()
 
-    Private Sub LoadGrid()
-        dgvAdjust.Rows.Clear()
+'        If idKamar = -1 Then
+'            lblNote.Text = "Kamar tidak valid." : Return
+'        End If
 
-        If Not PropertiKamarForm.IsAssignLoaded Then
-            lblNote.Text = "Properti belum ter-assign ke kamar manapun."
-            Return
-        End If
+'        Try
+'            Dim params As New Dictionary(Of String, Object) From {{"@id_kamar", idKamar}}
+'            Dim dt As DataTable = Database.ExecuteQuery("sp_GetPropertiByKamar", params)
 
-        Dim found As Boolean = False
-        For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-            If Convert.ToInt32(dr("id_properti")) = idProperti Then
-                Dim idKamar As Integer = Convert.ToInt32(dr("id_kamar"))
-                Dim kondisi As String = dr("kondisi").ToString()
-                Dim noKamar As String = If(KamarData.ContainsKey(idKamar), KamarData(idKamar)(0), "?")
-                Dim tipe As String = If(KamarData.ContainsKey(idKamar), KamarData(idKamar)(1), "?")
+'            If dt.Rows.Count = 0 Then
+'                lblNote.Text = "Tidak ada properti yang ter-assign ke kamar ini."
+'                lblNote.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
+'                Return
+'            End If
 
-                Dim i As Integer = dgvAdjust.Rows.Add()
-                dgvAdjust.Rows(i).Cells("colIdKamar").Value = idKamar
-                dgvAdjust.Rows(i).Cells("colNoKamar").Value = noKamar
-                dgvAdjust.Rows(i).Cells("colTipe").Value = tipe
-                dgvAdjust.Rows(i).Cells("colKondisi").Value = kondisi
-                dgvAdjust.Rows(i).Tag = idKamar
+'            lblNote.Text = "Klik dropdown kolom Kondisi untuk mengubah status"
+'            lblNote.ForeColor = System.Drawing.Color.FromArgb(100, 100, 100)
 
-                StyleRow(dgvAdjust.Rows(i), kondisi)
-                found = True
-            End If
-        Next
+'            For Each dr As DataRow In dt.Rows
+'                Dim i As Integer = dgvKondisi.Rows.Add()
+'                dgvKondisi.Rows(i).Cells("colIdProperti").Value = Convert.ToInt32(dr("id_properti"))
+'                dgvKondisi.Rows(i).Cells("colNamaProperti").Value = dr("nama_properti").ToString()
+'                dgvKondisi.Rows(i).Cells("colBiayaDenda").Value = Convert.ToDecimal(dr("biaya_denda")).ToString("N0")
+'                dgvKondisi.Rows(i).Cells("colKondisi").Value = dr("kondisi").ToString()
+'                dgvKondisi.Rows(i).Tag = Convert.ToInt32(dr("id_properti"))
+'                StyleRow(dgvKondisi.Rows(i), dr("kondisi").ToString())
+'            Next
 
-        If Not found Then
-            lblNote.Text = "Properti ini tidak ter-assign ke kamar manapun."
-        End If
-    End Sub
+'        Catch ex As Exception
+'            MsgBox("Gagal load properti kamar: " & ex.Message, MsgBoxStyle.Critical)
+'        End Try
+'    End Sub
 
-    Private Sub StyleRow(row As DataGridViewRow, kondisi As String)
-        Select Case kondisi
-            Case "Rusak"
-                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(254, 226, 226)
-                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
-            Case "Dalam Perbaikan"
-                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(254, 243, 199)
-                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(146, 64, 14)
-            Case Else
-                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(209, 250, 229)
-                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(22, 101, 52)
-        End Select
-    End Sub
+'    Private Sub StyleRow(row As DataGridViewRow, kondisi As String)
+'        Select Case kondisi
+'            Case "Rusak"
+'                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(254, 226, 226)
+'                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
+'            Case "Dalam Perbaikan"
+'                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(254, 243, 199)
+'                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(146, 64, 14)
+'            Case Else
+'                row.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(209, 250, 229)
+'                row.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(22, 101, 52)
+'        End Select
+'    End Sub
 
-    Private Sub dgvAdjust_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvAdjust.CurrentCellDirtyStateChanged
-        If dgvAdjust.IsCurrentCellDirty Then
-            dgvAdjust.CommitEdit(DataGridViewDataErrorContexts.Commit)
-        End If
-    End Sub
+'    Private Sub dgvKondisi_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgvKondisi.CurrentCellDirtyStateChanged
+'        If dgvKondisi.IsCurrentCellDirty Then
+'            dgvKondisi.CommitEdit(DataGridViewDataErrorContexts.Commit)
+'        End If
+'    End Sub
 
-    Private Sub dgvAdjust_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAdjust.CellValueChanged
-        If e.RowIndex < 0 Then Exit Sub
-        If e.ColumnIndex = dgvAdjust.Columns("colKondisi").Index Then
-            Dim row As DataGridViewRow = dgvAdjust.Rows(e.RowIndex)
-            Dim kondisi As String = row.Cells("colKondisi").Value?.ToString()
-            If Not String.IsNullOrEmpty(kondisi) Then
-                StyleRow(row, kondisi)
-            End If
-        End If
-    End Sub
+'    Private Sub dgvKondisi_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvKondisi.CellValueChanged
+'        If e.RowIndex < 0 Then Exit Sub
+'        If e.ColumnIndex = dgvKondisi.Columns("colKondisi").Index Then
+'            Dim kondisi As String = dgvKondisi.Rows(e.RowIndex).Cells("colKondisi").Value?.ToString()
+'            If Not String.IsNullOrEmpty(kondisi) Then
+'                StyleRow(dgvKondisi.Rows(e.RowIndex), kondisi)
+'            End If
+'        End If
+'    End Sub
 
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        dgvAdjust.EndEdit()
+'    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+'        dgvKondisi.EndEdit()
+'        If dgvKondisi.Rows.Count = 0 Then
+'            MsgBox("Tidak ada properti untuk disimpan.", MsgBoxStyle.Exclamation) : Return
+'        End If
 
-        Dim hasil As New List(Of String)
+'        Dim hasil As New List(Of String)
+'        Dim errorCount As Integer = 0
 
-        For Each row As DataGridViewRow In dgvAdjust.Rows
-            Dim idKamar As Integer = Convert.ToInt32(row.Tag)
-            Dim kondisi As String = row.Cells("colKondisi").Value?.ToString()
-            Dim noKamar As String = row.Cells("colNoKamar").Value.ToString()
+'        For Each row As DataGridViewRow In dgvKondisi.Rows
+'            Dim idProp As Integer = Convert.ToInt32(row.Tag)
+'            Dim kondisi As String = row.Cells("colKondisi").Value?.ToString()
+'            Dim nama As String = row.Cells("colNamaProperti").Value?.ToString()
+'            If String.IsNullOrEmpty(kondisi) Then kondisi = "Baik"
 
-            If String.IsNullOrEmpty(kondisi) Then kondisi = "Baik"
+'            Try
+'                Database.ExecuteNonQuery("sp_UpdateKondisiProperti",
+'                    New Dictionary(Of String, Object) From {
+'                        {"@id_properti", idProp},
+'                        {"@id_kamar", idKamar},
+'                        {"@kondisi", kondisi}
+'                    })
+'                hasil.Add(nama & " → " & kondisi)
+'            Catch ex As Exception
+'                errorCount += 1
+'                hasil.Add("[GAGAL] " & nama & ": " & ex.Message)
+'            End Try
+'        Next
 
-            ' Update di dtAssignment
-            For Each dr As DataRow In PropertiKamarForm.dtAssignment.Rows
-                If Convert.ToInt32(dr("id_properti")) = idProperti AndAlso
-                   Convert.ToInt32(dr("id_kamar")) = idKamar Then
-                    dr("kondisi") = kondisi
-                    Exit For
-                End If
-            Next
+'        Dim icon As MsgBoxStyle = If(errorCount = 0, MsgBoxStyle.Information, MsgBoxStyle.Exclamation)
+'        MsgBox(If(errorCount = 0, "Semua kondisi berhasil disimpan!", errorCount & " item gagal.") &
+'               vbNewLine & String.Join(vbNewLine, hasil), icon, "Hasil")
 
-            hasil.Add("No." & noKamar & " → " & kondisi)
-        Next
+'        LoadGrid()
+'    End Sub
 
-        MsgBox("Kondisi berhasil disimpan!" & vbNewLine & String.Join(vbNewLine, hasil),
-               MsgBoxStyle.Information, "Berhasil")
-        LoadGrid()
-    End Sub
+'    Private Sub btnTutup_Click(sender As Object, e As EventArgs) Handles btnTutup.Click
+'        Me.Close()
+'    End Sub
 
-    Private Sub btnTutup_Click(sender As Object, e As EventArgs) Handles btnTutup.Click
-        Me.Close()
-    End Sub
-
-End Class
+'End Class
