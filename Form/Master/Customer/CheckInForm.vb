@@ -2,97 +2,70 @@
 
 Public Class CheckInForm
 
-    Private dtCheckin As New DataTable()
     Private selectedId As Integer = -1
     Private hargaPerMalam As Decimal = 0
-    Private tglCheckinAktual As DateTime
+    Private tglCheckinRencana As DateTime
     Private tglCheckoutRencana As DateTime
 
     Private Sub CheckInForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadFromReservasi()
         LoadGrid()
         ClearForm()
     End Sub
 
-    Private Sub LoadFromReservasi()
-        dtCheckin = New DataTable()
-        dtCheckin.Columns.Add("id_reservasi", GetType(Integer))
-        dtCheckin.Columns.Add("nik", GetType(String))
-        dtCheckin.Columns.Add("nama_tamu", GetType(String))
-        dtCheckin.Columns.Add("nomor_kamar", GetType(String))
-        dtCheckin.Columns.Add("tipe_reservasi", GetType(String))
-        dtCheckin.Columns.Add("harga_kamar", GetType(Decimal))
-        dtCheckin.Columns.Add("tgl_checkin", GetType(DateTime))
-        dtCheckin.Columns.Add("tgl_checkout", GetType(DateTime))
-        dtCheckin.Columns.Add("status", GetType(String))
-
-        If Not ReservasiForm.IsSharedLoaded Then
-            ' Dummy — sertakan NIK
-            dtCheckin.Rows.Add(1, "3578012345678901", "Budi Santoso", "101", "Walk-in", 350000D, DateTime.Today, DateTime.Today.AddDays(2), "Confirmed")
-            dtCheckin.Rows.Add(2, "3578019876543210", "Siti Rahayu", "201", "Online/Contact", 600000D, DateTime.Today.AddDays(3), DateTime.Today.AddDays(5), "Pending")
-            dtCheckin.Rows.Add(3, "3578011122334455", "Agus Prasetyo", "301", "Online/Contact", 1200000D, DateTime.Today.AddDays(1), DateTime.Today.AddDays(4), "Confirmed")
-        Else
-            For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
-                dtCheckin.Rows.Add(
-                    dr("id_reservasi"),
-                    If(dr.Table.Columns.Contains("nik"), dr("nik"), "—"),
-                    dr("nama_tamu"),
-                    dr("nomor_kamar"),
-                    dr("tipe_reservasi"),
-                    dr("harga_kamar"),
-                    dr("tgl_checkin"),
-                    dr("tgl_checkout"),
-                    dr("status")
-                )
-            Next
-        End If
-    End Sub
-
     Private Sub LoadGrid(Optional filter As String = "")
-        Dim filterStatus As String = cboFilter.SelectedItem?.ToString()
-        Dim view As New DataView(dtCheckin)
-        Dim rowFilter As String = ""
+        Try
+            Dim filterStatus As String = cboFilter.SelectedItem?.ToString()
+            Dim statusParam As Object = Nothing
 
-        ' Filter status
-        If filterStatus <> "Semua" AndAlso filterStatus <> "" Then
-            rowFilter = "status = '" & filterStatus & "'"
-        End If
+            If filterStatus <> "Semua" AndAlso filterStatus <> "" Then
+                statusParam = filterStatus
+            End If
 
-        ' NIK primary, Nama secondary
-        If filter <> "" Then
-            Dim cariFilter As String = "nik LIKE '" & filter & "%' OR nama_tamu LIKE '%" & filter & "%'"
-            rowFilter = If(rowFilter = "", cariFilter, rowFilter & " AND (" & cariFilter & ")")
-        End If
+            Dim params As New Dictionary(Of String, Object) From {
+                {"@filter", If(filter = "", Nothing, filter)},
+                {"@status", statusParam}
+            }
 
-        view.RowFilter = rowFilter
-        dgvCheckin.DataSource = view.ToTable()
-        StyleGrid()
+            ' Hanya tampilkan yang bisa di-checkin
+            Dim dt As DataTable = Database.ExecuteQuery("sp_GetAllReservasi", params)
+            Dim view As New DataView(dt)
+
+            ' Default: tampilkan Pending dan Confirmed saja
+            If statusParam Is Nothing Then
+                view.RowFilter = "status IN ('Pending', 'Confirmed', 'Checked-In')"
+            End If
+
+            dgvCheckin.DataSource = view.ToTable()
+            StyleGrid()
+        Catch ex As Exception
+            MsgBox("Gagal load data: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Sub StyleGrid()
         If dgvCheckin.Columns.Count = 0 Then Exit Sub
 
-        dgvCheckin.Columns("id_reservasi").HeaderText = "ID Res."
-        dgvCheckin.Columns("nik").HeaderText = "NIK"
-        dgvCheckin.Columns("nama_tamu").HeaderText = "Nama Tamu"
-        dgvCheckin.Columns("nomor_kamar").HeaderText = "Kamar"
-        dgvCheckin.Columns("tipe_reservasi").HeaderText = "Tipe"
-        dgvCheckin.Columns("harga_kamar").HeaderText = "Harga/Malam"
-        dgvCheckin.Columns("tgl_checkin").HeaderText = "Tgl Check-In"
-        dgvCheckin.Columns("tgl_checkout").HeaderText = "Tgl Check-Out"
-        dgvCheckin.Columns("status").HeaderText = "Status"
+        Dim headers As New Dictionary(Of String, String) From {
+            {"id_reservasi", "ID"}, {"nik", "NIK"}, {"nama_tamu", "Nama Tamu"},
+            {"nomor_kamar", "Kamar"}, {"tipe_reservasi", "Tipe"},
+            {"harga_kamar", "Harga/Malam"}, {"tanggal_checkin", "Tgl Check-In"},
+            {"tanggal_checkout", "Tgl Check-Out"}, {"status", "Status"}
+        }
+        For Each kv In headers
+            If dgvCheckin.Columns.Contains(kv.Key) Then
+                dgvCheckin.Columns(kv.Key).HeaderText = kv.Value
+            End If
+        Next
 
-        dgvCheckin.Columns("id_reservasi").FillWeight = 45
-        dgvCheckin.Columns("nik").FillWeight = 110
-        dgvCheckin.Columns("nama_tamu").FillWeight = 120
-        dgvCheckin.Columns("nomor_kamar").FillWeight = 50
-        dgvCheckin.Columns("tipe_reservasi").FillWeight = 100
-        dgvCheckin.Columns("harga_kamar").FillWeight = 90
-        dgvCheckin.Columns("tgl_checkin").FillWeight = 80
-        dgvCheckin.Columns("tgl_checkout").FillWeight = 80
-        dgvCheckin.Columns("status").FillWeight = 75
+        For Each col As String In {"id_kamar", "id_tamu", "tanggal_reservasi", "nama_tipe", "no_hp"}
+            If dgvCheckin.Columns.Contains(col) Then
+                dgvCheckin.Columns(col).Visible = False
+            End If
+        Next
 
-        dgvCheckin.Columns("harga_kamar").DefaultCellStyle.Format = "N0"
+        If dgvCheckin.Columns.Contains("harga_kamar") Then
+            dgvCheckin.Columns("harga_kamar").DefaultCellStyle.Format = "N0"
+        End If
 
         For Each row As DataGridViewRow In dgvCheckin.Rows
             Select Case row.Cells("status").Value?.ToString()
@@ -116,36 +89,36 @@ Public Class CheckInForm
 
         selectedId = Convert.ToInt32(row.Cells("id_reservasi").Value)
         hargaPerMalam = Convert.ToDecimal(row.Cells("harga_kamar").Value)
-        tglCheckinAktual = Convert.ToDateTime(row.Cells("tgl_checkin").Value)
-        tglCheckoutRencana = Convert.ToDateTime(row.Cells("tgl_checkout").Value)
+        tglCheckinRencana = Convert.ToDateTime(row.Cells("tanggal_checkin").Value)
+        tglCheckoutRencana = Convert.ToDateTime(row.Cells("tanggal_checkout").Value)
 
         txtIdReservasi.Text = selectedId.ToString()
-        txtNamaTamu.Text = row.Cells("nama_tamu").Value.ToString() &
-                              "  (NIK: " & row.Cells("nik").Value.ToString() & ")"
-        txtKamar.Text = "No. " & row.Cells("nomor_kamar").Value.ToString()
+        txtNamaTamu.Text = row.Cells("nama_tamu").Value?.ToString() &
+                              "  (NIK: " & row.Cells("nik").Value?.ToString() & ")"
+        txtKamar.Text = "No. " & row.Cells("nomor_kamar").Value?.ToString()
         txtHarga.Text = "Rp " & hargaPerMalam.ToString("N0") & " / malam"
-        txtTipe.Text = row.Cells("tipe_reservasi").Value.ToString()
-        dtpTglCheckin.Value = tglCheckinAktual
+        txtTipe.Text = row.Cells("tipe_reservasi").Value?.ToString()
+        dtpTglCheckin.Value = tglCheckinRencana
         dtpTglCheckout.Value = tglCheckoutRencana
 
         HitungEstimasi()
 
-        If status = "Checked-In" Then
-            btnCheckIn.Enabled = False
-            btnCheckIn.Text = "Sudah Check-In"
-        ElseIf status = "Checked-Out" OrElse status = "Cancelled" Then
-            btnCheckIn.Enabled = False
-            btnCheckIn.Text = "Tidak Dapat Diproses"
-        Else
-            btnCheckIn.Enabled = True
-            btnCheckIn.Text = "Proses Check-In"
-        End If
+        Select Case status
+            Case "Checked-In"
+                btnCheckIn.Enabled = False
+                btnCheckIn.Text = "Sudah Check-In"
+            Case "Checked-Out", "Cancelled"
+                btnCheckIn.Enabled = False
+                btnCheckIn.Text = "Tidak Dapat Diproses"
+            Case Else
+                btnCheckIn.Enabled = True
+                btnCheckIn.Text = "Proses Check-In"
+        End Select
     End Sub
 
     Private Sub dtpTglCheckin_ValueChanged(sender As Object, e As EventArgs) Handles dtpTglCheckin.ValueChanged
         HitungEstimasi()
     End Sub
-
     Private Sub dtpTglCheckout_ValueChanged(sender As Object, e As EventArgs) Handles dtpTglCheckout.ValueChanged
         HitungEstimasi()
     End Sub
@@ -157,8 +130,7 @@ Public Class CheckInForm
             txtEstimasi.BackColor = System.Drawing.Color.FromArgb(254, 226, 226)
             txtEstimasi.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
         Else
-            Dim total As Decimal = malam * hargaPerMalam
-            txtEstimasi.Text = "Rp " & total.ToString("N0") & " (" & malam & " malam)"
+            txtEstimasi.Text = "Rp " & (malam * hargaPerMalam).ToString("N0") & " (" & malam & " malam)"
             txtEstimasi.BackColor = System.Drawing.Color.FromArgb(209, 250, 229)
             txtEstimasi.ForeColor = System.Drawing.Color.FromArgb(6, 95, 70)
         End If
@@ -169,64 +141,45 @@ Public Class CheckInForm
             MsgBox("Pilih reservasi dari daftar.", MsgBoxStyle.Exclamation) : Exit Sub
         End If
         If dtpTglCheckout.Value.Date <= dtpTglCheckin.Value.Date Then
-            MsgBox("Tanggal check-out harus setelah check-in.", MsgBoxStyle.Exclamation) : Exit Sub
+            MsgBox("Tanggal checkout harus setelah checkin.", MsgBoxStyle.Exclamation) : Exit Sub
         End If
 
         Dim malam As Integer = (dtpTglCheckout.Value.Date - dtpTglCheckin.Value.Date).Days
-        Dim total As Decimal = malam * hargaPerMalam
-
         If MsgBox("Konfirmasi Check-In:" & vbNewLine &
                   "Tamu  : " & txtNamaTamu.Text & vbNewLine &
                   "Kamar : " & txtKamar.Text & vbNewLine &
                   "Malam : " & malam & " malam" & vbNewLine &
-                  "Total : Rp " & total.ToString("N0") & vbNewLine & vbNewLine & "Lanjutkan?",
-                  MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Konfirmasi") = MsgBoxResult.Yes Then
-
-            For Each dr As DataRow In dtCheckin.Rows
-                If Convert.ToInt32(dr("id_reservasi")) = selectedId Then
-                    dr("tgl_checkin") = dtpTglCheckin.Value.Date
-                    dr("tgl_checkout") = dtpTglCheckout.Value.Date
-                    dr("status") = "Checked-In"
-                    Exit For
-                End If
-            Next
-
-            If ReservasiForm.IsSharedLoaded Then
-                For Each dr As DataRow In ReservasiForm.dtReservasiShared.Rows
-                    If Convert.ToInt32(dr("id_reservasi")) = selectedId Then
-                        dr("tgl_checkin") = dtpTglCheckin.Value.Date
-                        dr("tgl_checkout") = dtpTglCheckout.Value.Date
-                        dr("status") = "Checked-In"
-                        Exit For
-                    End If
-                Next
-            End If
-
-            MsgBox("Check-In berhasil!", MsgBoxStyle.Information, "Berhasil")
-            LoadGrid() : ClearForm()
+                  "Total : Rp " & (malam * hargaPerMalam).ToString("N0") & vbNewLine & vbNewLine &
+                  "Lanjutkan?",
+                  MsgBoxStyle.YesNo Or MsgBoxStyle.Question,
+                  "Konfirmasi Check-In") = MsgBoxResult.Yes Then
+            Try
+                Database.ExecuteNonQuery("sp_ProsesCheckIn",
+                    New Dictionary(Of String, Object) From {
+                        {"@id_reservasi", selectedId},
+                        {"@tgl_checkin", dtpTglCheckin.Value.Date},
+                        {"@tgl_checkout", dtpTglCheckout.Value.Date}
+                    })
+                MsgBox("Check-In berhasil!", MsgBoxStyle.Information, "Berhasil")
+                LoadGrid() : ClearForm()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
         End If
     End Sub
 
     Private Sub cboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFilter.SelectedIndexChanged
         LoadGrid(txtCari.Text.Trim())
     End Sub
-
     Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
         LoadGrid(txtCari.Text.Trim())
     End Sub
-
     Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
         If e.KeyCode = Keys.Enter Then LoadGrid(txtCari.Text.Trim())
     End Sub
-
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        txtCari.Clear()
-        cboFilter.SelectedIndex = 0
-        LoadFromReservasi()
-        LoadGrid()
-        ClearForm()
+        txtCari.Clear() : cboFilter.SelectedIndex = 0 : LoadGrid() : ClearForm()
     End Sub
-
     Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
         ClearForm()
     End Sub

@@ -146,7 +146,7 @@ Public Class ReservasiForm
         txtHargaKamar.Text = "Rp " & currentHargaKamar.ToString("N0")
     End Sub
 
-    Private Sub cboTipeReservasi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTipe.SelectedIndexChanged
+    Private Sub cboTipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTipe.SelectedIndexChanged
         If cboTipe.SelectedIndex = 0 Then
             dtpTglReservasi.Value = DateTime.Today
             dtpTglCheckin.Value = DateTime.Today
@@ -279,8 +279,8 @@ Public Class ReservasiForm
     End Sub
 
     Private Function ValidateForm() As Boolean
-        If cboTipeReservasi.SelectedIndex = -1 Then
-            MsgBox("Pilih tipe reservasi.", MsgBoxStyle.Exclamation) : cboTipeReservasi.Focus() : Return False
+        If cboTipe.SelectedIndex = -1 Then
+            MsgBox("Pilih tipe reservasi.", MsgBoxStyle.Exclamation) : cboTipe.Focus() : Return False
         End If
         If selectedTamu Is Nothing Then
             MsgBox("Pilih tamu.", MsgBoxStyle.Exclamation) : cboTamu.Focus() : Return False

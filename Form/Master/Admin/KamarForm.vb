@@ -173,10 +173,10 @@ Public Class KamarForm
     End Sub
 
     ' Buka form kelola kondisi properti per kamar
-    Private Sub btnKondisiProperti_Click(sender As Object, e As EventArgs) Handles btnKondisiProperti.Click
-        Dim frm As New KondisiPropertiForm()
-        frm.ShowDialog()
-    End Sub
+    'Private Sub btnKondisiProperti_Click(sender As Object, e As EventArgs) Handles btnKondisiProperti.Click
+    '    Dim frm As New KondisiPropertiKamarForm()
+    '    frm.ShowDialog()
+    'End Sub
 
     Private Function ValidateForm() As Boolean
         If cboIdTipe.SelectedIndex = -1 Then
@@ -191,4 +191,13 @@ Public Class KamarForm
         Return True
     End Function
 
+End Class
+
+Public Class TipeItem
+    Public Property Id As Integer
+    Public Property Nama As String
+    Public Sub New(id As Integer, nama As String)
+        Me.Id = id
+        Me.Nama = nama
+    End Sub
 End Class
