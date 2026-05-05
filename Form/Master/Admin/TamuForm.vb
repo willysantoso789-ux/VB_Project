@@ -1,65 +1,123 @@
-﻿Imports System.Data
+﻿Imports VB_PROJECT.HotelDBDataSetTableAdapters
 
 Public Class TamuForm
 
     Private isEdit As Boolean = False
-    Private selectedId As Integer = -1
 
-    Private Sub DataTamuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadGrid()
+    ' ── Load ──────────────────────────────────────────────
+    Private Sub TamuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RefreshData()
         ClearForm()
     End Sub
 
-    Private Sub LoadGrid(Optional filter As String = "")
+    Private Sub RefreshData()
+        ' Pakai TableAdapter langsung — pattern dari referensi
+        Me.Vw_DataTamuTableAdapter.Fill(Me.HotelDBDataSet.vw_DataTamu)
+    End Sub
+
+    ' ── Klik baris ────────────────────────────────────────
+    Private Sub dgvTamu_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTamu.CellClick
+        If dgvTamu.SelectedRows.Count < 0 Then Exit Sub
+
+        txtNIK.Text = dgvTamu.SelectedRows(0).Cells(1).Value
+        txtNama.Text = dgvTamu.SelectedRows(0).Cells(2).Value
+        txtEmail.Text = dgvTamu.SelectedRows(0).Cells(3).Value
+        txtNoHp.Text = dgvTamu.SelectedRows(0).Cells(4).Value
+        cboGender.SelectedItem = dgvTamu.SelectedRows(0).Cells(5).Value
+        txtAlamat.Text = dgvTamu.SelectedRows(0).Cells(6).Value
+
+        btnHapus.Enabled = True
+        btnSimpan.Text = "Update"
+        isEdit = True
+    End Sub
+
+    ' ── Simpan / Update ───────────────────────────────────
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        If Not ValidateForm() Then Exit Sub
+
         Try
-            Dim params As New Dictionary(Of String, Object) From {
-                {"@filter", If(filter = "", Nothing, filter)}
-            }
-            Dim dt As DataTable = Database.ExecuteQuery("sp_GetAllTamu", params)
-            dgvTamu.DataSource = dt
-            StyleGrid()
+            If isEdit Then
+                ' Update via QueriesTableAdapter
+                QueriesTableAdapter1.sp_UpdateTamu(
+                    dgvTamu.SelectedRows(0).Cells(0).Value,
+                    txtNIK.Text.Trim(),
+                    txtNama.Text.Trim(),
+                    txtEmail.Text.Trim(),
+                    txtNoHp.Text.Trim(),
+                    cboGender.SelectedItem.ToString(),
+                    txtAlamat.Text.Trim())
+                MsgBox("Data tamu berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
+            Else
+                ' Insert via QueriesTableAdapter
+                QueriesTableAdapter1.sp_InsertTamu(
+                    txtNIK.Text.Trim(),
+                    txtNama.Text.Trim(),
+                    txtEmail.Text.Trim(),
+                    txtNoHp.Text.Trim(),
+                    cboGender.SelectedItem.ToString(),
+                    txtAlamat.Text.Trim())
+                MsgBox("Data tamu berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
+            End If
+
+            RefreshData()
+            ClearForm()
+
         Catch ex As Exception
-            MsgBox("Gagal load data tamu:" & vbNewLine & ex.Message,
-                   MsgBoxStyle.Critical, "Error")
+            MsgBox("Gagal menyimpan: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
 
-    Private Sub StyleGrid()
-        If dgvTamu.Columns.Count = 0 Then Exit Sub
+    ' ── Hapus ─────────────────────────────────────────────
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If dgvTamu.SelectedRows.Count < 0 Then Exit Sub
 
-        Dim headers As New Dictionary(Of String, String) From {
-            {"id_tamu", "ID"}, {"nik", "NIK"}, {"nama", "Nama Lengkap"},
-            {"email", "Email"}, {"no_hp", "No. HP"},
-            {"gender", "Gender"}, {"alamat", "Alamat"}
-        }
-        For Each kv In headers
-            If dgvTamu.Columns.Contains(kv.Key) Then
-                dgvTamu.Columns(kv.Key).HeaderText = kv.Value
-            End If
-        Next
+        Dim konfirm As Boolean = True
+        If AppSettingsManager.ConfirmHapus Then
+            konfirm = (MsgBox("Yakin ingin menghapus tamu " & txtNama.Text & "?",
+                              MsgBoxStyle.YesNo Or MsgBoxStyle.Question,
+                              "Hapus") = MsgBoxResult.Yes)
+        End If
+        If Not konfirm Then Exit Sub
 
-        Dim weights As New Dictionary(Of String, Integer) From {
-            {"id_tamu", 35}, {"nik", 120}, {"nama", 140},
-            {"email", 150}, {"no_hp", 100}, {"gender", 70}, {"alamat", 200}
-        }
-        For Each kv In weights
-            If dgvTamu.Columns.Contains(kv.Key) Then
-                dgvTamu.Columns(kv.Key).FillWeight = kv.Value
-            End If
-        Next
-
-        For Each row As DataGridViewRow In dgvTamu.Rows
-            Select Case row.Cells("gender").Value?.ToString()
-                Case "Laki-laki"
-                    row.Cells("gender").Style.ForeColor = System.Drawing.Color.FromArgb(26, 86, 219)
-                    row.Cells("gender").Style.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-                Case "Perempuan"
-                    row.Cells("gender").Style.ForeColor = System.Drawing.Color.FromArgb(157, 23, 77)
-                    row.Cells("gender").Style.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-            End Select
-        Next
+        Try
+            Dim id As Integer = dgvTamu.SelectedRows(0).Cells(0).Value
+            QueriesTableAdapter1.sp_DeleteTamu(id)
+            MsgBox("Data tamu berhasil dihapus.", MsgBoxStyle.Information, "Berhasil")
+            RefreshData()
+            ClearForm()
+        Catch ex As Exception
+            MsgBox("Gagal menghapus: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
     End Sub
 
+    ' ── Cari — filter BindingSource ───────────────────────
+    Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
+        ApplyFilter(txtCari.Text.Trim())
+    End Sub
+
+    Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
+        If e.KeyCode = Keys.Enter Then ApplyFilter(txtCari.Text.Trim())
+    End Sub
+
+    Private Sub ApplyFilter(keyword As String)
+        If keyword = "" Then
+            VwDataTamuBindingSource.Filter = ""
+        Else
+            ' Filter di BindingSource — NIK prefix atau Nama contains
+            VwDataTamuBindingSource.Filter =
+                "NIK LIKE '" & keyword & "%' OR [Nama Lengkap] LIKE '%" & keyword & "%'"
+        End If
+    End Sub
+
+    ' ── Refresh ───────────────────────────────────────────
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        txtCari.Clear()
+        VwDataTamuBindingSource.Filter = ""
+        RefreshData()
+        ClearForm()
+    End Sub
+
+    ' ── Clear form ────────────────────────────────────────
     Private Sub ClearForm()
         txtIdTamu.Text = "(auto)"
         txtNIK.Clear()
@@ -71,109 +129,34 @@ Public Class TamuForm
         btnHapus.Enabled = False
         btnSimpan.Text = "Simpan"
         isEdit = False
-        selectedId = -1
         txtNIK.Focus()
-    End Sub
-
-    Private Sub dgvTamu_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTamu.CellClick
-        If e.RowIndex < 0 Then Exit Sub
-        Dim row As DataGridViewRow = dgvTamu.Rows(e.RowIndex)
-        selectedId = Convert.ToInt32(row.Cells("id_tamu").Value)
-        txtIdTamu.Text = selectedId.ToString()
-        txtNIK.Text = row.Cells("nik").Value?.ToString()
-        txtNama.Text = row.Cells("nama").Value?.ToString()
-        txtEmail.Text = row.Cells("email").Value?.ToString()
-        txtNoHp.Text = row.Cells("no_hp").Value?.ToString()
-        txtAlamat.Text = row.Cells("alamat").Value?.ToString()
-        cboGender.SelectedItem = row.Cells("gender").Value?.ToString()
-        btnHapus.Enabled = True
-        btnSimpan.Text = "Update"
-        isEdit = True
-    End Sub
-
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        If Not ValidateForm() Then Exit Sub
-        Try
-            If isEdit Then
-                Dim params As New Dictionary(Of String, Object) From {
-                    {"@id_tamu", selectedId},
-                    {"@nik", txtNIK.Text.Trim()},
-                    {"@nama", txtNama.Text.Trim()},
-                    {"@email", txtEmail.Text.Trim()},
-                    {"@no_hp", txtNoHp.Text.Trim()},
-                    {"@gender", cboGender.SelectedItem.ToString()},
-                    {"@alamat", txtAlamat.Text.Trim()}
-                }
-                Database.ExecuteNonQuery("sp_UpdateTamu", params)
-                MsgBox("Data tamu berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
-            Else
-                Dim params As New Dictionary(Of String, Object) From {
-                    {"@nik", txtNIK.Text.Trim()},
-                    {"@nama", txtNama.Text.Trim()},
-                    {"@email", txtEmail.Text.Trim()},
-                    {"@no_hp", txtNoHp.Text.Trim()},
-                    {"@gender", cboGender.SelectedItem.ToString()},
-                    {"@alamat", txtAlamat.Text.Trim()}
-                }
-                Database.ExecuteNonQuery("sp_InsertTamu", params)
-                MsgBox("Data tamu berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
-            End If
-            LoadGrid() : ClearForm()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Sub
-
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        Dim konfirm As Boolean = True
-        If AppSettingsManager.ConfirmHapus Then
-            konfirm = (MsgBox("Yakin ingin menghapus tamu ini?",
-                              MsgBoxStyle.YesNo Or MsgBoxStyle.Question,
-                              "Hapus") = MsgBoxResult.Yes)
-        End If
-        If Not konfirm Then Exit Sub
-
-        Try
-            Database.ExecuteNonQuery("sp_DeleteTamu",
-                New Dictionary(Of String, Object) From {{"@id_tamu", selectedId}})
-            MsgBox("Data tamu berhasil dihapus.", MsgBoxStyle.Information, "Berhasil")
-            LoadGrid() : ClearForm()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
     End Sub
 
     Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
         ClearForm()
     End Sub
 
-    Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
-        LoadGrid(txtCari.Text.Trim())
-    End Sub
-
-    Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
-        If e.KeyCode = Keys.Enter Then LoadGrid(txtCari.Text.Trim())
-    End Sub
-
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        txtCari.Clear() : LoadGrid() : ClearForm()
-    End Sub
-
+    ' ── Validasi ──────────────────────────────────────────
     Private Function ValidateForm() As Boolean
         If String.IsNullOrWhiteSpace(txtNIK.Text) OrElse txtNIK.Text.Trim().Length <> 16 Then
-            MsgBox("NIK harus 16 digit.", MsgBoxStyle.Exclamation) : txtNIK.Focus() : Return False
+            MsgBox("NIK harus 16 digit.", MsgBoxStyle.Exclamation)
+            txtNIK.Focus() : Return False
         End If
         If Not txtNIK.Text.Trim().All(Function(c) Char.IsDigit(c)) Then
-            MsgBox("NIK harus berupa angka.", MsgBoxStyle.Exclamation) : txtNIK.Focus() : Return False
+            MsgBox("NIK harus berupa angka.", MsgBoxStyle.Exclamation)
+            txtNIK.Focus() : Return False
         End If
         If String.IsNullOrWhiteSpace(txtNama.Text) Then
-            MsgBox("Nama tidak boleh kosong.", MsgBoxStyle.Exclamation) : txtNama.Focus() : Return False
+            MsgBox("Nama tidak boleh kosong.", MsgBoxStyle.Exclamation)
+            txtNama.Focus() : Return False
         End If
         If String.IsNullOrWhiteSpace(txtEmail.Text) Then
-            MsgBox("Email tidak boleh kosong.", MsgBoxStyle.Exclamation) : txtEmail.Focus() : Return False
+            MsgBox("Email tidak boleh kosong.", MsgBoxStyle.Exclamation)
+            txtEmail.Focus() : Return False
         End If
         If cboGender.SelectedIndex = -1 Then
-            MsgBox("Pilih jenis kelamin.", MsgBoxStyle.Exclamation) : cboGender.Focus() : Return False
+            MsgBox("Pilih jenis kelamin.", MsgBoxStyle.Exclamation)
+            cboGender.Focus() : Return False
         End If
         Return True
     End Function
