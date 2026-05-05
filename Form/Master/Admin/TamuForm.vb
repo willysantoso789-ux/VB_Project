@@ -17,7 +17,7 @@ Public Class TamuForm
 
     ' ── Klik baris ────────────────────────────────────────
     Private Sub dgvTamu_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTamu.CellClick
-        If dgvTamu.SelectedRows.Count < 0 Then Exit Sub
+        If dgvTamu.SelectedRows.Count = 0 Then Exit Sub
 
         txtNIK.Text = dgvTamu.SelectedRows(0).Cells(1).Value
         txtNama.Text = dgvTamu.SelectedRows(0).Cells(2).Value
@@ -69,7 +69,7 @@ Public Class TamuForm
 
     ' ── Hapus ─────────────────────────────────────────────
     Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        If dgvTamu.SelectedRows.Count < 0 Then Exit Sub
+        If dgvTamu.SelectedRows.Count = 0 Then Exit Sub
 
         Dim konfirm As Boolean = True
         If AppSettingsManager.ConfirmHapus Then
