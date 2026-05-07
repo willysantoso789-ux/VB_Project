@@ -1,106 +1,47 @@
-﻿Imports System.Data
-Imports Org.BouncyCastle.Asn1.Cmp
+﻿Imports VB_PROJECT.HotelDBDataSetTableAdapters
 
 Public Class KamarForm
 
     Private isEdit As Boolean = False
-    Private selectedId As Integer = -1
-    Private selectedNomorKamar As String = ""
 
-    Private Sub DataKamarForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadTipeKamar()
-        LoadGrid()
+    Private Sub KamarForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadTipeCombo()
+        RefreshData()
         ClearForm()
     End Sub
 
-    Private Sub LoadTipeKamar()
-        Try
-            cboIdTipe.Items.Clear()
-            Dim dt As DataTable = Database.ExecuteQuery("sp_GetAllTipeKamar", Nothing)
-            For Each row As DataRow In dt.Rows
-                cboIdTipe.Items.Add(New TipeItem(
-                    Convert.ToInt32(row("id_tipe")),
-                    row("nama_tipe").ToString()))
-            Next
-            cboIdTipe.DisplayMember = "Nama"
-            cboIdTipe.ValueMember = "Id"
-        Catch ex As Exception
-            MsgBox("Gagal load tipe kamar: " & ex.Message, MsgBoxStyle.Critical)
-        End Try
+    Private Sub RefreshData()
+        Me.Vw_DataKamarTableAdapter.Fill(Me.HotelDBDataSet.vw_DataKamar)
     End Sub
 
-    Private Sub LoadGrid(Optional filter As String = "")
-        Try
-            Dim dt As DataTable = Database.ExecuteQuery("sp_GetAllKamar", Nothing)
-
-            If filter <> "" Then
-                Dim view As New DataView(dt)
-                view.RowFilter = "nomor_kamar LIKE '%" & filter & "%'"
-                dgvKamar.DataSource = view.ToTable()
-            Else
-                dgvKamar.DataSource = dt
-            End If
-            StyleGrid()
-        Catch ex As Exception
-            MsgBox("Gagal load data kamar: " & ex.Message, MsgBoxStyle.Critical)
-        End Try
-    End Sub
-
-    Private Sub StyleGrid()
-        If dgvKamar.Columns.Count = 0 Then Exit Sub
-
-        Dim headers As New Dictionary(Of String, String) From {
-            {"id_kamar", "ID"},
-            {"id_tipe", "ID Tipe"},
-            {"nama_tipe", "Tipe Kamar"},
-            {"nomor_kamar", "Nomor Kamar"},
-            {"status", "Status"},
-            {"harga", "Harga/Malam"}
-        }
-        For Each kv In headers
-            If dgvKamar.Columns.Contains(kv.Key) Then
-                dgvKamar.Columns(kv.Key).HeaderText = kv.Value
-            End If
-        Next
-
-        If dgvKamar.Columns.Contains("harga") Then
-            dgvKamar.Columns("harga").DefaultCellStyle.Format = "N0"
-        End If
-        If dgvKamar.Columns.Contains("id_tipe") Then
-            dgvKamar.Columns("id_tipe").Visible = False
-        End If
-
-        For Each row As DataGridViewRow In dgvKamar.Rows
-            Select Case row.Cells("status").Value?.ToString()
-                Case "Tersedia"
-                    row.Cells("status").Style.ForeColor = System.Drawing.Color.FromArgb(22, 101, 52)
-                    row.Cells("status").Style.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-                Case "Terisi"
-                    row.Cells("status").Style.ForeColor = System.Drawing.Color.FromArgb(146, 64, 14)
-                    row.Cells("status").Style.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-                Case "Maintenance"
-                    row.Cells("status").Style.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
-                    row.Cells("status").Style.Font = New System.Drawing.Font("Segoe UI", 9, System.Drawing.FontStyle.Bold)
-            End Select
-        Next
+    Private Sub LoadTipeCombo()
+        Dim dt = New sp_GetAllTipeKamarTableAdapter().GetData()
+        cboIdTipe.DataSource = dt
+        cboIdTipe.DisplayMember = "nama_tipe"
+        cboIdTipe.ValueMember = "id_tipe"
+        cboIdTipe.SelectedIndex = -1
     End Sub
 
     Private Sub dgvKamar_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvKamar.CellClick
-        If e.RowIndex < 0 Then Exit Sub
-        Dim row As DataGridViewRow = dgvKamar.Rows(e.RowIndex)
+        If dgvKamar.SelectedRows.Count = 0 Then Exit Sub
 
-        selectedId = Convert.ToInt32(row.Cells("id_kamar").Value)
-        selectedNomorKamar = row.Cells("nomor_kamar").Value?.ToString()
-        txtIdKamar.Text = selectedId.ToString()
-        txtNomorKamar.Text = selectedNomorKamar
-        cboStatus.SelectedItem = row.Cells("status").Value?.ToString()
+        ' [0]=ID Kamar [1]=Nomor Kamar [2]=Tipe Kamar [3]=Harga per Malam
+        ' [4]=Status   [5]=Jumlah Properti [6]=Properti Rusak [7]=Properti Perbaikan
+        txtIdKamar.Text = dgvKamar.SelectedRows(0).Cells(0).Value
+        txtNomorKamar.Text = dgvKamar.SelectedRows(0).Cells(1).Value
+        cboStatus.SelectedItem = dgvKamar.SelectedRows(0).Cells(4).Value
 
-        Dim idTipe As Integer = Convert.ToInt32(row.Cells("id_tipe").Value)
-        For i As Integer = 0 To cboIdTipe.Items.Count - 1
-            If CType(cboIdTipe.Items(i), TipeItem).Id = idTipe Then
-                cboIdTipe.SelectedIndex = i : Exit For
-            End If
-        Next
+        ' Set tipe kamar di combo berdasarkan nama tipe [2]
+        Dim namaTipe As String = dgvKamar.SelectedRows(0).Cells(2).Value?.ToString()
+        Dim dt As System.Data.DataTable = CType(cboIdTipe.DataSource, System.Data.DataTable)
+        If dt IsNot Nothing Then
+            For Each dr As System.Data.DataRow In dt.Rows
+                If dr("nama_tipe").ToString() = namaTipe Then
+                    cboIdTipe.SelectedValue = dr("id_tipe")
+                    Exit For
+                End If
+            Next
+        End If
 
         btnHapus.Enabled = True
         btnKondisi.Enabled = True
@@ -108,18 +49,80 @@ Public Class KamarForm
         isEdit = True
     End Sub
 
-    '── Adjust Kondisi Properti (dari sini, bukan dari PropertiForm) ──
     'Private Sub btnKondisi_Click(sender As Object, e As EventArgs) Handles btnKondisi.Click
-    '    If selectedId = -1 Then
-    '        MsgBox("Pilih kamar dari tabel terlebih dahulu.", MsgBoxStyle.Exclamation)
-    '        Exit Sub
+    '    If dgvKamar.SelectedRows.Count = 0 Then
+    '        MsgBox("Pilih kamar dari tabel.", MsgBoxStyle.Exclamation) : Exit Sub
     '    End If
-
-    '    Dim frm As New KondisiPropertiForm()
-    '    frm.SetKamar(selectedId, selectedNomorKamar)
+    '    Dim idKamar As Integer = dgvKamar.SelectedRows(0).Cells(0).Value
+    '    Dim nomor As String = dgvKamar.SelectedRows(0).Cells(1).Value?.ToString()
+    '    Dim frm As New KondisiPropertiKamarForm()
+    '    frm.SetKamar(idKamar, nomor)
     '    frm.ShowDialog()
-    '    LoadGrid()
+    '    RefreshData()
     'End Sub
+
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        If Not ValidateForm() Then Exit Sub
+        Dim idTipe As Integer = Convert.ToInt32(cboIdTipe.SelectedValue)
+        Try
+            If isEdit Then
+                Dim idKamar As Integer = dgvKamar.SelectedRows(0).Cells(0).Value
+                ' sp_UpdateKamar(@id_kamar, @id_tipe, @nomor_kamar, @status)
+                QueriesTableAdapter1.sp_UpdateKamar(
+                    idKamar, idTipe,
+                    txtNomorKamar.Text.Trim(),
+                    cboStatus.SelectedItem.ToString())
+                MsgBox("Data kamar berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
+            Else
+                ' sp_InsertKamar(@id_tipe, @nomor_kamar, @status)
+                QueriesTableAdapter1.sp_InsertKamar(
+                    idTipe,
+                    txtNomorKamar.Text.Trim(),
+                    cboStatus.SelectedItem.ToString())
+                MsgBox("Data kamar berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
+            End If
+            RefreshData() : ClearForm()
+        Catch ex As Exception
+            MsgBox("Gagal: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If dgvKamar.SelectedRows.Count = 0 Then Exit Sub
+        Dim konfirm As Boolean = True
+        If AppSettingsManager.ConfirmHapus Then
+            konfirm = (MsgBox("Yakin hapus kamar No. " & txtNomorKamar.Text & "?",
+                              MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Hapus") = MsgBoxResult.Yes)
+        End If
+        If Not konfirm Then Exit Sub
+        Try
+            Dim id As Integer = dgvKamar.SelectedRows(0).Cells(0).Value
+            ' sp_DeleteKamar(@id_kamar)
+            QueriesTableAdapter1.sp_DeleteKamar(id)
+            MsgBox("Kamar berhasil dihapus.", MsgBoxStyle.Information, "Berhasil")
+            RefreshData() : ClearForm()
+        Catch ex As Exception
+            MsgBox("Gagal: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
+        ApplyFilter(txtCari.Text.Trim())
+    End Sub
+    Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
+        If e.KeyCode = Keys.Enter Then ApplyFilter(txtCari.Text.Trim())
+    End Sub
+    Private Sub ApplyFilter(keyword As String)
+        ' Filter via BindingSource — kolom dari vw_DataKamar
+        VwDataKamarBindingSource.Filter = If(keyword = "", "",
+            "[Nomor Kamar] LIKE '%" & keyword & "%' OR [Tipe Kamar] LIKE '%" & keyword & "%'")
+    End Sub
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        txtCari.Clear() : VwDataKamarBindingSource.Filter = "" : RefreshData() : ClearForm()
+    End Sub
+    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
+        ClearForm()
+    End Sub
 
     Private Sub ClearForm()
         txtIdKamar.Text = "(auto)"
@@ -130,68 +133,7 @@ Public Class KamarForm
         btnKondisi.Enabled = False
         btnSimpan.Text = "Simpan"
         isEdit = False
-        selectedId = -1
-        selectedNomorKamar = ""
         txtNomorKamar.Focus()
-    End Sub
-
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        If Not ValidateForm() Then Exit Sub
-        Dim tipe As TipeItem = CType(cboIdTipe.SelectedItem, TipeItem)
-        Try
-            If isEdit Then
-                Database.ExecuteNonQuery("sp_UpdateKamar",
-                    New Dictionary(Of String, Object) From {
-                        {"@id_kamar", selectedId},
-                        {"@id_tipe", tipe.Id},
-                        {"@nomor_kamar", txtNomorKamar.Text.Trim()},
-                        {"@status", cboStatus.SelectedItem.ToString()}
-                    })
-                MsgBox("Data kamar berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
-            Else
-                Database.ExecuteNonQuery("sp_InsertKamar",
-                    New Dictionary(Of String, Object) From {
-                        {"@id_tipe", tipe.Id},
-                        {"@nomor_kamar", txtNomorKamar.Text.Trim()},
-                        {"@status", cboStatus.SelectedItem.ToString()}
-                    })
-                MsgBox("Data kamar berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
-            End If
-            LoadGrid() : ClearForm()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Sub
-
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        Dim konfirm As Boolean = True
-        If AppSettingsManager.ConfirmHapus Then
-            konfirm = (MsgBox("Yakin ingin menghapus kamar ini?",
-                              MsgBoxStyle.YesNo Or MsgBoxStyle.Question,
-                              "Hapus") = MsgBoxResult.Yes)
-        End If
-        If Not konfirm Then Exit Sub
-        Try
-            Database.ExecuteNonQuery("sp_DeleteKamar",
-                New Dictionary(Of String, Object) From {{"@id_kamar", selectedId}})
-            MsgBox("Data kamar berhasil dihapus.", MsgBoxStyle.Information, "Berhasil")
-            LoadGrid() : ClearForm()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Sub
-
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
-        ClearForm()
-    End Sub
-    Private Sub btnCari_Click(sender As Object, e As EventArgs) Handles btnCari.Click
-        LoadGrid(txtCari.Text.Trim())
-    End Sub
-    Private Sub txtCari_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCari.KeyDown
-        If e.KeyCode = Keys.Enter Then LoadGrid(txtCari.Text.Trim())
-    End Sub
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        txtCari.Clear() : LoadGrid() : ClearForm()
     End Sub
 
     Private Function ValidateForm() As Boolean
@@ -207,16 +149,4 @@ Public Class KamarForm
         Return True
     End Function
 
-End Class
-
-'── Helper class TipeItem ──────────────────────────────────
-Public Class TipeItem
-    Public Property Id As Integer
-    Public Property Nama As String
-    Public Sub New(id As Integer, nama As String)
-        Me.Id = id : Me.Nama = nama
-    End Sub
-    Public Overrides Function ToString() As String
-        Return Nama
-    End Function
 End Class

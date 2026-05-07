@@ -52,7 +52,7 @@ Partial Class SettingsForm
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(423, 56)
+        Me.pnlHeader.Size = New System.Drawing.Size(420, 56)
         Me.pnlHeader.TabIndex = 0
         '
         'lblTitle
@@ -288,7 +288,7 @@ Partial Class SettingsForm
         Me.btnReset.ForeColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer))
         Me.btnReset.Location = New System.Drawing.Point(204, 358)
         Me.btnReset.Name = "btnReset"
-        Me.btnReset.Size = New System.Drawing.Size(110, 32)
+        Me.btnReset.Size = New System.Drawing.Size(200, 32)
         Me.btnReset.TabIndex = 16
         Me.btnReset.Text = "Reset Default"
         Me.btnReset.UseVisualStyleBackColor = False

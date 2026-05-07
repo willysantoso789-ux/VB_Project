@@ -274,6 +274,24 @@ JOIN [User] u           ON tr.id_user = u.id_user
 WHERE r.status = 'Checked-Out';
 GO
 
+-- View: Properti
+CREATE OR ALTER VIEW vw_DataProperti AS
+SELECT
+    p.id_properti                               AS [ID],
+    p.nama_properti                             AS [Nama Properti],
+    FORMAT(p.biaya_denda, 'N0')                 AS [Biaya Denda (Rp)],
+    COUNT(pk.id_detail)                         AS [Jumlah Assign],
+    SUM(CASE WHEN pk.kondisi = 'Rusak'
+             THEN 1 ELSE 0 END)                 AS [Properti Rusak],
+    SUM(CASE WHEN pk.kondisi = 'Dalam Perbaikan'
+             THEN 1 ELSE 0 END)                 AS [Properti Perbaikan],
+    SUM(CASE WHEN pk.kondisi = 'Baik'
+             THEN 1 ELSE 0 END)                 AS [Properti Baik]
+FROM Properti p
+LEFT JOIN PropertiKamar pk ON p.id_properti = pk.id_properti
+GROUP BY p.id_properti, p.nama_properti, p.biaya_denda;
+GO
+
 -- View: Properti per kamar lengkap
 CREATE OR ALTER VIEW vw_PropertiKamar AS
 SELECT

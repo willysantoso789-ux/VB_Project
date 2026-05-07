@@ -196,8 +196,20 @@
     <EmbeddedResource Include="Form\Master\Admin\KamarForm.resx">
       <DependentUpon>KamarForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Admin\PropertiForm.resx">
+      <DependentUpon>PropertiForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\Admin\TamuForm.resx">
       <DependentUpon>TamuForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Customer\CheckInForm.resx">
+      <DependentUpon>CheckInForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Customer\CheckOutForm.resx">
+      <DependentUpon>CheckOutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Customer\ReservasiForm.resx">
+      <DependentUpon>ReservasiForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
