@@ -40,6 +40,7 @@ Partial Class MainForm
         Me.mnuItemSettings = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSettingsPreferensi = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSettingsBackup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSettingsAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.ssBottom = New System.Windows.Forms.StatusStrip()
         Me.lblStatusDB = New System.Windows.Forms.ToolStripStatusLabel()
@@ -139,114 +140,146 @@ Partial Class MainForm
         'mnuProfile
         '
         Me.mnuProfile.Name = "mnuProfile"
-        Me.mnuProfile.Size = New System.Drawing.Size(270, 34)
+        Me.mnuProfile.Size = New System.Drawing.Size(171, 34)
         Me.mnuProfile.Text = "Profile"
         Me.mnuProfile.Visible = False
         '
         'mnuSep1
         '
         Me.mnuSep1.Name = "mnuSep1"
-        Me.mnuSep1.Size = New System.Drawing.Size(267, 6)
+        Me.mnuSep1.Size = New System.Drawing.Size(168, 6)
         Me.mnuSep1.Visible = False
         '
         'mnuLogin
         '
         Me.mnuLogin.Name = "mnuLogin"
-        Me.mnuLogin.Size = New System.Drawing.Size(270, 34)
+        Me.mnuLogin.Size = New System.Drawing.Size(171, 34)
         Me.mnuLogin.Text = "Login"
         '
         'mnuLogout
         '
         Me.mnuLogout.Name = "mnuLogout"
-        Me.mnuLogout.Size = New System.Drawing.Size(270, 34)
+        Me.mnuLogout.Size = New System.Drawing.Size(171, 34)
         Me.mnuLogout.Text = "Logout"
         Me.mnuLogout.Visible = False
         '
         'mnuSep2
         '
         Me.mnuSep2.Name = "mnuSep2"
-        Me.mnuSep2.Size = New System.Drawing.Size(267, 6)
+        Me.mnuSep2.Size = New System.Drawing.Size(168, 6)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(270, 34)
+        Me.mnuExit.Size = New System.Drawing.Size(171, 34)
         Me.mnuExit.Text = "Keluar"
-
-        ' ── Menu: Operasional ─────────────────────────────────
-        Me.mnuItemOperasional.Text = "Operasional"
-        Me.mnuItemOperasional.Name = "mnuItemOperasional"
+        '
+        'mnuItemOperasional
+        '
+        Me.mnuItemOperasional.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNavTamu, Me.mnuNavKamar, Me.mnuNavReservasi, Me.mnuNavCheckIn, Me.mnuNavCheckOut})
         Me.mnuItemOperasional.ForeColor = System.Drawing.Color.White
+        Me.mnuItemOperasional.Name = "mnuItemOperasional"
+        Me.mnuItemOperasional.Size = New System.Drawing.Size(123, 29)
+        Me.mnuItemOperasional.Text = "Operasional"
         Me.mnuItemOperasional.Visible = False
-        Me.mnuItemOperasional.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
-            Me.mnuNavTamu,
-            Me.mnuNavKamar,
-            Me.mnuNavReservasi,
-            Me.mnuNavCheckIn,
-            Me.mnuNavCheckOut
-        })
-
-        Me.mnuNavTamu.Text = "Data Tamu         Ctrl+T"
+        '
+        'mnuNavTamu
+        '
         Me.mnuNavTamu.Name = "mnuNavTamu"
-
-        Me.mnuNavKamar.Text = "Data Kamar        Ctrl+K"
+        Me.mnuNavTamu.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavTamu.Text = "Data Tamu         Ctrl+T"
+        '
+        'mnuNavKamar
+        '
         Me.mnuNavKamar.Name = "mnuNavKamar"
-
-        Me.mnuNavReservasi.Text = "Reservasi          Ctrl+R"
+        Me.mnuNavKamar.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavKamar.Text = "Data Kamar        Ctrl+K"
+        '
+        'mnuNavReservasi
+        '
         Me.mnuNavReservasi.Name = "mnuNavReservasi"
-
-        Me.mnuNavCheckIn.Text = "Check-In           Ctrl+I"
+        Me.mnuNavReservasi.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavReservasi.Text = "Reservasi          Ctrl+R"
+        '
+        'mnuNavCheckIn
+        '
         Me.mnuNavCheckIn.Name = "mnuNavCheckIn"
-
-        Me.mnuNavCheckOut.Text = "Check-Out          Ctrl+O"
+        Me.mnuNavCheckIn.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavCheckIn.Text = "Check-In           Ctrl+I"
+        '
+        'mnuNavCheckOut
+        '
         Me.mnuNavCheckOut.Name = "mnuNavCheckOut"
-
-        ' ── Menu: Master (Admin only) ─────────────────────────
-        Me.mnuItemMaster.Text = "Master"
-        Me.mnuItemMaster.Name = "mnuItemMaster"
+        Me.mnuNavCheckOut.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavCheckOut.Text = "Check-Out          Ctrl+O"
+        '
+        'mnuItemMaster
+        '
+        Me.mnuItemMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNavTipeKamar, Me.mnuNavProperti})
         Me.mnuItemMaster.ForeColor = System.Drawing.Color.White
+        Me.mnuItemMaster.Name = "mnuItemMaster"
+        Me.mnuItemMaster.Size = New System.Drawing.Size(82, 29)
+        Me.mnuItemMaster.Text = "Master"
         Me.mnuItemMaster.Visible = False
-        Me.mnuItemMaster.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
-            Me.mnuNavTipeKamar,
-            Me.mnuNavProperti
-        })
-
-        Me.mnuNavTipeKamar.Text = "Tipe Kamar        Ctrl+Y"
+        '
+        'mnuNavTipeKamar
+        '
         Me.mnuNavTipeKamar.Name = "mnuNavTipeKamar"
-
-        Me.mnuNavProperti.Text = "Properti Kamar    Ctrl+P"
+        Me.mnuNavTipeKamar.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavTipeKamar.Text = "Tipe Kamar        Ctrl+Y"
+        '
+        'mnuNavProperti
+        '
         Me.mnuNavProperti.Name = "mnuNavProperti"
-
-        ' ── Menu: Laporan ─────────────────────────────────────
-        Me.mnuItemLaporanNav.Text = "Laporan"
-        Me.mnuItemLaporanNav.Name = "mnuItemLaporanNav"
+        Me.mnuNavProperti.Size = New System.Drawing.Size(301, 34)
+        Me.mnuNavProperti.Text = "Properti Kamar    Ctrl+P"
+        '
+        'mnuItemLaporanNav
+        '
+        Me.mnuItemLaporanNav.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuNavLaporan})
         Me.mnuItemLaporanNav.ForeColor = System.Drawing.Color.White
+        Me.mnuItemLaporanNav.Name = "mnuItemLaporanNav"
+        Me.mnuItemLaporanNav.Size = New System.Drawing.Size(92, 29)
+        Me.mnuItemLaporanNav.Text = "Laporan"
         Me.mnuItemLaporanNav.Visible = False
-        Me.mnuItemLaporanNav.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
-            Me.mnuNavLaporan
-        })
-
-        Me.mnuNavLaporan.Text = "Lihat Laporan     Ctrl+L"
+        '
+        'mnuNavLaporan
+        '
         Me.mnuNavLaporan.Name = "mnuNavLaporan"
-
-        ' ── Menu: Settings ────────────────────────────────────
-        Me.mnuItemSettings.Text = "Settings"
-        Me.mnuItemSettings.Name = "mnuItemSettings"
+        Me.mnuNavLaporan.Size = New System.Drawing.Size(292, 34)
+        Me.mnuNavLaporan.Text = "Lihat Laporan     Ctrl+L"
+        '
+        'mnuItemSettings
+        '
+        Me.mnuItemSettings.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSettingsPreferensi, Me.mnuSettingsBackup, Me.UserManagementToolStripMenuItem, Me.mnuSettingsAbout})
         Me.mnuItemSettings.ForeColor = System.Drawing.Color.White
-        Me.mnuItemSettings.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {
-            Me.mnuSettingsPreferensi,
-            Me.mnuSettingsBackup,
-            Me.mnuSettingsAbout
-        })
-
-        Me.mnuSettingsPreferensi.Text = "Preferensi"
+        Me.mnuItemSettings.Name = "mnuItemSettings"
+        Me.mnuItemSettings.Size = New System.Drawing.Size(92, 29)
+        Me.mnuItemSettings.Text = "Settings"
+        '
+        'mnuSettingsPreferensi
+        '
         Me.mnuSettingsPreferensi.Name = "mnuSettingsPreferensi"
-
-        Me.mnuSettingsBackup.Text = "Backup Data"
+        Me.mnuSettingsPreferensi.Size = New System.Drawing.Size(270, 34)
+        Me.mnuSettingsPreferensi.Text = "Preferensi"
+        '
+        'mnuSettingsBackup
+        '
         Me.mnuSettingsBackup.Name = "mnuSettingsBackup"
-
-        Me.mnuSettingsAbout.Text = "Tentang Aplikasi"
+        Me.mnuSettingsBackup.Size = New System.Drawing.Size(270, 34)
+        Me.mnuSettingsBackup.Text = "Backup Data"
+        '
+        'UserManagementToolStripMenuItem
+        '
+        Me.UserManagementToolStripMenuItem.Name = "UserManagementToolStripMenuItem"
+        Me.UserManagementToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.UserManagementToolStripMenuItem.Text = "User Management"
+        '
+        'mnuSettingsAbout
+        '
         Me.mnuSettingsAbout.Name = "mnuSettingsAbout"
+        Me.mnuSettingsAbout.Size = New System.Drawing.Size(270, 34)
+        Me.mnuSettingsAbout.Text = "Tentang Aplikasi"
         '
         'ssBottom
         '
@@ -981,4 +1014,5 @@ Partial Class MainForm
     Friend WithEvents mnuSettingsPreferensi As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuSettingsBackup As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuSettingsAbout As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UserManagementToolStripMenuItem As ToolStripMenuItem
 End Class

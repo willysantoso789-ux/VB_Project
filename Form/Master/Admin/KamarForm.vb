@@ -49,17 +49,17 @@ Public Class KamarForm
         isEdit = True
     End Sub
 
-    'Private Sub btnKondisi_Click(sender As Object, e As EventArgs) Handles btnKondisi.Click
-    '    If dgvKamar.SelectedRows.Count = 0 Then
-    '        MsgBox("Pilih kamar dari tabel.", MsgBoxStyle.Exclamation) : Exit Sub
-    '    End If
-    '    Dim idKamar As Integer = dgvKamar.SelectedRows(0).Cells(0).Value
-    '    Dim nomor As String = dgvKamar.SelectedRows(0).Cells(1).Value?.ToString()
-    '    Dim frm As New KondisiPropertiKamarForm()
-    '    frm.SetKamar(idKamar, nomor)
-    '    frm.ShowDialog()
-    '    RefreshData()
-    'End Sub
+    Private Sub btnKondisi_Click(sender As Object, e As EventArgs) Handles btnKondisi.Click
+        If dgvKamar.SelectedRows.Count = 0 Then
+            MsgBox("Pilih kamar dari tabel.", MsgBoxStyle.Exclamation) : Exit Sub
+        End If
+        Dim idKamar As Integer = dgvKamar.SelectedRows(0).Cells(0).Value
+        Dim nomor As String = dgvKamar.SelectedRows(0).Cells(1).Value?.ToString()
+        Dim frm As New KondisiPropertiKamarForm()
+        frm.SetKamar(idKamar, nomor)
+        frm.ShowDialog()
+        RefreshData()
+    End Sub
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
         If Not ValidateForm() Then Exit Sub

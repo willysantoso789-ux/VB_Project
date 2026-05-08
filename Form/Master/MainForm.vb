@@ -1,4 +1,6 @@
-﻿Public Class MainForm
+﻿Imports VB_PROJECT.HotelDBDataSetTableAdapters
+
+Public Class MainForm
 
     Public Shared LoggedIn As Boolean = False
     Public Shared ActiveUser As String = ""
@@ -47,6 +49,7 @@
         pnlCardTipeKamar.Visible = isAdmin
         pnlCardProperti.Visible = isAdmin
         mnuItemMaster.Visible = isAdmin
+        UserManagementToolStripMenuItem.Visible = isAdmin
     End Sub
 
     Private Sub UpdateStatus()
@@ -60,6 +63,38 @@
             lblStatusUser.Text = "User: -"
         End If
     End Sub
+
+    'Private Sub LoadDashboardSummary()
+    '    Try
+    '        Dim dt = New sp_GetDashboardSummaryTableAdapter().GetData()
+    '        If dt Is Nothing OrElse dt.Rows.Count = 0 Then Exit Sub
+    '        Dim dr As System.Data.DataRow = dt.Rows(0)
+
+    '        ' Update label summary di pnlDashboard
+    '        ' Sesuaikan nama label dengan yang ada di designer
+    '        lblTotalTamu.Text = dr("total_tamu").ToString()
+    '        lblKamarTersedia.Text = dr("kamar_tersedia").ToString()
+    '        lblKamarTerisi.Text = dr("kamar_terisi").ToString()
+    '        lblKamarMaintenance.Text = dr("kamar_maintenance").ToString()
+    '        lblReservasiPending.Text = dr("reservasi_pending").ToString()
+    '        lblReservasiConfirmed.Text = dr("reservasi_confirmed").ToString()
+    '        lblTamuCheckin.Text = dr("tamu_checkin").ToString()
+    '        lblPendapatanBulanIni.Text = "Rp " & Convert.ToDecimal(dr("pendapatan_bulan_ini")).ToString("N0")
+    '        lblPropertiRusak.Text = dr("properti_rusak").ToString()
+
+    '        ' Warna alert
+    '        If Convert.ToInt32(dr("properti_rusak")) > 0 Then
+    '            lblPropertiRusak.ForeColor = System.Drawing.Color.FromArgb(153, 27, 27)
+    '        End If
+    '        If Convert.ToInt32(dr("reservasi_pending")) > 0 Then
+    '            lblReservasiPending.ForeColor = System.Drawing.Color.FromArgb(146, 64, 14)
+    '        End If
+
+    '    Catch ex As Exception
+    '        ' Dashboard summary tidak critical — silent fail
+    '        Console.WriteLine("Dashboard summary error: " & ex.Message)
+    '    End Try
+    'End Sub
 
     Private Sub MainForm_MdiChildActivate(sender As Object, e As EventArgs) Handles Me.MdiChildActivate
         If Me.ActiveMdiChild Is Nothing AndAlso LoggedIn Then
@@ -163,6 +198,47 @@
         frm.ShowDialog()
     End Sub
 
+    Private Sub mnuSettingsBackup_Click(sender As Object, e As EventArgs) Handles mnuSettingsBackup.Click
+        ProsesBackup()
+    End Sub
+
+    Private Sub ProsesBackup()
+        Using sfd As New SaveFileDialog()
+            sfd.Filter = "SQL Backup (*.bak)|*.bak|Semua File (*.*)|*.*"
+            sfd.FileName = "HotelDB_Backup_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".bak"
+            sfd.Title = "Simpan Backup Database"
+
+            If sfd.ShowDialog() <> DialogResult.OK Then Exit Sub
+
+            Try
+                Dim backupPath As String = sfd.FileName.Replace("'", "''")
+                Dim sql As String = $"BACKUP DATABASE [HotelDB] TO DISK = N'{backupPath}' " &
+                                 "WITH FORMAT, MEDIANAME = 'HotelDBBackup', " &
+                                 "NAME = 'Full Backup HotelDB';"
+
+                Using conn As New System.Data.SqlClient.SqlConnection(AppSettingsManager.ConnString)
+                    conn.Open()
+                    Using cmd As New System.Data.SqlClient.SqlCommand(sql, conn)
+                        cmd.CommandTimeout = 120
+                        cmd.ExecuteNonQuery()
+                    End Using
+                End Using
+
+                MsgBox("Backup berhasil!" & vbNewLine & "File: " & sfd.FileName,
+                   MsgBoxStyle.Information, "Backup Sukses")
+
+            Catch ex As Exception
+                MsgBox("Backup gagal:" & vbNewLine & ex.Message,
+                   MsgBoxStyle.Critical, "Error Backup")
+            End Try
+        End Using
+    End Sub
+
+    Private Sub UserManagementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserManagementToolStripMenuItem.Click
+        Dim frm As New UserManagementForm()
+        frm.ShowDialog()
+    End Sub
+
     Private Sub mnuSettingsAbout_Click(sender As Object, e As EventArgs) Handles mnuSettingsAbout.Click
         MsgBox("Hotel Receptionist System" & vbNewLine &
                "Versi 1.0.0" & vbNewLine & vbNewLine &
@@ -218,5 +294,4 @@
             child.Close()
         Next
     End Sub
-
 End Class

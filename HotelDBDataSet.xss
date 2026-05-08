@@ -56,7 +56,7 @@
     <Shape ID="DesignTable:sp_LoginUser" ZOrder="15" X="15105" Y="70" Height="209" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="142" />
     <Shape ID="DesignTable:sp_ProsesCheckOut" ZOrder="14" X="15475" Y="70" Height="236" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="169" />
     <Shape ID="DesignTable:vw_DataProperti" ZOrder="1" X="16215" Y="70" Height="290" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="223" />
-    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="2" X="15845" Y="70" Height="355" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="352" />
+    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="2" X="15845" Y="70" Height="361" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="351" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK__DendaKeru__id_ka__76969D2E" ZOrder="13" LineWidth="11">

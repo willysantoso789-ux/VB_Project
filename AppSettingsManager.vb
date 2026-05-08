@@ -3,9 +3,12 @@ Imports System.Xml
 
 Public Module AppSettingsManager
 
-    ' ── Setiap user punya file XML sendiri ────────────────
-    ' Path: AppData\Roaming\HotelApp\settings_{username}.xml
-    Private Function GetSettingsPath(username As String) As String
+    ' ── Path global (satu file untuk semua user) ─────────
+    Private ReadOnly GlobalPath As String =
+        Path.Combine(Application.StartupPath, "global_settings.xml")
+
+    ' ── Path per-user ────────────────────────────────────
+    Private Function GetUserPath(username As String) As String
         Dim folder As String = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "HotelReceptionistApp")
@@ -14,20 +17,50 @@ Public Module AppSettingsManager
     End Function
 
     Private Function SanitizeFilename(name As String) As String
-        Dim invalid As Char() = Path.GetInvalidFileNameChars()
         Dim result As String = name
-        For Each c As Char In invalid
+        For Each c As Char In Path.GetInvalidFileNameChars()
             result = result.Replace(c, "_"c)
         Next
         Return result.ToLower()
     End Function
 
-    ' ── Properties preferensi tampilan per user ───────────
+    ' ── Global settings (admin only) ─────────────────────
+    Public PersenDenda As Integer = 100
+
+    ' ── Per-user preferences ─────────────────────────────
     Public ShowClock As Boolean = True
     Public ConfirmLogout As Boolean = True
     Public ConfirmHapus As Boolean = True
-    Public PersenDenda As Integer = 100  ' Minimum 100%
     Public CurrentUsername As String = ""
+
+    ' ── Load global (dipanggil saat startup) ─────────────
+    Public Sub LoadGlobalSettings()
+        If Not File.Exists(GlobalPath) Then SaveGlobalSettings() : Return
+        Try
+            Dim doc As New XmlDocument()
+            doc.Load(GlobalPath)
+            PersenDenda = ReadInt(doc, "Global/PersenDenda", 100)
+            If PersenDenda < 100 Then PersenDenda = 100
+        Catch
+            SaveGlobalSettings()
+        End Try
+    End Sub
+
+    Public Sub SaveGlobalSettings()
+        Try
+            Dim doc As New XmlDocument()
+            Dim decl As XmlDeclaration = doc.CreateXmlDeclaration("1.0", "utf-8", Nothing)
+            doc.AppendChild(decl)
+            Dim root As XmlElement = doc.CreateElement("HotelGlobalSettings")
+            doc.AppendChild(root)
+            Dim g As XmlElement = doc.CreateElement("Global")
+            AppendNode(doc, g, "PersenDenda", PersenDenda.ToString())
+            root.AppendChild(g)
+            WriteXml(doc, GlobalPath)
+        Catch ex As Exception
+            MsgBox("Gagal simpan global settings: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
 
     ' ── Connection string — hardcode atau dari config ──────
     ' Ubah sesuai server kamu
@@ -40,104 +73,74 @@ Public Module AppSettingsManager
         End Get
     End Property
 
-    ' ── Load settings untuk user yang login ───────────────
+    ' ── Load per-user (dipanggil setelah login) ───────────
     Public Sub LoadSettings(username As String)
         CurrentUsername = username
-        Dim path As String = GetSettingsPath(username)
-
-        If Not File.Exists(path) Then
-            SaveSettings(username)
-            Return
-        End If
-
+        Dim path As String = GetUserPath(username)
+        If Not File.Exists(path) Then SaveSettings(username) : Return
         Try
             Dim doc As New XmlDocument()
             doc.Load(path)
-
             ShowClock = ReadBool(doc, "Preferensi/ShowClock", True)
             ConfirmLogout = ReadBool(doc, "Preferensi/ConfirmLogout", True)
             ConfirmHapus = ReadBool(doc, "Preferensi/ConfirmHapus", True)
-            PersenDenda = ReadInt(doc, "Preferensi/PersenDenda", 100)
-
-            ' Validasi: denda tidak boleh di bawah 100%
-            If PersenDenda < 100 Then PersenDenda = 100
-
-        Catch ex As Exception
+        Catch
             ResetToDefault(username)
         End Try
     End Sub
 
-    ' ── Simpan settings untuk user tertentu ───────────────
     Public Sub SaveSettings(username As String)
         Try
-            Dim path As String = GetSettingsPath(username)
             Dim doc As New XmlDocument()
-
             Dim decl As XmlDeclaration = doc.CreateXmlDeclaration("1.0", "utf-8", Nothing)
             doc.AppendChild(decl)
-
             Dim root As XmlElement = doc.CreateElement("HotelUserSettings")
             doc.AppendChild(root)
-
-            ' Metadata
             Dim meta As XmlElement = doc.CreateElement("Metadata")
-            AppendChild(doc, meta, "Username", username)
-            AppendChild(doc, meta, "LastSaved", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            AppendNode(doc, meta, "Username", username)
+            AppendNode(doc, meta, "LastSaved", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             root.AppendChild(meta)
-
-            ' Preferensi
             Dim pref As XmlElement = doc.CreateElement("Preferensi")
-            AppendChild(doc, pref, "ShowClock", ShowClock.ToString().ToLower())
-            AppendChild(doc, pref, "ConfirmLogout", ConfirmLogout.ToString().ToLower())
-            AppendChild(doc, pref, "ConfirmHapus", ConfirmHapus.ToString().ToLower())
-            AppendChild(doc, pref, "PersenDenda", PersenDenda.ToString())
+            AppendNode(doc, pref, "ShowClock", ShowClock.ToString().ToLower())
+            AppendNode(doc, pref, "ConfirmLogout", ConfirmLogout.ToString().ToLower())
+            AppendNode(doc, pref, "ConfirmHapus", ConfirmHapus.ToString().ToLower())
             root.AppendChild(pref)
-
-            Dim writerSettings As New XmlWriterSettings()
-            writerSettings.Indent = True
-            writerSettings.IndentChars = "  "
-            writerSettings.Encoding = System.Text.Encoding.UTF8
-
-            Using writer As XmlWriter = XmlWriter.Create(path, writerSettings)
-                doc.WriteTo(writer)
-            End Using
-
+            WriteXml(doc, GetUserPath(username))
         Catch ex As Exception
-            MsgBox("Gagal menyimpan preferensi: " & ex.Message,
-                   MsgBoxStyle.Critical, "Error Settings")
+            MsgBox("Gagal simpan preferensi: " & ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
 
     Public Sub ResetToDefault(username As String)
-        ShowClock = True
-        ConfirmLogout = True
-        ConfirmHapus = True
-        PersenDenda = 100
+        ShowClock = True : ConfirmLogout = True : ConfirmHapus = True
         SaveSettings(username)
     End Sub
 
-    ' ── Helpers baca XML ──────────────────────────────────
-    Private Function ReadBool(doc As XmlDocument, path As String,
-                              def As Boolean) As Boolean
-        Dim node As XmlNode = doc.SelectSingleNode("HotelUserSettings/" & path)
-        If node Is Nothing Then Return def
-        Dim result As Boolean
-        Return If(Boolean.TryParse(node.InnerText, result), result, def)
+    ' ── Helpers ───────────────────────────────────────────
+    Private Function ReadBool(doc As XmlDocument, path As String, def As Boolean) As Boolean
+        Dim n As XmlNode = doc.SelectSingleNode("HotelUserSettings/" & path)
+        If n Is Nothing Then Return def
+        Dim r As Boolean : Return If(Boolean.TryParse(n.InnerText, r), r, def)
     End Function
 
-    Private Function ReadInt(doc As XmlDocument, path As String,
-                             def As Integer) As Integer
-        Dim node As XmlNode = doc.SelectSingleNode("HotelUserSettings/" & path)
-        If node Is Nothing Then Return def
-        Dim result As Integer
-        Return If(Integer.TryParse(node.InnerText, result), result, def)
+    Private Function ReadInt(doc As XmlDocument, path As String, def As Integer) As Integer
+        Dim n As XmlNode = doc.SelectSingleNode("HotelGlobalSettings/" & path)
+        If n Is Nothing Then Return def
+        Dim r As Integer : Return If(Integer.TryParse(n.InnerText, r), r, def)
     End Function
 
-    Private Sub AppendChild(doc As XmlDocument, parent As XmlElement,
-                             name As String, value As String)
-        Dim node As XmlElement = doc.CreateElement(name)
-        node.InnerText = If(value, "")
-        parent.AppendChild(node)
+    Private Sub AppendNode(doc As XmlDocument, parent As XmlElement, name As String, value As String)
+        Dim n As XmlElement = doc.CreateElement(name)
+        n.InnerText = If(value, "") : parent.AppendChild(n)
+    End Sub
+
+    Private Sub WriteXml(doc As XmlDocument, path As String)
+        Dim ws As New XmlWriterSettings()
+        ws.Indent = True : ws.IndentChars = "  "
+        ws.Encoding = System.Text.Encoding.UTF8
+        Using w As XmlWriter = XmlWriter.Create(path, ws)
+            doc.WriteTo(w)
+        End Using
     End Sub
 
 End Module
