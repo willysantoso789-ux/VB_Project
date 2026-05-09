@@ -33,7 +33,6 @@ Partial Class PropertiForm
         Me.lblAssignTitle = New System.Windows.Forms.Label()
         Me.lblAssignNote = New System.Windows.Forms.Label()
         Me.btnAssign = New System.Windows.Forms.Button()
-        Me.btnUnassign = New System.Windows.Forms.Button()
         Me.pnlDiv2 = New System.Windows.Forms.Panel()
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.btnBatal = New System.Windows.Forms.Button()
@@ -44,10 +43,6 @@ Partial Class PropertiForm
         Me.btnCari = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.dgvProperti = New System.Windows.Forms.DataGridView()
-        Me.QueriesTableAdapter1 = New VB_PROJECT.HotelDBDataSetTableAdapters.QueriesTableAdapter()
-        Me.HotelDBDataSet = New VB_PROJECT.HotelDBDataSet()
-        Me.VwDataPropertiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Vw_DataPropertiTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_DataPropertiTableAdapter()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NamaPropertiDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BiayaDendaRpDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,12 +50,16 @@ Partial Class PropertiForm
         Me.PropertiRusakDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PropertiPerbaikanDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PropertiBaikDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VwDataPropertiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.HotelDBDataSet = New VB_PROJECT.HotelDBDataSet()
+        Me.QueriesTableAdapter1 = New VB_PROJECT.HotelDBDataSetTableAdapters.QueriesTableAdapter()
+        Me.Vw_DataPropertiTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_DataPropertiTableAdapter()
         Me.pnlHeader.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.pnlRight.SuspendLayout()
         CType(Me.dgvProperti, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VwDataPropertiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlHeader
@@ -111,7 +110,6 @@ Partial Class PropertiForm
         Me.pnlLeft.Controls.Add(Me.lblAssignTitle)
         Me.pnlLeft.Controls.Add(Me.lblAssignNote)
         Me.pnlLeft.Controls.Add(Me.btnAssign)
-        Me.pnlLeft.Controls.Add(Me.btnUnassign)
         Me.pnlLeft.Controls.Add(Me.pnlDiv2)
         Me.pnlLeft.Controls.Add(Me.btnSimpan)
         Me.pnlLeft.Controls.Add(Me.btnBatal)
@@ -238,26 +236,10 @@ Partial Class PropertiForm
         Me.btnAssign.Text = "Assign ke Kamar"
         Me.btnAssign.UseVisualStyleBackColor = False
         '
-        'btnUnassign
-        '
-        Me.btnUnassign.BackColor = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(27, Byte), Integer))
-        Me.btnUnassign.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnUnassign.Enabled = False
-        Me.btnUnassign.FlatAppearance.BorderSize = 0
-        Me.btnUnassign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUnassign.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnUnassign.ForeColor = System.Drawing.Color.White
-        Me.btnUnassign.Location = New System.Drawing.Point(16, 326)
-        Me.btnUnassign.Name = "btnUnassign"
-        Me.btnUnassign.Size = New System.Drawing.Size(262, 32)
-        Me.btnUnassign.TabIndex = 11
-        Me.btnUnassign.Text = "Unassign dari Kamar"
-        Me.btnUnassign.UseVisualStyleBackColor = False
-        '
         'pnlDiv2
         '
         Me.pnlDiv2.BackColor = System.Drawing.Color.FromArgb(CType(CType(210, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(225, Byte), Integer))
-        Me.pnlDiv2.Location = New System.Drawing.Point(16, 372)
+        Me.pnlDiv2.Location = New System.Drawing.Point(16, 332)
         Me.pnlDiv2.Name = "pnlDiv2"
         Me.pnlDiv2.Size = New System.Drawing.Size(262, 1)
         Me.pnlDiv2.TabIndex = 12
@@ -270,7 +252,7 @@ Partial Class PropertiForm
         Me.btnSimpan.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSimpan.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSimpan.ForeColor = System.Drawing.Color.White
-        Me.btnSimpan.Location = New System.Drawing.Point(16, 384)
+        Me.btnSimpan.Location = New System.Drawing.Point(16, 344)
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Size = New System.Drawing.Size(120, 32)
         Me.btnSimpan.TabIndex = 13
@@ -285,7 +267,7 @@ Partial Class PropertiForm
         Me.btnBatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBatal.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btnBatal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer))
-        Me.btnBatal.Location = New System.Drawing.Point(144, 384)
+        Me.btnBatal.Location = New System.Drawing.Point(144, 344)
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Size = New System.Drawing.Size(134, 32)
         Me.btnBatal.TabIndex = 14
@@ -301,7 +283,7 @@ Partial Class PropertiForm
         Me.btnHapus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnHapus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnHapus.ForeColor = System.Drawing.Color.White
-        Me.btnHapus.Location = New System.Drawing.Point(16, 424)
+        Me.btnHapus.Location = New System.Drawing.Point(16, 384)
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Size = New System.Drawing.Size(262, 32)
         Me.btnHapus.TabIndex = 15
@@ -408,20 +390,6 @@ Partial Class PropertiForm
         Me.dgvProperti.Size = New System.Drawing.Size(650, 484)
         Me.dgvProperti.TabIndex = 4
         '
-        'HotelDBDataSet
-        '
-        Me.HotelDBDataSet.DataSetName = "HotelDBDataSet"
-        Me.HotelDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'VwDataPropertiBindingSource
-        '
-        Me.VwDataPropertiBindingSource.DataMember = "vw_DataProperti"
-        Me.VwDataPropertiBindingSource.DataSource = Me.HotelDBDataSet
-        '
-        'Vw_DataPropertiTableAdapter
-        '
-        Me.Vw_DataPropertiTableAdapter.ClearBeforeFill = True
-        '
         'IDDataGridViewTextBoxColumn
         '
         Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
@@ -478,6 +446,20 @@ Partial Class PropertiForm
         Me.PropertiBaikDataGridViewTextBoxColumn.Name = "PropertiBaikDataGridViewTextBoxColumn"
         Me.PropertiBaikDataGridViewTextBoxColumn.ReadOnly = True
         '
+        'VwDataPropertiBindingSource
+        '
+        Me.VwDataPropertiBindingSource.DataMember = "vw_DataProperti"
+        Me.VwDataPropertiBindingSource.DataSource = Me.HotelDBDataSet
+        '
+        'HotelDBDataSet
+        '
+        Me.HotelDBDataSet.DataSetName = "HotelDBDataSet"
+        Me.HotelDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'Vw_DataPropertiTableAdapter
+        '
+        Me.Vw_DataPropertiTableAdapter.ClearBeforeFill = True
+        '
         'PropertiForm
         '
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(250, Byte), Integer))
@@ -495,8 +477,8 @@ Partial Class PropertiForm
         Me.pnlRight.ResumeLayout(False)
         Me.pnlRight.PerformLayout()
         CType(Me.dgvProperti, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VwDataPropertiBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -516,7 +498,6 @@ Partial Class PropertiForm
     Friend WithEvents lblAssignTitle As System.Windows.Forms.Label
     Friend WithEvents lblAssignNote As System.Windows.Forms.Label
     Friend WithEvents btnAssign As System.Windows.Forms.Button
-    Friend WithEvents btnUnassign As System.Windows.Forms.Button
     Friend WithEvents pnlDiv2 As System.Windows.Forms.Panel
     Friend WithEvents btnSimpan As System.Windows.Forms.Button
     Friend WithEvents btnBatal As System.Windows.Forms.Button

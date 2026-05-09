@@ -30,7 +30,6 @@ Public Class PropertiForm
         Dim jumlah As Integer = Convert.ToInt32(dgvProperti.SelectedRows(0).Cells(3).Value)
         btnHapus.Enabled = True
         btnAssign.Enabled = True
-        btnUnassign.Enabled = (jumlah > 0)
         btnSimpan.Text = "Update"
         isEdit = True
     End Sub
@@ -43,25 +42,6 @@ Public Class PropertiForm
             dgvProperti.SelectedRows(0).Cells(1).Value?.ToString())
         frm.ShowDialog()
         RefreshData()
-        ' Refresh state tombol unassign setelah dialog tutup
-        If dgvProperti.SelectedRows.Count > 0 Then
-            Dim jumlah As Integer = Convert.ToInt32(dgvProperti.SelectedRows(0).Cells(3).Value)
-            btnUnassign.Enabled = (jumlah > 0)
-        End If
-    End Sub
-
-    Private Sub btnUnassign_Click(sender As Object, e As EventArgs) Handles btnUnassign.Click
-        If dgvProperti.SelectedRows.Count = 0 Then Exit Sub
-        Dim frm As New UnassignPropertiForm()
-        frm.SetProperti(
-            Convert.ToInt32(dgvProperti.SelectedRows(0).Cells(0).Value),
-            dgvProperti.SelectedRows(0).Cells(1).Value?.ToString())
-        frm.ShowDialog()
-        RefreshData()
-        If dgvProperti.SelectedRows.Count > 0 Then
-            Dim jumlah As Integer = Convert.ToInt32(dgvProperti.SelectedRows(0).Cells(3).Value)
-            btnUnassign.Enabled = (jumlah > 0)
-        End If
     End Sub
 
     Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
@@ -134,7 +114,6 @@ Public Class PropertiForm
         txtBiaya.Clear()
         btnHapus.Enabled = False
         btnAssign.Enabled = False
-        btnUnassign.Enabled = False
         btnSimpan.Text = "Simpan"
         isEdit = False
         txtNama.Focus()
