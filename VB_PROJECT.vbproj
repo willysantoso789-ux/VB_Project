@@ -117,12 +117,6 @@
     <Compile Include="Form\Master\Admin\TipeKamarForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Master\Admin\UnassignPropertiKamarForm.Designer.vb">
-      <DependentUpon>UnassignPropertiKamarForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Master\Admin\UnassignPropertiKamarForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form\Master\Customer\CheckInForm.Designer.vb">
       <DependentUpon>CheckInForm.vb</DependentUpon>
     </Compile>
@@ -209,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\Admin\TamuForm.resx">
       <DependentUpon>TamuForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Master\Admin\TipeKamarForm.resx">
+      <DependentUpon>TipeKamarForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Master\Customer\CheckInForm.resx">
       <DependentUpon>CheckInForm.vb</DependentUpon>

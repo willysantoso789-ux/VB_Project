@@ -10,18 +10,26 @@ Public Class TipeKamarForm
     End Sub
 
     Private Sub RefreshData()
-        dgvTipe.DataSource = New sp_GetAllTipeKamarTableAdapter().GetData()
+        Me.Vw_DataTipeKamarTableAdapter.Fill(Me.HotelDBDataSet.vw_DataTipeKamar)
     End Sub
 
     Private Sub dgvTipe_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTipe.CellClick
         If dgvTipe.SelectedRows.Count = 0 Then Exit Sub
 
-        ' [0]=id_tipe [1]=nama_tipe [2]=harga [3]=deskripsi
-        txtIdTipe.Text = dgvTipe.SelectedRows(0).Cells(0).Value
-        txtNamaTipe.Text = dgvTipe.SelectedRows(0).Cells(1).Value
-        txtHarga.Text = Convert.ToDecimal(dgvTipe.SelectedRows(0).Cells(2).Value).ToString("N0")
-        txtDeskripsi.Text = dgvTipe.SelectedRows(0).Cells(3).Value
+        ' [0]=ID Tipe [1]=Nama Tipe [2]=Harga per Malam [3]=Deskripsi
+        ' [4]=Jumlah Kamar [5]=Kamar Tersedia [6]=Kamar Terisi [7]=Kamar Maintenance [8]=Dibuat
+        txtIdTipe.Text = dgvTipe.SelectedRows(0).Cells(0).Value?.ToString()
+        txtNamaTipe.Text = dgvTipe.SelectedRows(0).Cells(1).Value?.ToString()
 
+        ' Harga dari view sudah format "N0" (misal "350.000") — parse untuk edit
+        Dim hargaStr As String = dgvTipe.SelectedRows(0).Cells(2).Value?.ToString()
+        txtHarga.Text = hargaStr?.Replace(".", "").Replace(",", "")
+
+        txtDeskripsi.Text = dgvTipe.SelectedRows(0).Cells(3).Value?.ToString()
+
+        ' Cegah hapus jika ada kamar terdaftar
+        Dim jumlah As Integer = 0
+        Integer.TryParse(dgvTipe.SelectedRows(0).Cells(4).Value?.ToString(), jumlah)
         btnHapus.Enabled = True
         btnSimpan.Text = "Update"
         isEdit = True
@@ -32,16 +40,15 @@ Public Class TipeKamarForm
         Dim harga As Decimal = 0
         Decimal.TryParse(txtHarga.Text.Replace(".", "").Replace(",", ""), harga)
         Try
-            Dim qta As New QueriesTableAdapter()
             If isEdit Then
-                Dim id As Integer = dgvTipe.SelectedRows(0).Cells(0).Value
+                Dim id As Integer = Convert.ToInt32(dgvTipe.SelectedRows(0).Cells(0).Value)
                 ' sp_UpdateTipeKamar(@id_tipe, @nama_tipe, @harga, @deskripsi)
-                qta.sp_UpdateTipeKamar(
+                QueriesTableAdapter1.sp_UpdateTipeKamar(
                     id, txtNamaTipe.Text.Trim(), harga, txtDeskripsi.Text.Trim())
                 MsgBox("Tipe kamar berhasil diupdate.", MsgBoxStyle.Information, "Berhasil")
             Else
                 ' sp_InsertTipeKamar(@nama_tipe, @harga, @deskripsi)
-                qta.sp_InsertTipeKamar(
+                QueriesTableAdapter1.sp_InsertTipeKamar(
                     txtNamaTipe.Text.Trim(), harga, txtDeskripsi.Text.Trim())
                 MsgBox("Tipe kamar berhasil disimpan.", MsgBoxStyle.Information, "Berhasil")
             End If
@@ -53,17 +60,28 @@ Public Class TipeKamarForm
 
     Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
         If dgvTipe.SelectedRows.Count = 0 Then Exit Sub
+
+        ' Cek apakah ada kamar yang memakai tipe ini
+        Dim jumlah As Integer = 0
+        Integer.TryParse(dgvTipe.SelectedRows(0).Cells(4).Value?.ToString(), jumlah)
+        If jumlah > 0 Then
+            MsgBox("Tipe kamar ini masih digunakan oleh " & jumlah & " kamar." & vbNewLine &
+                   "Hapus atau pindahkan kamar tersebut terlebih dahulu.",
+                   MsgBoxStyle.Exclamation, "Tidak Dapat Dihapus")
+            Return
+        End If
+
         Dim konfirm As Boolean = True
         If AppSettingsManager.ConfirmHapus Then
             konfirm = (MsgBox("Yakin hapus tipe " & txtNamaTipe.Text & "?",
                               MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Hapus") = MsgBoxResult.Yes)
         End If
         If Not konfirm Then Exit Sub
+
         Try
-            Dim qta As New QueriesTableAdapter()
-            Dim id As Integer = dgvTipe.SelectedRows(0).Cells(0).Value
+            Dim id As Integer = Convert.ToInt32(dgvTipe.SelectedRows(0).Cells(0).Value)
             ' sp_DeleteTipeKamar(@id_tipe)
-            qta.sp_DeleteTipeKamar(id)
+            QueriesTableAdapter1.sp_DeleteTipeKamar(id)
             MsgBox("Tipe kamar berhasil dihapus.", MsgBoxStyle.Information, "Berhasil")
             RefreshData() : ClearForm()
         Catch ex As Exception
@@ -78,17 +96,14 @@ Public Class TipeKamarForm
         If e.KeyCode = Keys.Enter Then ApplyFilter(txtCari.Text.Trim())
     End Sub
     Private Sub ApplyFilter(keyword As String)
-        Dim dt = New sp_GetAllTipeKamarTableAdapter().GetData()
-        If keyword = "" Then
-            dgvTipe.DataSource = dt
-        Else
-            Dim view As New System.Data.DataView(dt)
-            view.RowFilter = "nama_tipe LIKE '%" & keyword & "%'"
-            dgvTipe.DataSource = view.ToTable()
-        End If
+        ' Filter via BindingSource — kolom dari vw_DataTipeKamar
+        VwDataTipeKamarBindingSource.Filter = If(keyword = "", "",
+            "[Nama Tipe] LIKE '%" & keyword & "%'")
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        txtCari.Clear() : RefreshData() : ClearForm()
+        txtCari.Clear()
+        VwDataTipeKamarBindingSource.Filter = ""
+        RefreshData() : ClearForm()
     End Sub
     Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
         ClearForm()

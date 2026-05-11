@@ -191,6 +191,27 @@ LEFT JOIN PropertiKamar pk ON k.id_kamar = pk.id_kamar
 GROUP BY k.id_kamar, k.nomor_kamar, tk.nama_tipe, tk.harga, k.status;
 GO
 
+--View: Data Tipe Kamar 
+CREATE OR ALTER VIEW vw_DataTipeKamar AS
+SELECT
+    tk.id_tipe                                          AS [ID Tipe],
+    tk.nama_tipe                                        AS [Nama Tipe],
+    FORMAT(tk.harga, 'N0')                              AS [Harga per Malam],
+    ISNULL(tk.deskripsi, '-')                           AS [Deskripsi],
+    COUNT(k.id_kamar)                                   AS [Jumlah Kamar],
+    SUM(CASE WHEN k.status = 'Tersedia'
+             THEN 1 ELSE 0 END)                         AS [Kamar Tersedia],
+    SUM(CASE WHEN k.status = 'Terisi'
+             THEN 1 ELSE 0 END)                         AS [Kamar Terisi],
+    SUM(CASE WHEN k.status = 'Maintenance'
+             THEN 1 ELSE 0 END)                         AS [Kamar Maintenance],
+    FORMAT(tk.created_at, 'dd/MM/yyyy')                 AS [Dibuat]
+FROM TipeKamar tk
+LEFT JOIN Kamar k ON tk.id_tipe = k.id_tipe
+GROUP BY tk.id_tipe, tk.nama_tipe, tk.harga,
+         tk.deskripsi, tk.created_at;
+GO
+
 -- View: Data Reservasi lengkap
 CREATE OR ALTER VIEW vw_DataReservasi AS
 SELECT

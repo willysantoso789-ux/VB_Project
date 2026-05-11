@@ -125,6 +125,8 @@ Partial Public Class HotelDBDataSet
     
     Private tablevw_DataProperti As vw_DataPropertiDataTable
     
+    Private tablevw_DataTipeKamar As vw_DataTipeKamarDataTable
+    
     Private relationFK__DendaKeru__id_ka__76969D2E As Global.System.Data.DataRelation
     
     Private relationFK__DendaKeru__id_pr__75A278F5 As Global.System.Data.DataRelation
@@ -325,6 +327,9 @@ Partial Public Class HotelDBDataSet
             End If
             If (Not (ds.Tables("vw_DataProperti")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataPropertiDataTable(ds.Tables("vw_DataProperti")))
+            End If
+            If (Not (ds.Tables("vw_DataTipeKamar")) Is Nothing) Then
+                MyBase.Tables.Add(New vw_DataTipeKamarDataTable(ds.Tables("vw_DataTipeKamar")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -845,6 +850,16 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property vw_DataTipeKamar() As vw_DataTipeKamarDataTable
+        Get
+            Return Me.tablevw_DataTipeKamar
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
      Global.System.ComponentModel.BrowsableAttribute(true),  _
      Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Visible)>  _
     Public Overrides Property SchemaSerializationMode() As Global.System.Data.SchemaSerializationMode
@@ -1059,6 +1074,9 @@ Partial Public Class HotelDBDataSet
             End If
             If (Not (ds.Tables("vw_DataProperti")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataPropertiDataTable(ds.Tables("vw_DataProperti")))
+            End If
+            If (Not (ds.Tables("vw_DataTipeKamar")) Is Nothing) Then
+                MyBase.Tables.Add(New vw_DataTipeKamarDataTable(ds.Tables("vw_DataTipeKamar")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -1392,6 +1410,12 @@ Partial Public Class HotelDBDataSet
                 Me.tablevw_DataProperti.InitVars
             End If
         End If
+        Me.tablevw_DataTipeKamar = CType(MyBase.Tables("vw_DataTipeKamar"),vw_DataTipeKamarDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tablevw_DataTipeKamar) Is Nothing) Then
+                Me.tablevw_DataTipeKamar.InitVars
+            End If
+        End If
         Me.relationFK__DendaKeru__id_ka__76969D2E = Me.Relations("FK__DendaKeru__id_ka__76969D2E")
         Me.relationFK__DendaKeru__id_pr__75A278F5 = Me.Relations("FK__DendaKeru__id_pr__75A278F5")
         Me.relationFK__DendaKeru__id_tr__74AE54BC = Me.Relations("FK__DendaKeru__id_tr__74AE54BC")
@@ -1513,6 +1537,8 @@ Partial Public Class HotelDBDataSet
         MyBase.Tables.Add(Me.tablesp_ProsesCheckOut)
         Me.tablevw_DataProperti = New vw_DataPropertiDataTable()
         MyBase.Tables.Add(Me.tablevw_DataProperti)
+        Me.tablevw_DataTipeKamar = New vw_DataTipeKamarDataTable()
+        MyBase.Tables.Add(Me.tablevw_DataTipeKamar)
         Me.relationFK__DendaKeru__id_ka__76969D2E = New Global.System.Data.DataRelation("FK__DendaKeru__id_ka__76969D2E", New Global.System.Data.DataColumn() {Me.tableKamar.id_kamarColumn}, New Global.System.Data.DataColumn() {Me.tableDendaKerusakan.id_kamarColumn}, false)
         Me.Relations.Add(Me.relationFK__DendaKeru__id_ka__76969D2E)
         Me.relationFK__DendaKeru__id_pr__75A278F5 = New Global.System.Data.DataRelation("FK__DendaKeru__id_pr__75A278F5", New Global.System.Data.DataColumn() {Me.tableProperti.id_propertiColumn}, New Global.System.Data.DataColumn() {Me.tableDendaKerusakan.id_propertiColumn}, false)
@@ -1839,6 +1865,12 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Private Function ShouldSerializevw_DataTipeKamar() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Private Sub SchemaChanged(ByVal sender As Object, ByVal e As Global.System.ComponentModel.CollectionChangeEventArgs)
         If (e.Action = Global.System.ComponentModel.CollectionChangeAction.Remove) Then
             Me.InitVars
@@ -2044,6 +2076,9 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Public Delegate Sub vw_DataPropertiRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_DataPropertiRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Public Delegate Sub vw_DataTipeKamarRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_DataTipeKamarRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -19958,6 +19993,379 @@ Partial Public Class HotelDBDataSet
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class vw_DataTipeKamarDataTable
+        Inherits Global.System.Data.TypedTableBase(Of vw_DataTipeKamarRow)
+        
+        Private columnID_Tipe As Global.System.Data.DataColumn
+        
+        Private columnNama_Tipe As Global.System.Data.DataColumn
+        
+        Private columnHarga_per_Malam As Global.System.Data.DataColumn
+        
+        Private columnDeskripsi As Global.System.Data.DataColumn
+        
+        Private columnJumlah_Kamar As Global.System.Data.DataColumn
+        
+        Private columnKamar_Tersedia As Global.System.Data.DataColumn
+        
+        Private columnKamar_Terisi As Global.System.Data.DataColumn
+        
+        Private columnKamar_Maintenance As Global.System.Data.DataColumn
+        
+        Private columnDibuat As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "vw_DataTipeKamar"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property ID_TipeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID_Tipe
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Nama_TipeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNama_Tipe
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Harga_per_MalamColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHarga_per_Malam
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property DeskripsiColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDeskripsi
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Jumlah_KamarColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJumlah_Kamar
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Kamar_TersediaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnKamar_Tersedia
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Kamar_TerisiColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnKamar_Terisi
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Kamar_MaintenanceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnKamar_Maintenance
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property DibuatColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDibuat
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As vw_DataTipeKamarRow
+            Get
+                Return CType(Me.Rows(index),vw_DataTipeKamarRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_DataTipeKamarRowChanging As vw_DataTipeKamarRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_DataTipeKamarRowChanged As vw_DataTipeKamarRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_DataTipeKamarRowDeleting As vw_DataTipeKamarRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_DataTipeKamarRowDeleted As vw_DataTipeKamarRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overloads Sub Addvw_DataTipeKamarRow(ByVal row As vw_DataTipeKamarRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overloads Function Addvw_DataTipeKamarRow(ByVal ID_Tipe As Integer, ByVal Nama_Tipe As String, ByVal Harga_per_Malam As String, ByVal Deskripsi As String, ByVal Jumlah_Kamar As Integer, ByVal Kamar_Tersedia As Integer, ByVal Kamar_Terisi As Integer, ByVal Kamar_Maintenance As Integer, ByVal Dibuat As String) As vw_DataTipeKamarRow
+            Dim rowvw_DataTipeKamarRow As vw_DataTipeKamarRow = CType(Me.NewRow,vw_DataTipeKamarRow)
+            Dim columnValuesArray() As Object = New Object() {ID_Tipe, Nama_Tipe, Harga_per_Malam, Deskripsi, Jumlah_Kamar, Kamar_Tersedia, Kamar_Terisi, Kamar_Maintenance, Dibuat}
+            rowvw_DataTipeKamarRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowvw_DataTipeKamarRow)
+            Return rowvw_DataTipeKamarRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function FindByID_Tipe(ByVal ID_Tipe As Integer) As vw_DataTipeKamarRow
+            Return CType(Me.Rows.Find(New Object() {ID_Tipe}),vw_DataTipeKamarRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As vw_DataTipeKamarDataTable = CType(MyBase.Clone,vw_DataTipeKamarDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New vw_DataTipeKamarDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnID_Tipe = MyBase.Columns("ID Tipe")
+            Me.columnNama_Tipe = MyBase.Columns("Nama Tipe")
+            Me.columnHarga_per_Malam = MyBase.Columns("Harga per Malam")
+            Me.columnDeskripsi = MyBase.Columns("Deskripsi")
+            Me.columnJumlah_Kamar = MyBase.Columns("Jumlah Kamar")
+            Me.columnKamar_Tersedia = MyBase.Columns("Kamar Tersedia")
+            Me.columnKamar_Terisi = MyBase.Columns("Kamar Terisi")
+            Me.columnKamar_Maintenance = MyBase.Columns("Kamar Maintenance")
+            Me.columnDibuat = MyBase.Columns("Dibuat")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnID_Tipe = New Global.System.Data.DataColumn("ID Tipe", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID_Tipe)
+            Me.columnNama_Tipe = New Global.System.Data.DataColumn("Nama Tipe", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNama_Tipe)
+            Me.columnHarga_per_Malam = New Global.System.Data.DataColumn("Harga per Malam", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHarga_per_Malam)
+            Me.columnDeskripsi = New Global.System.Data.DataColumn("Deskripsi", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDeskripsi)
+            Me.columnJumlah_Kamar = New Global.System.Data.DataColumn("Jumlah Kamar", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJumlah_Kamar)
+            Me.columnKamar_Tersedia = New Global.System.Data.DataColumn("Kamar Tersedia", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnKamar_Tersedia)
+            Me.columnKamar_Terisi = New Global.System.Data.DataColumn("Kamar Terisi", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnKamar_Terisi)
+            Me.columnKamar_Maintenance = New Global.System.Data.DataColumn("Kamar Maintenance", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnKamar_Maintenance)
+            Me.columnDibuat = New Global.System.Data.DataColumn("Dibuat", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDibuat)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID_Tipe}, true))
+            Me.columnID_Tipe.AllowDBNull = false
+            Me.columnID_Tipe.Unique = true
+            Me.columnNama_Tipe.AllowDBNull = false
+            Me.columnNama_Tipe.MaxLength = 50
+            Me.columnHarga_per_Malam.ReadOnly = true
+            Me.columnHarga_per_Malam.MaxLength = 4000
+            Me.columnDeskripsi.ReadOnly = true
+            Me.columnDeskripsi.MaxLength = 255
+            Me.columnDibuat.ReadOnly = true
+            Me.columnDibuat.MaxLength = 4000
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Newvw_DataTipeKamarRow() As vw_DataTipeKamarRow
+            Return CType(Me.NewRow,vw_DataTipeKamarRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New vw_DataTipeKamarRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(vw_DataTipeKamarRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.vw_DataTipeKamarRowChangedEvent) Is Nothing) Then
+                RaiseEvent vw_DataTipeKamarRowChanged(Me, New vw_DataTipeKamarRowChangeEvent(CType(e.Row,vw_DataTipeKamarRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.vw_DataTipeKamarRowChangingEvent) Is Nothing) Then
+                RaiseEvent vw_DataTipeKamarRowChanging(Me, New vw_DataTipeKamarRowChangeEvent(CType(e.Row,vw_DataTipeKamarRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.vw_DataTipeKamarRowDeletedEvent) Is Nothing) Then
+                RaiseEvent vw_DataTipeKamarRowDeleted(Me, New vw_DataTipeKamarRowChangeEvent(CType(e.Row,vw_DataTipeKamarRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.vw_DataTipeKamarRowDeletingEvent) Is Nothing) Then
+                RaiseEvent vw_DataTipeKamarRowDeleting(Me, New vw_DataTipeKamarRowChangeEvent(CType(e.Row,vw_DataTipeKamarRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Removevw_DataTipeKamarRow(ByVal row As vw_DataTipeKamarRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As HotelDBDataSet = New HotelDBDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "vw_DataTipeKamarDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class DendaKerusakanRow
@@ -27809,6 +28217,233 @@ Partial Public Class HotelDBDataSet
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class vw_DataTipeKamarRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tablevw_DataTipeKamar As vw_DataTipeKamarDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tablevw_DataTipeKamar = CType(Me.Table,vw_DataTipeKamarDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property ID_Tipe() As Integer
+            Get
+                Return CType(Me(Me.tablevw_DataTipeKamar.ID_TipeColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.ID_TipeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Nama_Tipe() As String
+            Get
+                Return CType(Me(Me.tablevw_DataTipeKamar.Nama_TipeColumn),String)
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Nama_TipeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Harga_per_Malam() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.Harga_per_MalamColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga per Malam' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Harga_per_MalamColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Deskripsi() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.DeskripsiColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Deskripsi' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.DeskripsiColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Jumlah_Kamar() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.Jumlah_KamarColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Jumlah Kamar' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Jumlah_KamarColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Kamar_Tersedia() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.Kamar_TersediaColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Kamar Tersedia' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Kamar_TersediaColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Kamar_Terisi() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.Kamar_TerisiColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Kamar Terisi' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Kamar_TerisiColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Kamar_Maintenance() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.Kamar_MaintenanceColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Kamar Maintenance' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.Kamar_MaintenanceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Dibuat() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_DataTipeKamar.DibuatColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Dibuat' in table 'vw_DataTipeKamar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_DataTipeKamar.DibuatColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsHarga_per_MalamNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.Harga_per_MalamColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetHarga_per_MalamNull()
+            Me(Me.tablevw_DataTipeKamar.Harga_per_MalamColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsDeskripsiNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.DeskripsiColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetDeskripsiNull()
+            Me(Me.tablevw_DataTipeKamar.DeskripsiColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsJumlah_KamarNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.Jumlah_KamarColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetJumlah_KamarNull()
+            Me(Me.tablevw_DataTipeKamar.Jumlah_KamarColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsKamar_TersediaNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.Kamar_TersediaColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetKamar_TersediaNull()
+            Me(Me.tablevw_DataTipeKamar.Kamar_TersediaColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsKamar_TerisiNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.Kamar_TerisiColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetKamar_TerisiNull()
+            Me(Me.tablevw_DataTipeKamar.Kamar_TerisiColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsKamar_MaintenanceNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.Kamar_MaintenanceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetKamar_MaintenanceNull()
+            Me(Me.tablevw_DataTipeKamar.Kamar_MaintenanceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsDibuatNull() As Boolean
+            Return Me.IsNull(Me.tablevw_DataTipeKamar.DibuatColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetDibuatNull()
+            Me(Me.tablevw_DataTipeKamar.DibuatColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
@@ -29594,6 +30229,42 @@ Partial Public Class HotelDBDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public ReadOnly Property Row() As vw_DataPropertiRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Public Class vw_DataTipeKamarRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As vw_DataTipeKamarRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New(ByVal row As vw_DataTipeKamarRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Row() As vw_DataTipeKamarRow
             Get
                 Return Me.eventRow
             End Get
@@ -41299,6 +41970,189 @@ Namespace HotelDBDataSetTableAdapters
         Public Overloads Overridable Function GetData() As HotelDBDataSet.vw_DataPropertiDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As HotelDBDataSet.vw_DataPropertiDataTable = New HotelDBDataSet.vw_DataPropertiDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class vw_DataTipeKamarTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "vw_DataTipeKamar"
+            tableMapping.ColumnMappings.Add("ID Tipe", "ID Tipe")
+            tableMapping.ColumnMappings.Add("Nama Tipe", "Nama Tipe")
+            tableMapping.ColumnMappings.Add("Harga per Malam", "Harga per Malam")
+            tableMapping.ColumnMappings.Add("Deskripsi", "Deskripsi")
+            tableMapping.ColumnMappings.Add("Jumlah Kamar", "Jumlah Kamar")
+            tableMapping.ColumnMappings.Add("Kamar Tersedia", "Kamar Tersedia")
+            tableMapping.ColumnMappings.Add("Kamar Terisi", "Kamar Terisi")
+            tableMapping.ColumnMappings.Add("Kamar Maintenance", "Kamar Maintenance")
+            tableMapping.ColumnMappings.Add("Dibuat", "Dibuat")
+            Me._adapter.TableMappings.Add(tableMapping)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.VB_PROJECT.My.MySettings.Default.HotelDBConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT [ID Tipe], [Nama Tipe], [Harga per Malam], Deskripsi, [Jumlah Kamar], [Kam"& _ 
+                "ar Tersedia], [Kamar Terisi], [Kamar Maintenance], Dibuat FROM dbo.vw_DataTipeKa"& _ 
+                "mar"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As HotelDBDataSet.vw_DataTipeKamarDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As HotelDBDataSet.vw_DataTipeKamarDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As HotelDBDataSet.vw_DataTipeKamarDataTable = New HotelDBDataSet.vw_DataTipeKamarDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
