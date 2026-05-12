@@ -12,13 +12,16 @@ Public Class CheckOutForm
     Private dendaFormRef As DendaForm = Nothing
 
     Private Sub CheckOutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'HotelDBDataSet1.vw_CheckOutSelesai' table. You can move, or remove it, as needed.
+        Me.Vw_CheckOutSelesaiTableAdapter.Fill(Me.HotelDBDataSet1.vw_CheckOutSelesai)
         cboFilter.SelectedIndex = 0
         RefreshData()
         ClearBill()
     End Sub
 
     Private Sub RefreshData()
-        Me.Vw_CheckInAktifTableAdapter.Fill(Me.HotelDBDataSet.vw_CheckInAktif)
+        'TODO: This line of code loads data into the 'HotelDBDataSet.vw_CheckOutSelesai' table. You can move, or remove it, as needed.
+        Me.Vw_CheckOutSelesaiTableAdapter.Fill(Me.HotelDBDataSet.vw_CheckOutSelesai)
         ApplyFilter()
     End Sub
 
@@ -31,35 +34,33 @@ Public Class CheckOutForm
             Dim cf = "[Nomor Kamar] LIKE '%" & kw & "%' OR [Nama Tamu] LIKE '%" & kw & "%'"
             f = If(f = "", cf, "(" & f & ") AND (" & cf & ")")
         End If
-        VwCheckInAktifBindingSource.Filter = f
+        VwCheckOutSelesaiBindingSource.Filter = f
     End Sub
 
     Private Sub dgvCheckOut_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCheckOut.CellClick
         If dgvCheckOut.SelectedRows.Count = 0 Then Exit Sub
+        ' [0]=ID Reservasi [1]=Nama Tamu [2]=Nomor Kamar [3]=Tgl Check-In
+        ' [4]=Tgl Check-Out [5]=Durasi (Malam) [6]=Harga/Malam
+        ' [7]=Hari Menginap Sekarang [8]=Hari Terlambat [9]=Status
 
-        ' [0]=ID Reservasi [1]=NIK [2]=Nama Tamu [3]=No.HP [4]=Nomor Kamar
-        ' [5]=Tipe Kamar [6]=Tipe Reservasi [7]=Tgl Check-In [8]=Tgl Check-Out Plan
-        ' [9]=Durasi [10]=Harga/Malam [11]=Hari Menginap Sekarang [12]=Hari Terlambat [13]=Status
-        Dim status As String = dgvCheckOut.SelectedRows(0).Cells(13).Value?.ToString()
-
-        hargaPerMalam = ParseRupiah(dgvCheckOut.SelectedRows(0).Cells(10).Value?.ToString())
-        tglCheckin = ParseTanggal(dgvCheckOut.SelectedRows(0).Cells(7).Value?.ToString())
-        tglCheckoutRencana = ParseTanggal(dgvCheckOut.SelectedRows(0).Cells(8).Value?.ToString())
+        Dim status As String = dgvCheckOut.SelectedRows(0).Cells(9).Value?.ToString()
+        hargaPerMalam = ParseRupiah(dgvCheckOut.SelectedRows(0).Cells(6).Value?.ToString())
+        tglCheckin = ParseTanggal(dgvCheckOut.SelectedRows(0).Cells(3).Value?.ToString())
+        tglCheckoutRencana = ParseTanggal(dgvCheckOut.SelectedRows(0).Cells(4).Value?.ToString())
         dendaKerusakanTotal = 0
         dendaFormRef = Nothing
 
-        Dim noKamar As String = dgvCheckOut.SelectedRows(0).Cells(4).Value?.ToString()
+        Dim noKamar As String = dgvCheckOut.SelectedRows(0).Cells(2).Value?.ToString()
         selectedIdKamar = GetIdKamarByNomor(noKamar)
 
         txtIdReservasi.Text = dgvCheckOut.SelectedRows(0).Cells(0).Value
-        txtNamaTamu.Text = dgvCheckOut.SelectedRows(0).Cells(2).Value?.ToString()
+        txtNamaTamu.Text = dgvCheckOut.SelectedRows(0).Cells(1).Value?.ToString()
         txtKamar.Text = "No. " & noKamar
-        txtHarga.Text = dgvCheckOut.SelectedRows(0).Cells(10).Value?.ToString() & " / malam"
+        txtHarga.Text = dgvCheckOut.SelectedRows(0).Cells(6).Value?.ToString() & " / malam"
         txtTglCheckin.Text = tglCheckin.ToString("dd/MM/yyyy")
         txtTglCheckout.Text = tglCheckoutRencana.ToString("dd/MM/yyyy")
         txtTglAktual.Text = DateTime.Today.ToString("dd/MM/yyyy") & "  (Hari Ini)"
         txtDendaKerusakan.Text = "Rp 0"
-
         HitungSemua()
 
         If status = "Checked-In" Then
@@ -68,7 +69,7 @@ Public Class CheckOutForm
             btnDenda.Enabled = True
         Else
             btnCheckOut.Enabled = False
-            btnCheckOut.Text = "Sudah Check-Out"
+            btnCheckOut.Text = "Tidak Valid"
             btnDenda.Enabled = False
         End If
     End Sub

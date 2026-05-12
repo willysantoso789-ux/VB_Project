@@ -18,8 +18,8 @@ Partial Class CheckInForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblSubTitle = New System.Windows.Forms.Label()
@@ -56,9 +56,6 @@ Partial Class CheckInForm
         Me.btnCari = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.dgvCheckin = New System.Windows.Forms.DataGridView()
-        Me.HotelDBDataSet = New VB_PROJECT.HotelDBDataSet()
-        Me.VwCheckInAktifBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Vw_CheckInAktifTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_CheckInAktifTableAdapter()
         Me.IDReservasiDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NIKDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NamaTamuDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,13 +70,18 @@ Partial Class CheckInForm
         Me.HariMenginapSekarangDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HariTerlambatDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VwCheckInAktifBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.HotelDBDataSet = New VB_PROJECT.HotelDBDataSet()
+        Me.Vw_CheckInAktifTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_CheckInAktifTableAdapter()
         Me.QueriesTableAdapter1 = New VB_PROJECT.HotelDBDataSetTableAdapters.QueriesTableAdapter()
+        Me.VwCheckInAktifBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.pnlHeader.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.pnlRight.SuspendLayout()
         CType(Me.dgvCheckin, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VwCheckInAktifBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VwCheckInAktifBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlHeader
@@ -455,7 +457,7 @@ Partial Class CheckInForm
         '
         Me.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboFilter.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.cboFilter.Items.AddRange(New Object() {"Semua", "Pending", "Confirmed", "Checked-In"})
+        Me.cboFilter.Items.AddRange(New Object() {"Semua", "Pending"})
         Me.cboFilter.Location = New System.Drawing.Point(54, 43)
         Me.cboFilter.Name = "cboFilter"
         Me.cboFilter.Size = New System.Drawing.Size(140, 33)
@@ -503,25 +505,25 @@ Partial Class CheckInForm
         '
         Me.dgvCheckin.AllowUserToAddRows = False
         Me.dgvCheckin.AllowUserToDeleteRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(229, Byte), Integer))
-        Me.dgvCheckin.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.dgvCheckin.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvCheckin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvCheckin.AutoGenerateColumns = False
         Me.dgvCheckin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvCheckin.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(95, Byte), Integer), CType(CType(70, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCheckin.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(6, Byte), Integer), CType(CType(95, Byte), Integer), CType(CType(70, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCheckin.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvCheckin.ColumnHeadersHeight = 32
         Me.dgvCheckin.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDReservasiDataGridViewTextBoxColumn, Me.NIKDataGridViewTextBoxColumn, Me.NamaTamuDataGridViewTextBoxColumn, Me.NoHPDataGridViewTextBoxColumn, Me.NomorKamarDataGridViewTextBoxColumn, Me.TipeKamarDataGridViewTextBoxColumn, Me.TipeReservasiDataGridViewTextBoxColumn, Me.TglCheckInDataGridViewTextBoxColumn, Me.TglCheckOutPlanDataGridViewTextBoxColumn, Me.DurasiMalamDataGridViewTextBoxColumn, Me.HargaMalamDataGridViewTextBoxColumn, Me.HariMenginapSekarangDataGridViewTextBoxColumn, Me.HariTerlambatDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn})
-        Me.dgvCheckin.DataSource = Me.VwCheckInAktifBindingSource
+        Me.dgvCheckin.DataSource = Me.VwCheckInAktifBindingSource1
         Me.dgvCheckin.EnableHeadersVisualStyles = False
         Me.dgvCheckin.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dgvCheckin.Location = New System.Drawing.Point(12, 80)
@@ -533,20 +535,6 @@ Partial Class CheckInForm
         Me.dgvCheckin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvCheckin.Size = New System.Drawing.Size(640, 564)
         Me.dgvCheckin.TabIndex = 0
-        '
-        'HotelDBDataSet
-        '
-        Me.HotelDBDataSet.DataSetName = "HotelDBDataSet"
-        Me.HotelDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'VwCheckInAktifBindingSource
-        '
-        Me.VwCheckInAktifBindingSource.DataMember = "vw_CheckInAktif"
-        Me.VwCheckInAktifBindingSource.DataSource = Me.HotelDBDataSet
-        '
-        'Vw_CheckInAktifTableAdapter
-        '
-        Me.Vw_CheckInAktifTableAdapter.ClearBeforeFill = True
         '
         'IDReservasiDataGridViewTextBoxColumn
         '
@@ -660,6 +648,25 @@ Partial Class CheckInForm
         Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
         Me.StatusDataGridViewTextBoxColumn.ReadOnly = True
         '
+        'VwCheckInAktifBindingSource
+        '
+        Me.VwCheckInAktifBindingSource.DataMember = "vw_CheckInAktif"
+        Me.VwCheckInAktifBindingSource.DataSource = Me.HotelDBDataSet
+        '
+        'HotelDBDataSet
+        '
+        Me.HotelDBDataSet.DataSetName = "HotelDBDataSet"
+        Me.HotelDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'Vw_CheckInAktifTableAdapter
+        '
+        Me.Vw_CheckInAktifTableAdapter.ClearBeforeFill = True
+        '
+        'VwCheckInAktifBindingSource1
+        '
+        Me.VwCheckInAktifBindingSource1.DataMember = "vw_CheckInAktif"
+        Me.VwCheckInAktifBindingSource1.DataSource = Me.HotelDBDataSet
+        '
         'CheckInForm
         '
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(250, Byte), Integer))
@@ -677,8 +684,9 @@ Partial Class CheckInForm
         Me.pnlRight.ResumeLayout(False)
         Me.pnlRight.PerformLayout()
         CType(Me.dgvCheckin, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VwCheckInAktifBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VwCheckInAktifBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -737,4 +745,5 @@ Partial Class CheckInForm
     Friend WithEvents HariTerlambatDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents StatusDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents QueriesTableAdapter1 As HotelDBDataSetTableAdapters.QueriesTableAdapter
+    Friend WithEvents VwCheckInAktifBindingSource1 As BindingSource
 End Class

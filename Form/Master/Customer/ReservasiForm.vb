@@ -39,13 +39,7 @@ Public Class ReservasiForm
     End Sub
 
     Private Sub cboTipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTipe.SelectedIndexChanged
-        If cboTipe.SelectedIndex = 0 Then   ' Walk-in (Langsung)
-            dtpTglReservasi.Value = DateTime.Today
-            dtpTglCheckin.Value = DateTime.Today
-            cboStatus.SelectedItem = "Confirmed"
-        ElseIf cboTipe.SelectedIndex = 1 Then   ' Online / Contact
-            cboStatus.SelectedItem = "Pending"
-        End If
+        cboStatus.SelectedItem = "Pending"
     End Sub
 
     Private Sub dgvReservasi_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReservasi.CellClick
@@ -76,7 +70,7 @@ Public Class ReservasiForm
         End If
 
         Dim st As String = dgvReservasi.SelectedRows(0).Cells(13).Value?.ToString()
-        btnHapus.Enabled = (st = "Pending" OrElse st = "Confirmed")
+        btnHapus.Enabled = st = "Pending"
         btnSimpan.Text = "Update"
         isEdit = True
     End Sub
@@ -100,7 +94,7 @@ Public Class ReservasiForm
             Else
                 Dim idTamu As Integer = Convert.ToInt32(cboTamu.SelectedValue)
                 Dim idKamar As Integer = Convert.ToInt32(cboKamar.SelectedValue)
-                Dim status As String = If(cboTipe.SelectedIndex = 0, "Confirmed", "Pending")
+                Dim status As String = "Pending"
                 ' sp_InsertReservasi(@id_tamu, @id_kamar, @tipe_reservasi,
                 '                    @tgl_reservasi, @tgl_checkin, @tgl_checkout, @status)
                 QueriesTableAdapter1.sp_InsertReservasi(

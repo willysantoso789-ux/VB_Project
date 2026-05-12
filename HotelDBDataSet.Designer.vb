@@ -47,8 +47,6 @@ Partial Public Class HotelDBDataSet
     
     Private tablevw_CheckInAktif As vw_CheckInAktifDataTable
     
-    Private tablevw_CheckOutSelesai As vw_CheckOutSelesaiDataTable
-    
     Private tablevw_DataKamar As vw_DataKamarDataTable
     
     Private tablevw_DataReservasi As vw_DataReservasiDataTable
@@ -126,6 +124,8 @@ Partial Public Class HotelDBDataSet
     Private tablevw_DataProperti As vw_DataPropertiDataTable
     
     Private tablevw_DataTipeKamar As vw_DataTipeKamarDataTable
+    
+    Private tablevw_CheckOutSelesai As vw_CheckOutSelesaiDataTable
     
     Private relationFK__DendaKeru__id_ka__76969D2E As Global.System.Data.DataRelation
     
@@ -210,9 +210,6 @@ Partial Public Class HotelDBDataSet
             End If
             If (Not (ds.Tables("vw_CheckInAktif")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_CheckInAktifDataTable(ds.Tables("vw_CheckInAktif")))
-            End If
-            If (Not (ds.Tables("vw_CheckOutSelesai")) Is Nothing) Then
-                MyBase.Tables.Add(New vw_CheckOutSelesaiDataTable(ds.Tables("vw_CheckOutSelesai")))
             End If
             If (Not (ds.Tables("vw_DataKamar")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataKamarDataTable(ds.Tables("vw_DataKamar")))
@@ -330,6 +327,9 @@ Partial Public Class HotelDBDataSet
             End If
             If (Not (ds.Tables("vw_DataTipeKamar")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataTipeKamarDataTable(ds.Tables("vw_DataTipeKamar")))
+            End If
+            If (Not (ds.Tables("vw_CheckOutSelesai")) Is Nothing) Then
+                MyBase.Tables.Add(New vw_CheckOutSelesaiDataTable(ds.Tables("vw_CheckOutSelesai")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -455,16 +455,6 @@ Partial Public Class HotelDBDataSet
     Public ReadOnly Property vw_CheckInAktif() As vw_CheckInAktifDataTable
         Get
             Return Me.tablevw_CheckInAktif
-        End Get
-    End Property
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
-     Global.System.ComponentModel.Browsable(false),  _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property vw_CheckOutSelesai() As vw_CheckOutSelesaiDataTable
-        Get
-            Return Me.tablevw_CheckOutSelesai
         End Get
     End Property
     
@@ -860,6 +850,16 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property vw_CheckOutSelesai() As vw_CheckOutSelesaiDataTable
+        Get
+            Return Me.tablevw_CheckOutSelesai
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
      Global.System.ComponentModel.BrowsableAttribute(true),  _
      Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Visible)>  _
     Public Overrides Property SchemaSerializationMode() As Global.System.Data.SchemaSerializationMode
@@ -957,9 +957,6 @@ Partial Public Class HotelDBDataSet
             End If
             If (Not (ds.Tables("vw_CheckInAktif")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_CheckInAktifDataTable(ds.Tables("vw_CheckInAktif")))
-            End If
-            If (Not (ds.Tables("vw_CheckOutSelesai")) Is Nothing) Then
-                MyBase.Tables.Add(New vw_CheckOutSelesaiDataTable(ds.Tables("vw_CheckOutSelesai")))
             End If
             If (Not (ds.Tables("vw_DataKamar")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataKamarDataTable(ds.Tables("vw_DataKamar")))
@@ -1078,6 +1075,9 @@ Partial Public Class HotelDBDataSet
             If (Not (ds.Tables("vw_DataTipeKamar")) Is Nothing) Then
                 MyBase.Tables.Add(New vw_DataTipeKamarDataTable(ds.Tables("vw_DataTipeKamar")))
             End If
+            If (Not (ds.Tables("vw_CheckOutSelesai")) Is Nothing) Then
+                MyBase.Tables.Add(New vw_CheckOutSelesaiDataTable(ds.Tables("vw_CheckOutSelesai")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -1174,12 +1174,6 @@ Partial Public Class HotelDBDataSet
         If (initTable = true) Then
             If (Not (Me.tablevw_CheckInAktif) Is Nothing) Then
                 Me.tablevw_CheckInAktif.InitVars
-            End If
-        End If
-        Me.tablevw_CheckOutSelesai = CType(MyBase.Tables("vw_CheckOutSelesai"),vw_CheckOutSelesaiDataTable)
-        If (initTable = true) Then
-            If (Not (Me.tablevw_CheckOutSelesai) Is Nothing) Then
-                Me.tablevw_CheckOutSelesai.InitVars
             End If
         End If
         Me.tablevw_DataKamar = CType(MyBase.Tables("vw_DataKamar"),vw_DataKamarDataTable)
@@ -1416,6 +1410,12 @@ Partial Public Class HotelDBDataSet
                 Me.tablevw_DataTipeKamar.InitVars
             End If
         End If
+        Me.tablevw_CheckOutSelesai = CType(MyBase.Tables("vw_CheckOutSelesai"),vw_CheckOutSelesaiDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tablevw_CheckOutSelesai) Is Nothing) Then
+                Me.tablevw_CheckOutSelesai.InitVars
+            End If
+        End If
         Me.relationFK__DendaKeru__id_ka__76969D2E = Me.Relations("FK__DendaKeru__id_ka__76969D2E")
         Me.relationFK__DendaKeru__id_pr__75A278F5 = Me.Relations("FK__DendaKeru__id_pr__75A278F5")
         Me.relationFK__DendaKeru__id_tr__74AE54BC = Me.Relations("FK__DendaKeru__id_tr__74AE54BC")
@@ -1459,8 +1459,6 @@ Partial Public Class HotelDBDataSet
         MyBase.Tables.Add(Me.tableUser)
         Me.tablevw_CheckInAktif = New vw_CheckInAktifDataTable()
         MyBase.Tables.Add(Me.tablevw_CheckInAktif)
-        Me.tablevw_CheckOutSelesai = New vw_CheckOutSelesaiDataTable()
-        MyBase.Tables.Add(Me.tablevw_CheckOutSelesai)
         Me.tablevw_DataKamar = New vw_DataKamarDataTable()
         MyBase.Tables.Add(Me.tablevw_DataKamar)
         Me.tablevw_DataReservasi = New vw_DataReservasiDataTable()
@@ -1539,6 +1537,8 @@ Partial Public Class HotelDBDataSet
         MyBase.Tables.Add(Me.tablevw_DataProperti)
         Me.tablevw_DataTipeKamar = New vw_DataTipeKamarDataTable()
         MyBase.Tables.Add(Me.tablevw_DataTipeKamar)
+        Me.tablevw_CheckOutSelesai = New vw_CheckOutSelesaiDataTable()
+        MyBase.Tables.Add(Me.tablevw_CheckOutSelesai)
         Me.relationFK__DendaKeru__id_ka__76969D2E = New Global.System.Data.DataRelation("FK__DendaKeru__id_ka__76969D2E", New Global.System.Data.DataColumn() {Me.tableKamar.id_kamarColumn}, New Global.System.Data.DataColumn() {Me.tableDendaKerusakan.id_kamarColumn}, false)
         Me.Relations.Add(Me.relationFK__DendaKeru__id_ka__76969D2E)
         Me.relationFK__DendaKeru__id_pr__75A278F5 = New Global.System.Data.DataRelation("FK__DendaKeru__id_pr__75A278F5", New Global.System.Data.DataColumn() {Me.tableProperti.id_propertiColumn}, New Global.System.Data.DataColumn() {Me.tableDendaKerusakan.id_propertiColumn}, false)
@@ -1626,12 +1626,6 @@ Partial Public Class HotelDBDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Private Function ShouldSerializevw_CheckInAktif() As Boolean
-        Return false
-    End Function
-    
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-    Private Function ShouldSerializevw_CheckOutSelesai() As Boolean
         Return false
     End Function
     
@@ -1871,6 +1865,12 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Private Function ShouldSerializevw_CheckOutSelesai() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Private Sub SchemaChanged(ByVal sender As Object, ByVal e As Global.System.ComponentModel.CollectionChangeEventArgs)
         If (e.Action = Global.System.ComponentModel.CollectionChangeAction.Remove) Then
             Me.InitVars
@@ -1959,9 +1959,6 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Public Delegate Sub vw_CheckInAktifRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_CheckInAktifRowChangeEvent)
-    
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-    Public Delegate Sub vw_CheckOutSelesaiRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_CheckOutSelesaiRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Public Delegate Sub vw_DataKamarRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_DataKamarRowChangeEvent)
@@ -2079,6 +2076,9 @@ Partial Public Class HotelDBDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
     Public Delegate Sub vw_DataTipeKamarRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_DataTipeKamarRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Public Delegate Sub vw_CheckOutSelesaiRowChangeEventHandler(ByVal sender As Object, ByVal e As vw_CheckOutSelesaiRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -5896,437 +5896,6 @@ Partial Public Class HotelDBDataSet
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
             attribute2.FixedValue = "vw_CheckInAktifDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the strongly named DataTable class.
-    '''</summary>
-    <Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class vw_CheckOutSelesaiDataTable
-        Inherits Global.System.Data.TypedTableBase(Of vw_CheckOutSelesaiRow)
-        
-        Private columnID_Reservasi As Global.System.Data.DataColumn
-        
-        Private columnNama_Tamu As Global.System.Data.DataColumn
-        
-        Private columnNomor_Kamar As Global.System.Data.DataColumn
-        
-        Private _columnTgl_Check_In As Global.System.Data.DataColumn
-        
-        Private _columnTgl_Check_Out As Global.System.Data.DataColumn
-        
-        Private _columnDurasi__Malam_ As Global.System.Data.DataColumn
-        
-        Private columnTotal_Bayar As Global.System.Data.DataColumn
-        
-        Private columnDenda_Telat As Global.System.Data.DataColumn
-        
-        Private columnDenda_Kerusakan As Global.System.Data.DataColumn
-        
-        Private columnMetode_Bayar As Global.System.Data.DataColumn
-        
-        Private columnWaktu_Transaksi As Global.System.Data.DataColumn
-        
-        Private columnDiproses_Oleh As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub New()
-            MyBase.New
-            Me.TableName = "vw_CheckOutSelesai"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
-            Me.TableName = table.TableName
-            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-                Me.CaseSensitive = table.CaseSensitive
-            End If
-            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-                Me.Locale = table.Locale
-            End If
-            If (table.Namespace <> table.DataSet.Namespace) Then
-                Me.Namespace = table.Namespace
-            End If
-            Me.Prefix = table.Prefix
-            Me.MinimumCapacity = table.MinimumCapacity
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-            MyBase.New(info, context)
-            Me.InitVars
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property ID_ReservasiColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnID_Reservasi
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Nama_TamuColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnNama_Tamu
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Nomor_KamarColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnNomor_Kamar
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property _Tgl_Check_InColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me._columnTgl_Check_In
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property _Tgl_Check_OutColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me._columnTgl_Check_Out
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property _Durasi__Malam_Column() As Global.System.Data.DataColumn
-            Get
-                Return Me._columnDurasi__Malam_
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Total_BayarColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTotal_Bayar
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Denda_TelatColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDenda_Telat
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Denda_KerusakanColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDenda_Kerusakan
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Metode_BayarColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnMetode_Bayar
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Waktu_TransaksiColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnWaktu_Transaksi
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Diproses_OlehColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnDiproses_Oleh
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
-         Global.System.ComponentModel.Browsable(false)>  _
-        Public ReadOnly Property Count() As Integer
-            Get
-                Return Me.Rows.Count
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As vw_CheckOutSelesaiRow
-            Get
-                Return CType(Me.Rows(index),vw_CheckOutSelesaiRow)
-            End Get
-        End Property
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Event vw_CheckOutSelesaiRowChanging As vw_CheckOutSelesaiRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Event vw_CheckOutSelesaiRowChanged As vw_CheckOutSelesaiRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Event vw_CheckOutSelesaiRowDeleting As vw_CheckOutSelesaiRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Event vw_CheckOutSelesaiRowDeleted As vw_CheckOutSelesaiRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Overloads Sub Addvw_CheckOutSelesaiRow(ByVal row As vw_CheckOutSelesaiRow)
-            Me.Rows.Add(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Overloads Function Addvw_CheckOutSelesaiRow(ByVal ID_Reservasi As Integer, ByVal Nama_Tamu As String, ByVal Nomor_Kamar As String, ByVal _Tgl_Check_In As String, ByVal _Tgl_Check_Out As String, ByVal _Durasi__Malam_ As Integer, ByVal Total_Bayar As String, ByVal Denda_Telat As String, ByVal Denda_Kerusakan As String, ByVal Metode_Bayar As String, ByVal Waktu_Transaksi As String, ByVal Diproses_Oleh As String) As vw_CheckOutSelesaiRow
-            Dim rowvw_CheckOutSelesaiRow As vw_CheckOutSelesaiRow = CType(Me.NewRow,vw_CheckOutSelesaiRow)
-            Dim columnValuesArray() As Object = New Object() {ID_Reservasi, Nama_Tamu, Nomor_Kamar, _Tgl_Check_In, _Tgl_Check_Out, _Durasi__Malam_, Total_Bayar, Denda_Telat, Denda_Kerusakan, Metode_Bayar, Waktu_Transaksi, Diproses_Oleh}
-            rowvw_CheckOutSelesaiRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowvw_CheckOutSelesaiRow)
-            Return rowvw_CheckOutSelesaiRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function FindByID_Reservasi(ByVal ID_Reservasi As Integer) As vw_CheckOutSelesaiRow
-            Return CType(Me.Rows.Find(New Object() {ID_Reservasi}),vw_CheckOutSelesaiRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As vw_CheckOutSelesaiDataTable = CType(MyBase.Clone,vw_CheckOutSelesaiDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New vw_CheckOutSelesaiDataTable()
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Friend Sub InitVars()
-            Me.columnID_Reservasi = MyBase.Columns("ID Reservasi")
-            Me.columnNama_Tamu = MyBase.Columns("Nama Tamu")
-            Me.columnNomor_Kamar = MyBase.Columns("Nomor Kamar")
-            Me._columnTgl_Check_In = MyBase.Columns("Tgl Check-In")
-            Me._columnTgl_Check_Out = MyBase.Columns("Tgl Check-Out")
-            Me._columnDurasi__Malam_ = MyBase.Columns("Durasi (Malam)")
-            Me.columnTotal_Bayar = MyBase.Columns("Total Bayar")
-            Me.columnDenda_Telat = MyBase.Columns("Denda Telat")
-            Me.columnDenda_Kerusakan = MyBase.Columns("Denda Kerusakan")
-            Me.columnMetode_Bayar = MyBase.Columns("Metode Bayar")
-            Me.columnWaktu_Transaksi = MyBase.Columns("Waktu Transaksi")
-            Me.columnDiproses_Oleh = MyBase.Columns("Diproses Oleh")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Private Sub InitClass()
-            Me.columnID_Reservasi = New Global.System.Data.DataColumn("ID Reservasi", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnID_Reservasi)
-            Me.columnNama_Tamu = New Global.System.Data.DataColumn("Nama Tamu", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnNama_Tamu)
-            Me.columnNomor_Kamar = New Global.System.Data.DataColumn("Nomor Kamar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnNomor_Kamar)
-            Me._columnTgl_Check_In = New Global.System.Data.DataColumn("Tgl Check-In", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            Me._columnTgl_Check_In.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnTgl_Check_In")
-            Me._columnTgl_Check_In.ExtendedProperties.Add("Generator_UserColumnName", "Tgl Check-In")
-            MyBase.Columns.Add(Me._columnTgl_Check_In)
-            Me._columnTgl_Check_Out = New Global.System.Data.DataColumn("Tgl Check-Out", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            Me._columnTgl_Check_Out.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnTgl_Check_Out")
-            Me._columnTgl_Check_Out.ExtendedProperties.Add("Generator_UserColumnName", "Tgl Check-Out")
-            MyBase.Columns.Add(Me._columnTgl_Check_Out)
-            Me._columnDurasi__Malam_ = New Global.System.Data.DataColumn("Durasi (Malam)", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            Me._columnDurasi__Malam_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnDurasi__Malam_")
-            Me._columnDurasi__Malam_.ExtendedProperties.Add("Generator_UserColumnName", "Durasi (Malam)")
-            MyBase.Columns.Add(Me._columnDurasi__Malam_)
-            Me.columnTotal_Bayar = New Global.System.Data.DataColumn("Total Bayar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTotal_Bayar)
-            Me.columnDenda_Telat = New Global.System.Data.DataColumn("Denda Telat", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDenda_Telat)
-            Me.columnDenda_Kerusakan = New Global.System.Data.DataColumn("Denda Kerusakan", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDenda_Kerusakan)
-            Me.columnMetode_Bayar = New Global.System.Data.DataColumn("Metode Bayar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnMetode_Bayar)
-            Me.columnWaktu_Transaksi = New Global.System.Data.DataColumn("Waktu Transaksi", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnWaktu_Transaksi)
-            Me.columnDiproses_Oleh = New Global.System.Data.DataColumn("Diproses Oleh", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDiproses_Oleh)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID_Reservasi}, true))
-            Me.columnID_Reservasi.AllowDBNull = false
-            Me.columnID_Reservasi.Unique = true
-            Me.columnNama_Tamu.AllowDBNull = false
-            Me.columnNama_Tamu.MaxLength = 100
-            Me.columnNomor_Kamar.AllowDBNull = false
-            Me.columnNomor_Kamar.MaxLength = 10
-            Me._columnTgl_Check_In.ReadOnly = true
-            Me._columnTgl_Check_In.MaxLength = 4000
-            Me._columnTgl_Check_Out.ReadOnly = true
-            Me._columnTgl_Check_Out.MaxLength = 4000
-            Me._columnDurasi__Malam_.ReadOnly = true
-            Me.columnTotal_Bayar.ReadOnly = true
-            Me.columnTotal_Bayar.MaxLength = 4000
-            Me.columnDenda_Telat.ReadOnly = true
-            Me.columnDenda_Telat.MaxLength = 4000
-            Me.columnDenda_Kerusakan.ReadOnly = true
-            Me.columnDenda_Kerusakan.MaxLength = 4000
-            Me.columnMetode_Bayar.AllowDBNull = false
-            Me.columnMetode_Bayar.MaxLength = 30
-            Me.columnWaktu_Transaksi.ReadOnly = true
-            Me.columnWaktu_Transaksi.MaxLength = 4000
-            Me.columnDiproses_Oleh.AllowDBNull = false
-            Me.columnDiproses_Oleh.MaxLength = 100
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function Newvw_CheckOutSelesaiRow() As vw_CheckOutSelesaiRow
-            Return CType(Me.NewRow,vw_CheckOutSelesaiRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New vw_CheckOutSelesaiRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(vw_CheckOutSelesaiRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.vw_CheckOutSelesaiRowChangedEvent) Is Nothing) Then
-                RaiseEvent vw_CheckOutSelesaiRowChanged(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.vw_CheckOutSelesaiRowChangingEvent) Is Nothing) Then
-                RaiseEvent vw_CheckOutSelesaiRowChanging(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.vw_CheckOutSelesaiRowDeletedEvent) Is Nothing) Then
-                RaiseEvent vw_CheckOutSelesaiRowDeleted(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.vw_CheckOutSelesaiRowDeletingEvent) Is Nothing) Then
-                RaiseEvent vw_CheckOutSelesaiRowDeleting(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub Removevw_CheckOutSelesaiRow(ByVal row As vw_CheckOutSelesaiRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As HotelDBDataSet = New HotelDBDataSet()
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "vw_CheckOutSelesaiDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -13195,8 +12764,6 @@ Partial Public Class HotelDBDataSet
         
         Private columnreservasi_pending As Global.System.Data.DataColumn
         
-        Private columnreservasi_confirmed As Global.System.Data.DataColumn
-        
         Private columntamu_checkin As Global.System.Data.DataColumn
         
         Private columnpendapatan_bulan_ini As Global.System.Data.DataColumn
@@ -13288,14 +12855,6 @@ Partial Public Class HotelDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property reservasi_confirmedColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnreservasi_confirmed
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public ReadOnly Property tamu_checkinColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columntamu_checkin
@@ -13355,9 +12914,9 @@ Partial Public Class HotelDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Overloads Function Addsp_GetDashboardSummaryRow(ByVal total_tamu As Integer, ByVal total_kamar As Integer, ByVal kamar_tersedia As Integer, ByVal kamar_terisi As Integer, ByVal kamar_maintenance As Integer, ByVal reservasi_pending As Integer, ByVal reservasi_confirmed As Integer, ByVal tamu_checkin As Integer, ByVal pendapatan_bulan_ini As Decimal, ByVal properti_rusak As Integer) As sp_GetDashboardSummaryRow
+        Public Overloads Function Addsp_GetDashboardSummaryRow(ByVal total_tamu As Integer, ByVal total_kamar As Integer, ByVal kamar_tersedia As Integer, ByVal kamar_terisi As Integer, ByVal kamar_maintenance As Integer, ByVal reservasi_pending As Integer, ByVal tamu_checkin As Integer, ByVal pendapatan_bulan_ini As Decimal, ByVal properti_rusak As Integer) As sp_GetDashboardSummaryRow
             Dim rowsp_GetDashboardSummaryRow As sp_GetDashboardSummaryRow = CType(Me.NewRow,sp_GetDashboardSummaryRow)
-            Dim columnValuesArray() As Object = New Object() {total_tamu, total_kamar, kamar_tersedia, kamar_terisi, kamar_maintenance, reservasi_pending, reservasi_confirmed, tamu_checkin, pendapatan_bulan_ini, properti_rusak}
+            Dim columnValuesArray() As Object = New Object() {total_tamu, total_kamar, kamar_tersedia, kamar_terisi, kamar_maintenance, reservasi_pending, tamu_checkin, pendapatan_bulan_ini, properti_rusak}
             rowsp_GetDashboardSummaryRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowsp_GetDashboardSummaryRow)
             Return rowsp_GetDashboardSummaryRow
@@ -13386,7 +12945,6 @@ Partial Public Class HotelDBDataSet
             Me.columnkamar_terisi = MyBase.Columns("kamar_terisi")
             Me.columnkamar_maintenance = MyBase.Columns("kamar_maintenance")
             Me.columnreservasi_pending = MyBase.Columns("reservasi_pending")
-            Me.columnreservasi_confirmed = MyBase.Columns("reservasi_confirmed")
             Me.columntamu_checkin = MyBase.Columns("tamu_checkin")
             Me.columnpendapatan_bulan_ini = MyBase.Columns("pendapatan_bulan_ini")
             Me.columnproperti_rusak = MyBase.Columns("properti_rusak")
@@ -13407,8 +12965,6 @@ Partial Public Class HotelDBDataSet
             MyBase.Columns.Add(Me.columnkamar_maintenance)
             Me.columnreservasi_pending = New Global.System.Data.DataColumn("reservasi_pending", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnreservasi_pending)
-            Me.columnreservasi_confirmed = New Global.System.Data.DataColumn("reservasi_confirmed", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnreservasi_confirmed)
             Me.columntamu_checkin = New Global.System.Data.DataColumn("tamu_checkin", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntamu_checkin)
             Me.columnpendapatan_bulan_ini = New Global.System.Data.DataColumn("pendapatan_bulan_ini", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
@@ -13421,7 +12977,6 @@ Partial Public Class HotelDBDataSet
             Me.columnkamar_terisi.ReadOnly = true
             Me.columnkamar_maintenance.ReadOnly = true
             Me.columnreservasi_pending.ReadOnly = true
-            Me.columnreservasi_confirmed.ReadOnly = true
             Me.columntamu_checkin.ReadOnly = true
             Me.columnpendapatan_bulan_ini.ReadOnly = true
             Me.columnproperti_rusak.ReadOnly = true
@@ -20366,6 +19921,407 @@ Partial Public Class HotelDBDataSet
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class vw_CheckOutSelesaiDataTable
+        Inherits Global.System.Data.TypedTableBase(Of vw_CheckOutSelesaiRow)
+        
+        Private columnID_Reservasi As Global.System.Data.DataColumn
+        
+        Private columnNama_Tamu As Global.System.Data.DataColumn
+        
+        Private columnNomor_Kamar As Global.System.Data.DataColumn
+        
+        Private _columnTgl_Check_In As Global.System.Data.DataColumn
+        
+        Private _columnTgl_Check_Out As Global.System.Data.DataColumn
+        
+        Private _columnDurasi__Malam_ As Global.System.Data.DataColumn
+        
+        Private _columnHarga_Malam As Global.System.Data.DataColumn
+        
+        Private columnHari_Menginap_Sekarang As Global.System.Data.DataColumn
+        
+        Private columnHari_Terlambat As Global.System.Data.DataColumn
+        
+        Private columnStatus As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "vw_CheckOutSelesai"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property ID_ReservasiColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID_Reservasi
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Nama_TamuColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNama_Tamu
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Nomor_KamarColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNomor_Kamar
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property _Tgl_Check_InColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me._columnTgl_Check_In
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property _Tgl_Check_OutColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me._columnTgl_Check_Out
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property _Durasi__Malam_Column() As Global.System.Data.DataColumn
+            Get
+                Return Me._columnDurasi__Malam_
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property _Harga_MalamColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me._columnHarga_Malam
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Hari_Menginap_SekarangColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHari_Menginap_Sekarang
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Hari_TerlambatColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnHari_Terlambat
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property StatusColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStatus
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As vw_CheckOutSelesaiRow
+            Get
+                Return CType(Me.Rows(index),vw_CheckOutSelesaiRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_CheckOutSelesaiRowChanging As vw_CheckOutSelesaiRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_CheckOutSelesaiRowChanged As vw_CheckOutSelesaiRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_CheckOutSelesaiRowDeleting As vw_CheckOutSelesaiRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Event vw_CheckOutSelesaiRowDeleted As vw_CheckOutSelesaiRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overloads Sub Addvw_CheckOutSelesaiRow(ByVal row As vw_CheckOutSelesaiRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overloads Function Addvw_CheckOutSelesaiRow(ByVal ID_Reservasi As Integer, ByVal Nama_Tamu As String, ByVal Nomor_Kamar As String, ByVal _Tgl_Check_In As String, ByVal _Tgl_Check_Out As String, ByVal _Durasi__Malam_ As Integer, ByVal _Harga_Malam As String, ByVal Hari_Menginap_Sekarang As Integer, ByVal Hari_Terlambat As Integer, ByVal Status As String) As vw_CheckOutSelesaiRow
+            Dim rowvw_CheckOutSelesaiRow As vw_CheckOutSelesaiRow = CType(Me.NewRow,vw_CheckOutSelesaiRow)
+            Dim columnValuesArray() As Object = New Object() {ID_Reservasi, Nama_Tamu, Nomor_Kamar, _Tgl_Check_In, _Tgl_Check_Out, _Durasi__Malam_, _Harga_Malam, Hari_Menginap_Sekarang, Hari_Terlambat, Status}
+            rowvw_CheckOutSelesaiRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowvw_CheckOutSelesaiRow)
+            Return rowvw_CheckOutSelesaiRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function FindByID_Reservasi(ByVal ID_Reservasi As Integer) As vw_CheckOutSelesaiRow
+            Return CType(Me.Rows.Find(New Object() {ID_Reservasi}),vw_CheckOutSelesaiRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As vw_CheckOutSelesaiDataTable = CType(MyBase.Clone,vw_CheckOutSelesaiDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New vw_CheckOutSelesaiDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnID_Reservasi = MyBase.Columns("ID Reservasi")
+            Me.columnNama_Tamu = MyBase.Columns("Nama Tamu")
+            Me.columnNomor_Kamar = MyBase.Columns("Nomor Kamar")
+            Me._columnTgl_Check_In = MyBase.Columns("Tgl Check-In")
+            Me._columnTgl_Check_Out = MyBase.Columns("Tgl Check-Out")
+            Me._columnDurasi__Malam_ = MyBase.Columns("Durasi (Malam)")
+            Me._columnHarga_Malam = MyBase.Columns("Harga/Malam")
+            Me.columnHari_Menginap_Sekarang = MyBase.Columns("Hari Menginap Sekarang")
+            Me.columnHari_Terlambat = MyBase.Columns("Hari Terlambat")
+            Me.columnStatus = MyBase.Columns("Status")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnID_Reservasi = New Global.System.Data.DataColumn("ID Reservasi", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID_Reservasi)
+            Me.columnNama_Tamu = New Global.System.Data.DataColumn("Nama Tamu", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNama_Tamu)
+            Me.columnNomor_Kamar = New Global.System.Data.DataColumn("Nomor Kamar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNomor_Kamar)
+            Me._columnTgl_Check_In = New Global.System.Data.DataColumn("Tgl Check-In", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me._columnTgl_Check_In.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnTgl_Check_In")
+            Me._columnTgl_Check_In.ExtendedProperties.Add("Generator_UserColumnName", "Tgl Check-In")
+            MyBase.Columns.Add(Me._columnTgl_Check_In)
+            Me._columnTgl_Check_Out = New Global.System.Data.DataColumn("Tgl Check-Out", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me._columnTgl_Check_Out.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnTgl_Check_Out")
+            Me._columnTgl_Check_Out.ExtendedProperties.Add("Generator_UserColumnName", "Tgl Check-Out")
+            MyBase.Columns.Add(Me._columnTgl_Check_Out)
+            Me._columnDurasi__Malam_ = New Global.System.Data.DataColumn("Durasi (Malam)", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me._columnDurasi__Malam_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnDurasi__Malam_")
+            Me._columnDurasi__Malam_.ExtendedProperties.Add("Generator_UserColumnName", "Durasi (Malam)")
+            MyBase.Columns.Add(Me._columnDurasi__Malam_)
+            Me._columnHarga_Malam = New Global.System.Data.DataColumn("Harga/Malam", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me._columnHarga_Malam.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnHarga_Malam")
+            Me._columnHarga_Malam.ExtendedProperties.Add("Generator_UserColumnName", "Harga/Malam")
+            MyBase.Columns.Add(Me._columnHarga_Malam)
+            Me.columnHari_Menginap_Sekarang = New Global.System.Data.DataColumn("Hari Menginap Sekarang", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHari_Menginap_Sekarang)
+            Me.columnHari_Terlambat = New Global.System.Data.DataColumn("Hari Terlambat", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHari_Terlambat)
+            Me.columnStatus = New Global.System.Data.DataColumn("Status", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStatus)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID_Reservasi}, true))
+            Me.columnID_Reservasi.AllowDBNull = false
+            Me.columnID_Reservasi.Unique = true
+            Me.columnNama_Tamu.AllowDBNull = false
+            Me.columnNama_Tamu.MaxLength = 100
+            Me.columnNomor_Kamar.AllowDBNull = false
+            Me.columnNomor_Kamar.MaxLength = 10
+            Me._columnTgl_Check_In.ReadOnly = true
+            Me._columnTgl_Check_In.MaxLength = 4000
+            Me._columnTgl_Check_Out.ReadOnly = true
+            Me._columnTgl_Check_Out.MaxLength = 4000
+            Me._columnDurasi__Malam_.ReadOnly = true
+            Me._columnHarga_Malam.ReadOnly = true
+            Me._columnHarga_Malam.MaxLength = 4000
+            Me.columnHari_Menginap_Sekarang.ReadOnly = true
+            Me.columnHari_Terlambat.ReadOnly = true
+            Me.columnStatus.AllowDBNull = false
+            Me.columnStatus.MaxLength = 20
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Newvw_CheckOutSelesaiRow() As vw_CheckOutSelesaiRow
+            Return CType(Me.NewRow,vw_CheckOutSelesaiRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New vw_CheckOutSelesaiRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(vw_CheckOutSelesaiRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.vw_CheckOutSelesaiRowChangedEvent) Is Nothing) Then
+                RaiseEvent vw_CheckOutSelesaiRowChanged(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.vw_CheckOutSelesaiRowChangingEvent) Is Nothing) Then
+                RaiseEvent vw_CheckOutSelesaiRowChanging(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.vw_CheckOutSelesaiRowDeletedEvent) Is Nothing) Then
+                RaiseEvent vw_CheckOutSelesaiRowDeleted(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.vw_CheckOutSelesaiRowDeletingEvent) Is Nothing) Then
+                RaiseEvent vw_CheckOutSelesaiRowDeleting(Me, New vw_CheckOutSelesaiRowChangeEvent(CType(e.Row,vw_CheckOutSelesaiRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Removevw_CheckOutSelesaiRow(ByVal row As vw_CheckOutSelesaiRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As HotelDBDataSet = New HotelDBDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "vw_CheckOutSelesaiDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class DendaKerusakanRow
@@ -21776,266 +21732,6 @@ Partial Public Class HotelDBDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public Sub SetHari_TerlambatNull()
             Me(Me.tablevw_CheckInAktif.Hari_TerlambatColumn) = Global.System.Convert.DBNull
-        End Sub
-    End Class
-    
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    Partial Public Class vw_CheckOutSelesaiRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tablevw_CheckOutSelesai As vw_CheckOutSelesaiDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tablevw_CheckOutSelesai = CType(Me.Table,vw_CheckOutSelesaiDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property ID_Reservasi() As Integer
-            Get
-                Return CType(Me(Me.tablevw_CheckOutSelesai.ID_ReservasiColumn),Integer)
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.ID_ReservasiColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Nama_Tamu() As String
-            Get
-                Return CType(Me(Me.tablevw_CheckOutSelesai.Nama_TamuColumn),String)
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Nama_TamuColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Nomor_Kamar() As String
-            Get
-                Return CType(Me(Me.tablevw_CheckOutSelesai.Nomor_KamarColumn),String)
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Nomor_KamarColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property _Tgl_Check_In() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Tgl Check-In' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property _Tgl_Check_Out() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Tgl Check-Out' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property _Durasi__Malam_() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Durasi (Malam)' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Total_Bayar() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai.Total_BayarColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Total Bayar' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Total_BayarColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Denda_Telat() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai.Denda_TelatColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Denda Telat' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Denda_TelatColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Denda_Kerusakan() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai.Denda_KerusakanColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Denda Kerusakan' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Denda_KerusakanColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Metode_Bayar() As String
-            Get
-                Return CType(Me(Me.tablevw_CheckOutSelesai.Metode_BayarColumn),String)
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Metode_BayarColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Waktu_Transaksi() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tablevw_CheckOutSelesai.Waktu_TransaksiColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Waktu Transaksi' in table 'vw_CheckOutSelesai' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Waktu_TransaksiColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property Diproses_Oleh() As String
-            Get
-                Return CType(Me(Me.tablevw_CheckOutSelesai.Diproses_OlehColumn),String)
-            End Get
-            Set
-                Me(Me.tablevw_CheckOutSelesai.Diproses_OlehColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function Is_Tgl_Check_InNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub Set_Tgl_Check_InNull()
-            Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function Is_Tgl_Check_OutNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub Set_Tgl_Check_OutNull()
-            Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function Is_Durasi__Malam_Null() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub Set_Durasi__Malam_Null()
-            Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function IsTotal_BayarNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Total_BayarColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub SetTotal_BayarNull()
-            Me(Me.tablevw_CheckOutSelesai.Total_BayarColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function IsDenda_TelatNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Denda_TelatColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub SetDenda_TelatNull()
-            Me(Me.tablevw_CheckOutSelesai.Denda_TelatColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function IsDenda_KerusakanNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Denda_KerusakanColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub SetDenda_KerusakanNull()
-            Me(Me.tablevw_CheckOutSelesai.Denda_KerusakanColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function IsWaktu_TransaksiNull() As Boolean
-            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Waktu_TransaksiColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub SetWaktu_TransaksiNull()
-            Me(Me.tablevw_CheckOutSelesai.Waktu_TransaksiColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -25324,22 +25020,6 @@ Partial Public Class HotelDBDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property reservasi_confirmed() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tablesp_GetDashboardSummary.reservasi_confirmedColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'reservasi_confirmed' in table 'sp_GetDashboardSummary' is D"& _ 
-                            "BNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tablesp_GetDashboardSummary.reservasi_confirmedColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public Property tamu_checkin() As Integer
             Get
                 Try 
@@ -25455,18 +25135,6 @@ Partial Public Class HotelDBDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public Sub Setreservasi_pendingNull()
             Me(Me.tablesp_GetDashboardSummary.reservasi_pendingColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Function Isreservasi_confirmedNull() As Boolean
-            Return Me.IsNull(Me.tablesp_GetDashboardSummary.reservasi_confirmedColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub Setreservasi_confirmedNull()
-            Me(Me.tablesp_GetDashboardSummary.reservasi_confirmedColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -28444,6 +28112,229 @@ Partial Public Class HotelDBDataSet
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class vw_CheckOutSelesaiRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tablevw_CheckOutSelesai As vw_CheckOutSelesaiDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tablevw_CheckOutSelesai = CType(Me.Table,vw_CheckOutSelesaiDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property ID_Reservasi() As Integer
+            Get
+                Return CType(Me(Me.tablevw_CheckOutSelesai.ID_ReservasiColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.ID_ReservasiColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Nama_Tamu() As String
+            Get
+                Return CType(Me(Me.tablevw_CheckOutSelesai.Nama_TamuColumn),String)
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.Nama_TamuColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Nomor_Kamar() As String
+            Get
+                Return CType(Me(Me.tablevw_CheckOutSelesai.Nomor_KamarColumn),String)
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.Nomor_KamarColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property _Tgl_Check_In() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Tgl Check-In' in table 'vw_CheckOutSelesai' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property _Tgl_Check_Out() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Tgl Check-Out' in table 'vw_CheckOutSelesai' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property _Durasi__Malam_() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Durasi (Malam)' in table 'vw_CheckOutSelesai' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property _Harga_Malam() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai._Harga_MalamColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Harga/Malam' in table 'vw_CheckOutSelesai' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai._Harga_MalamColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Hari_Menginap_Sekarang() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai.Hari_Menginap_SekarangColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Hari Menginap Sekarang' in table 'vw_CheckOutSelesai' is DB"& _ 
+                            "Null.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.Hari_Menginap_SekarangColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Hari_Terlambat() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tablevw_CheckOutSelesai.Hari_TerlambatColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Hari Terlambat' in table 'vw_CheckOutSelesai' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.Hari_TerlambatColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property Status() As String
+            Get
+                Return CType(Me(Me.tablevw_CheckOutSelesai.StatusColumn),String)
+            End Get
+            Set
+                Me(Me.tablevw_CheckOutSelesai.StatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Is_Tgl_Check_InNull() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Set_Tgl_Check_InNull()
+            Me(Me.tablevw_CheckOutSelesai._Tgl_Check_InColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Is_Tgl_Check_OutNull() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Set_Tgl_Check_OutNull()
+            Me(Me.tablevw_CheckOutSelesai._Tgl_Check_OutColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Is_Durasi__Malam_Null() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Set_Durasi__Malam_Null()
+            Me(Me.tablevw_CheckOutSelesai._Durasi__Malam_Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function Is_Harga_MalamNull() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai._Harga_MalamColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub Set_Harga_MalamNull()
+            Me(Me.tablevw_CheckOutSelesai._Harga_MalamColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsHari_Menginap_SekarangNull() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Hari_Menginap_SekarangColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetHari_Menginap_SekarangNull()
+            Me(Me.tablevw_CheckOutSelesai.Hari_Menginap_SekarangColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Function IsHari_TerlambatNull() As Boolean
+            Return Me.IsNull(Me.tablevw_CheckOutSelesai.Hari_TerlambatColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub SetHari_TerlambatNull()
+            Me(Me.tablevw_CheckOutSelesai.Hari_TerlambatColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
@@ -28825,42 +28716,6 @@ Partial Public Class HotelDBDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public ReadOnly Property Row() As vw_CheckInAktifRow
-            Get
-                Return Me.eventRow
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
-            Get
-                Return Me.eventAction
-            End Get
-        End Property
-    End Class
-    
-    '''<summary>
-    '''Row event argument class
-    '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-    Public Class vw_CheckOutSelesaiRowChangeEvent
-        Inherits Global.System.EventArgs
-        
-        Private eventRow As vw_CheckOutSelesaiRow
-        
-        Private eventAction As Global.System.Data.DataRowAction
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub New(ByVal row As vw_CheckOutSelesaiRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New
-            Me.eventRow = row
-            Me.eventAction = action
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public ReadOnly Property Row() As vw_CheckOutSelesaiRow
             Get
                 Return Me.eventRow
             End Get
@@ -30265,6 +30120,42 @@ Partial Public Class HotelDBDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
         Public ReadOnly Property Row() As vw_DataTipeKamarRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+    Public Class vw_CheckOutSelesaiRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As vw_CheckOutSelesaiRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New(ByVal row As vw_CheckOutSelesaiRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public ReadOnly Property Row() As vw_CheckOutSelesaiRow
             Get
                 Return Me.eventRow
             End Get
@@ -34332,192 +34223,6 @@ Namespace HotelDBDataSetTableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class vw_CheckOutSelesaiTableAdapter
-        Inherits Global.System.ComponentModel.Component
-        
-        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-        
-        Private _connection As Global.System.Data.SqlClient.SqlConnection
-        
-        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-        
-        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-        
-        Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Sub New()
-            MyBase.New
-            Me.ClearBeforeFill = true
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
-            Get
-                If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
-                End If
-                Return Me._adapter
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
-            Get
-                If (Me._connection Is Nothing) Then
-                    Me.InitConnection
-                End If
-                Return Me._connection
-            End Get
-            Set
-                Me._connection = value
-                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
-                    Me.Adapter.InsertCommand.Connection = value
-                End If
-                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
-                    Me.Adapter.DeleteCommand.Connection = value
-                End If
-                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
-                    Me.Adapter.UpdateCommand.Connection = value
-                End If
-                Dim i As Integer = 0
-                Do While (i < Me.CommandCollection.Length)
-                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
-                    End If
-                    i = (i + 1)
-                Loop
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
-            Get
-                Return Me._transaction
-            End Get
-            Set
-                Me._transaction = value
-                Dim i As Integer = 0
-                Do While (i < Me.CommandCollection.Length)
-                    Me.CommandCollection(i).Transaction = Me._transaction
-                    i = (i + 1)
-                Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
-                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
-                End If
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
-                    Me.Adapter.InsertCommand.Transaction = Me._transaction
-                End If
-                If ((Not (Me.Adapter) Is Nothing)  _
-                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
-                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
-                End If
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
-            Get
-                If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
-                End If
-                Return Me._commandCollection
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Public Property ClearBeforeFill() As Boolean
-            Get
-                Return Me._clearBeforeFill
-            End Get
-            Set
-                Me._clearBeforeFill = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Private Sub InitAdapter()
-            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
-            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
-            tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "vw_CheckOutSelesai"
-            tableMapping.ColumnMappings.Add("ID Reservasi", "ID Reservasi")
-            tableMapping.ColumnMappings.Add("Nama Tamu", "Nama Tamu")
-            tableMapping.ColumnMappings.Add("Nomor Kamar", "Nomor Kamar")
-            tableMapping.ColumnMappings.Add("Tgl Check-In", "Tgl Check-In")
-            tableMapping.ColumnMappings.Add("Tgl Check-Out", "Tgl Check-Out")
-            tableMapping.ColumnMappings.Add("Durasi (Malam)", "Durasi (Malam)")
-            tableMapping.ColumnMappings.Add("Total Bayar", "Total Bayar")
-            tableMapping.ColumnMappings.Add("Denda Telat", "Denda Telat")
-            tableMapping.ColumnMappings.Add("Denda Kerusakan", "Denda Kerusakan")
-            tableMapping.ColumnMappings.Add("Metode Bayar", "Metode Bayar")
-            tableMapping.ColumnMappings.Add("Waktu Transaksi", "Waktu Transaksi")
-            tableMapping.ColumnMappings.Add("Diproses Oleh", "Diproses Oleh")
-            Me._adapter.TableMappings.Add(tableMapping)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Private Sub InitConnection()
-            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.VB_PROJECT.My.MySettings.Default.HotelDBConnectionString
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
-        Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
-            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT [ID Reservasi], [Nama Tamu], [Nomor Kamar], [Tgl Check-In], [Tgl Check-Out"& _ 
-                "], [Durasi (Malam)], [Total Bayar], [Denda Telat], [Denda Kerusakan], [Metode Ba"& _ 
-                "yar], [Waktu Transaksi], [Diproses Oleh] FROM dbo.vw_CheckOutSelesai"
-            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As HotelDBDataSet.vw_CheckOutSelesaiDataTable) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
-            End If
-            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As HotelDBDataSet.vw_CheckOutSelesaiDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As HotelDBDataSet.vw_CheckOutSelesaiDataTable = New HotelDBDataSet.vw_CheckOutSelesaiDataTable()
-            Me.Adapter.Fill(dataTable)
-            Return dataTable
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents the connection and commands used to retrieve and save data.
-    '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
     Partial Public Class vw_DataKamarTableAdapter
         Inherits Global.System.ComponentModel.Component
         
@@ -37977,7 +37682,6 @@ Namespace HotelDBDataSetTableAdapters
             tableMapping.ColumnMappings.Add("kamar_terisi", "kamar_terisi")
             tableMapping.ColumnMappings.Add("kamar_maintenance", "kamar_maintenance")
             tableMapping.ColumnMappings.Add("reservasi_pending", "reservasi_pending")
-            tableMapping.ColumnMappings.Add("reservasi_confirmed", "reservasi_confirmed")
             tableMapping.ColumnMappings.Add("tamu_checkin", "tamu_checkin")
             tableMapping.ColumnMappings.Add("pendapatan_bulan_ini", "pendapatan_bulan_ini")
             tableMapping.ColumnMappings.Add("properti_rusak", "properti_rusak")
@@ -42153,6 +41857,190 @@ Namespace HotelDBDataSetTableAdapters
         Public Overloads Overridable Function GetData() As HotelDBDataSet.vw_DataTipeKamarDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As HotelDBDataSet.vw_DataTipeKamarDataTable = New HotelDBDataSet.vw_DataTipeKamarDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class vw_CheckOutSelesaiTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "vw_CheckOutSelesai"
+            tableMapping.ColumnMappings.Add("ID Reservasi", "ID Reservasi")
+            tableMapping.ColumnMappings.Add("Nama Tamu", "Nama Tamu")
+            tableMapping.ColumnMappings.Add("Nomor Kamar", "Nomor Kamar")
+            tableMapping.ColumnMappings.Add("Tgl Check-In", "Tgl Check-In")
+            tableMapping.ColumnMappings.Add("Tgl Check-Out", "Tgl Check-Out")
+            tableMapping.ColumnMappings.Add("Durasi (Malam)", "Durasi (Malam)")
+            tableMapping.ColumnMappings.Add("Harga/Malam", "Harga/Malam")
+            tableMapping.ColumnMappings.Add("Hari Menginap Sekarang", "Hari Menginap Sekarang")
+            tableMapping.ColumnMappings.Add("Hari Terlambat", "Hari Terlambat")
+            tableMapping.ColumnMappings.Add("Status", "Status")
+            Me._adapter.TableMappings.Add(tableMapping)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.VB_PROJECT.My.MySettings.Default.HotelDBConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT [ID Reservasi], [Nama Tamu], [Nomor Kamar], [Tgl Check-In], [Tgl Check-Out"& _ 
+                "], [Durasi (Malam)], [Harga/Malam], [Hari Menginap Sekarang], [Hari Terlambat], "& _ 
+                "Status FROM dbo.vw_CheckOutSelesai"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As HotelDBDataSet.vw_CheckOutSelesaiDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "18.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As HotelDBDataSet.vw_CheckOutSelesaiDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As HotelDBDataSet.vw_CheckOutSelesaiDataTable = New HotelDBDataSet.vw_CheckOutSelesaiDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function

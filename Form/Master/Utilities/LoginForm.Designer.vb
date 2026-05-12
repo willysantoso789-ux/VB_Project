@@ -68,9 +68,9 @@ Partial Class LoginForm
         Me.lblUser.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.lblUser.Location = New System.Drawing.Point(30, 76)
         Me.lblUser.Name = "lblUser"
-        Me.lblUser.Size = New System.Drawing.Size(91, 25)
+        Me.lblUser.Size = New System.Drawing.Size(54, 25)
         Me.lblUser.TabIndex = 5
-        Me.lblUser.Text = "Username"
+        Me.lblUser.Text = "Email"
         '
         'txtUsername
         '

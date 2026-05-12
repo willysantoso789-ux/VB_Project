@@ -18,8 +18,8 @@ Partial Class CheckOutForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblSubTitle = New System.Windows.Forms.Label()
@@ -66,29 +66,27 @@ Partial Class CheckOutForm
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.dgvCheckOut = New System.Windows.Forms.DataGridView()
         Me.HotelDBDataSet = New VB_PROJECT.HotelDBDataSet()
-        Me.VwCheckInAktifBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Vw_CheckInAktifTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_CheckInAktifTableAdapter()
+        Me.QueriesTableAdapter1 = New VB_PROJECT.HotelDBDataSetTableAdapters.QueriesTableAdapter()
+        Me.VwCheckOutSelesaiBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Vw_CheckOutSelesaiTableAdapter = New VB_PROJECT.HotelDBDataSetTableAdapters.vw_CheckOutSelesaiTableAdapter()
+        Me.HotelDBDataSet1 = New VB_PROJECT.HotelDBDataSet()
         Me.IDReservasiDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NIKDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NamaTamuDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NoHPDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NomorKamarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipeKamarDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TipeReservasiDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TglCheckInDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TglCheckOutDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DurasiMalamDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HargaMalamDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HariMenginapSekarangDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HariTerlambatDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QueriesTableAdapter1 = New VB_PROJECT.HotelDBDataSetTableAdapters.QueriesTableAdapter()
         Me.pnlHeader.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.pnlRight.SuspendLayout()
         CType(Me.dgvCheckOut, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VwCheckInAktifBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VwCheckOutSelesaiBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HotelDBDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlHeader
@@ -625,25 +623,25 @@ Partial Class CheckOutForm
         '
         Me.dgvCheckOut.AllowUserToAddRows = False
         Me.dgvCheckOut.AllowUserToDeleteRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.dgvCheckOut.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer))
+        Me.dgvCheckOut.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvCheckOut.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvCheckOut.AutoGenerateColumns = False
         Me.dgvCheckOut.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvCheckOut.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(27, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCheckOut.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(153, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(27, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCheckOut.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvCheckOut.ColumnHeadersHeight = 32
-        Me.dgvCheckOut.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDReservasiDataGridViewTextBoxColumn, Me.NIKDataGridViewTextBoxColumn, Me.NamaTamuDataGridViewTextBoxColumn, Me.NoHPDataGridViewTextBoxColumn, Me.NomorKamarDataGridViewTextBoxColumn, Me.TipeKamarDataGridViewTextBoxColumn, Me.TipeReservasiDataGridViewTextBoxColumn, Me.TglCheckInDataGridViewTextBoxColumn, Me.TglCheckOutPlanDataGridViewTextBoxColumn, Me.DurasiMalamDataGridViewTextBoxColumn, Me.HargaMalamDataGridViewTextBoxColumn, Me.HariMenginapSekarangDataGridViewTextBoxColumn, Me.HariTerlambatDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn})
-        Me.dgvCheckOut.DataSource = Me.VwCheckInAktifBindingSource
+        Me.dgvCheckOut.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDReservasiDataGridViewTextBoxColumn, Me.NamaTamuDataGridViewTextBoxColumn, Me.NomorKamarDataGridViewTextBoxColumn, Me.TglCheckInDataGridViewTextBoxColumn, Me.TglCheckOutDataGridViewTextBoxColumn, Me.DurasiMalamDataGridViewTextBoxColumn, Me.HargaMalamDataGridViewTextBoxColumn, Me.HariMenginapSekarangDataGridViewTextBoxColumn, Me.HariTerlambatDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn})
+        Me.dgvCheckOut.DataSource = Me.VwCheckOutSelesaiBindingSource
         Me.dgvCheckOut.EnableHeadersVisualStyles = False
         Me.dgvCheckOut.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dgvCheckOut.Location = New System.Drawing.Point(12, 80)
@@ -661,14 +659,19 @@ Partial Class CheckOutForm
         Me.HotelDBDataSet.DataSetName = "HotelDBDataSet"
         Me.HotelDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'VwCheckInAktifBindingSource
+        'VwCheckOutSelesaiBindingSource
         '
-        Me.VwCheckInAktifBindingSource.DataMember = "vw_CheckInAktif"
-        Me.VwCheckInAktifBindingSource.DataSource = Me.HotelDBDataSet
+        Me.VwCheckOutSelesaiBindingSource.DataMember = "vw_CheckOutSelesai"
+        Me.VwCheckOutSelesaiBindingSource.DataSource = Me.HotelDBDataSet
         '
-        'Vw_CheckInAktifTableAdapter
+        'Vw_CheckOutSelesaiTableAdapter
         '
-        Me.Vw_CheckInAktifTableAdapter.ClearBeforeFill = True
+        Me.Vw_CheckOutSelesaiTableAdapter.ClearBeforeFill = True
+        '
+        'HotelDBDataSet1
+        '
+        Me.HotelDBDataSet1.DataSetName = "HotelDBDataSet"
+        Me.HotelDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'IDReservasiDataGridViewTextBoxColumn
         '
@@ -678,14 +681,6 @@ Partial Class CheckOutForm
         Me.IDReservasiDataGridViewTextBoxColumn.Name = "IDReservasiDataGridViewTextBoxColumn"
         Me.IDReservasiDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'NIKDataGridViewTextBoxColumn
-        '
-        Me.NIKDataGridViewTextBoxColumn.DataPropertyName = "NIK"
-        Me.NIKDataGridViewTextBoxColumn.HeaderText = "NIK"
-        Me.NIKDataGridViewTextBoxColumn.MinimumWidth = 8
-        Me.NIKDataGridViewTextBoxColumn.Name = "NIKDataGridViewTextBoxColumn"
-        Me.NIKDataGridViewTextBoxColumn.ReadOnly = True
-        '
         'NamaTamuDataGridViewTextBoxColumn
         '
         Me.NamaTamuDataGridViewTextBoxColumn.DataPropertyName = "Nama Tamu"
@@ -693,14 +688,6 @@ Partial Class CheckOutForm
         Me.NamaTamuDataGridViewTextBoxColumn.MinimumWidth = 8
         Me.NamaTamuDataGridViewTextBoxColumn.Name = "NamaTamuDataGridViewTextBoxColumn"
         Me.NamaTamuDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'NoHPDataGridViewTextBoxColumn
-        '
-        Me.NoHPDataGridViewTextBoxColumn.DataPropertyName = "No_ HP"
-        Me.NoHPDataGridViewTextBoxColumn.HeaderText = "No_ HP"
-        Me.NoHPDataGridViewTextBoxColumn.MinimumWidth = 8
-        Me.NoHPDataGridViewTextBoxColumn.Name = "NoHPDataGridViewTextBoxColumn"
-        Me.NoHPDataGridViewTextBoxColumn.ReadOnly = True
         '
         'NomorKamarDataGridViewTextBoxColumn
         '
@@ -710,22 +697,6 @@ Partial Class CheckOutForm
         Me.NomorKamarDataGridViewTextBoxColumn.Name = "NomorKamarDataGridViewTextBoxColumn"
         Me.NomorKamarDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'TipeKamarDataGridViewTextBoxColumn
-        '
-        Me.TipeKamarDataGridViewTextBoxColumn.DataPropertyName = "Tipe Kamar"
-        Me.TipeKamarDataGridViewTextBoxColumn.HeaderText = "Tipe Kamar"
-        Me.TipeKamarDataGridViewTextBoxColumn.MinimumWidth = 8
-        Me.TipeKamarDataGridViewTextBoxColumn.Name = "TipeKamarDataGridViewTextBoxColumn"
-        Me.TipeKamarDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TipeReservasiDataGridViewTextBoxColumn
-        '
-        Me.TipeReservasiDataGridViewTextBoxColumn.DataPropertyName = "Tipe Reservasi"
-        Me.TipeReservasiDataGridViewTextBoxColumn.HeaderText = "Tipe Reservasi"
-        Me.TipeReservasiDataGridViewTextBoxColumn.MinimumWidth = 8
-        Me.TipeReservasiDataGridViewTextBoxColumn.Name = "TipeReservasiDataGridViewTextBoxColumn"
-        Me.TipeReservasiDataGridViewTextBoxColumn.ReadOnly = True
-        '
         'TglCheckInDataGridViewTextBoxColumn
         '
         Me.TglCheckInDataGridViewTextBoxColumn.DataPropertyName = "Tgl Check-In"
@@ -734,13 +705,13 @@ Partial Class CheckOutForm
         Me.TglCheckInDataGridViewTextBoxColumn.Name = "TglCheckInDataGridViewTextBoxColumn"
         Me.TglCheckInDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'TglCheckOutPlanDataGridViewTextBoxColumn
+        'TglCheckOutDataGridViewTextBoxColumn
         '
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn.DataPropertyName = "Tgl Check-Out Plan"
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn.HeaderText = "Tgl Check-Out Plan"
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn.MinimumWidth = 8
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn.Name = "TglCheckOutPlanDataGridViewTextBoxColumn"
-        Me.TglCheckOutPlanDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TglCheckOutDataGridViewTextBoxColumn.DataPropertyName = "Tgl Check-Out"
+        Me.TglCheckOutDataGridViewTextBoxColumn.HeaderText = "Tgl Check-Out"
+        Me.TglCheckOutDataGridViewTextBoxColumn.MinimumWidth = 8
+        Me.TglCheckOutDataGridViewTextBoxColumn.Name = "TglCheckOutDataGridViewTextBoxColumn"
+        Me.TglCheckOutDataGridViewTextBoxColumn.ReadOnly = True
         '
         'DurasiMalamDataGridViewTextBoxColumn
         '
@@ -800,7 +771,8 @@ Partial Class CheckOutForm
         Me.pnlRight.PerformLayout()
         CType(Me.dgvCheckOut, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HotelDBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VwCheckInAktifBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VwCheckOutSelesaiBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HotelDBDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -851,21 +823,18 @@ Partial Class CheckOutForm
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents dgvCheckOut As System.Windows.Forms.DataGridView
     Friend WithEvents HotelDBDataSet As HotelDBDataSet
-    Friend WithEvents VwCheckInAktifBindingSource As BindingSource
-    Friend WithEvents Vw_CheckInAktifTableAdapter As HotelDBDataSetTableAdapters.vw_CheckInAktifTableAdapter
+    Friend WithEvents QueriesTableAdapter1 As HotelDBDataSetTableAdapters.QueriesTableAdapter
+    Friend WithEvents VwCheckOutSelesaiBindingSource As BindingSource
+    Friend WithEvents Vw_CheckOutSelesaiTableAdapter As HotelDBDataSetTableAdapters.vw_CheckOutSelesaiTableAdapter
+    Friend WithEvents HotelDBDataSet1 As HotelDBDataSet
     Friend WithEvents IDReservasiDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NIKDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents NamaTamuDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents NoHPDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents NomorKamarDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents TipeKamarDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents TipeReservasiDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents TglCheckInDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents TglCheckOutPlanDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TglCheckOutDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DurasiMalamDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents HargaMalamDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents HariMenginapSekarangDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents HariTerlambatDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents StatusDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents QueriesTableAdapter1 As HotelDBDataSetTableAdapters.QueriesTableAdapter
 End Class

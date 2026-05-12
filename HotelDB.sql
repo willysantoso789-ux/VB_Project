@@ -1635,3 +1635,87 @@ SELECT * FROM vw_DataKamar;
 SELECT * FROM vw_DataTamu;
 SELECT * FROM vw_PropertiKamar;
 GO
+
+-- REVISION
+CREATE OR ALTER VIEW vw_DataReservasi AS
+SELECT
+    r.id_reservasi                               AS [ID Reservasi],
+    t.nik                                        AS [NIK Tamu],
+    t.nama                                       AS [Nama Tamu],
+    ISNULL(t.no_hp, '-')                         AS [No. HP],
+    k.nomor_kamar                                AS [Nomor Kamar],
+    tk.nama_tipe                                 AS [Tipe Kamar],
+    r.tipe_reservasi                             AS [Tipe Reservasi],
+    FORMAT(r.tanggal_reservasi, 'dd/MM/yyyy')    AS [Tgl Reservasi],
+    FORMAT(r.tanggal_checkin,   'dd/MM/yyyy')    AS [Tgl Check-In],
+    FORMAT(r.tanggal_checkout,  'dd/MM/yyyy')    AS [Tgl Check-Out],
+    DATEDIFF(DAY, r.tanggal_checkin,
+             r.tanggal_checkout)                 AS [Durasi (Malam)],
+    FORMAT(dr.harga_kamar, 'N0')                 AS [Harga/Malam],
+    FORMAT(dr.harga_kamar *
+           DATEDIFF(DAY, r.tanggal_checkin,
+                    r.tanggal_checkout), 'N0')   AS [Estimasi Biaya],
+    r.status                                     AS [Status]
+FROM Reservasi r
+JOIN Tamu t             ON r.id_tamu = t.id_tamu
+JOIN DetailReservasi dr ON dr.id_reservasi = r.id_reservasi
+JOIN Kamar k            ON dr.id_kamar = k.id_kamar
+JOIN TipeKamar tk       ON k.id_tipe = tk.id_tipe
+WHERE r.status = 'Pending';
+GO
+
+CREATE OR ALTER VIEW vw_CheckInAktif AS
+SELECT
+    r.id_reservasi                               AS [ID Reservasi],
+    t.nik                                        AS [NIK],
+    t.nama                                       AS [Nama Tamu],
+    ISNULL(t.no_hp, '-')                         AS [No. HP],
+    k.nomor_kamar                                AS [Nomor Kamar],
+    tk.nama_tipe                                 AS [Tipe Kamar],
+    r.tipe_reservasi                             AS [Tipe Reservasi],
+    FORMAT(r.tanggal_checkin,  'dd/MM/yyyy')     AS [Tgl Check-In],
+    FORMAT(r.tanggal_checkout, 'dd/MM/yyyy')     AS [Tgl Check-Out Plan],
+    DATEDIFF(DAY, r.tanggal_checkin,
+             r.tanggal_checkout)                 AS [Durasi (Malam)],
+    FORMAT(dr.harga_kamar, 'N0')                 AS [Harga/Malam],
+    DATEDIFF(DAY, r.tanggal_checkin,
+             CAST(GETDATE() AS DATE))            AS [Hari Menginap Sekarang],
+    CASE
+        WHEN CAST(GETDATE() AS DATE) > r.tanggal_checkout
+        THEN DATEDIFF(DAY, r.tanggal_checkout, CAST(GETDATE() AS DATE))
+        ELSE 0
+    END                                          AS [Hari Terlambat],
+    r.status                                     AS [Status]
+FROM Reservasi r
+JOIN Tamu t             ON r.id_tamu = t.id_tamu
+JOIN DetailReservasi dr ON dr.id_reservasi = r.id_reservasi
+JOIN Kamar k            ON dr.id_kamar = k.id_kamar
+JOIN TipeKamar tk       ON k.id_tipe = tk.id_tipe
+WHERE r.status = 'Pending';
+GO
+
+CREATE OR ALTER VIEW vw_CheckOutSelesai AS
+SELECT
+    r.id_reservasi                               AS [ID Reservasi],
+    t.nama                                       AS [Nama Tamu],
+    k.nomor_kamar                                AS [Nomor Kamar],
+    FORMAT(r.tanggal_checkin,  'dd/MM/yyyy')     AS [Tgl Check-In],
+    FORMAT(r.tanggal_checkout, 'dd/MM/yyyy')     AS [Tgl Check-Out],
+    DATEDIFF(DAY, r.tanggal_checkin,
+             r.tanggal_checkout)                 AS [Durasi (Malam)],
+    FORMAT(dr.harga_kamar, 'N0')                 AS [Harga/Malam],
+    DATEDIFF(DAY, r.tanggal_checkin,
+             CAST(GETDATE() AS DATE))            AS [Hari Menginap Sekarang],
+    CASE
+        WHEN CAST(GETDATE() AS DATE) > r.tanggal_checkout
+        THEN DATEDIFF(DAY, r.tanggal_checkout, CAST(GETDATE() AS DATE))
+        ELSE 0
+    END                                          AS [Hari Terlambat],
+    r.status                                     AS [Status]
+FROM Reservasi r
+JOIN Tamu t             ON r.id_tamu = t.id_tamu
+JOIN DetailReservasi dr ON dr.id_reservasi = r.id_reservasi
+JOIN Kamar k            ON dr.id_kamar = k.id_kamar
+JOIN TipeKamar tk       ON k.id_tipe = tk.id_tipe
+WHERE r.status = 'Checked-In';
+GO

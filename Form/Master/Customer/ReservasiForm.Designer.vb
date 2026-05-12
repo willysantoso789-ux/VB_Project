@@ -337,7 +337,7 @@ Partial Class ReservasiForm
         '
         Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.cboStatus.Items.AddRange(New Object() {"Pending", "Confirmed", "Checked-In", "Checked-Out", "Cancelled"})
+        Me.cboStatus.Items.AddRange(New Object() {"Pending"})
         Me.cboStatus.Location = New System.Drawing.Point(16, 500)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(272, 33)

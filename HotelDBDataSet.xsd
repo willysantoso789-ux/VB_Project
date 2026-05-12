@@ -716,33 +716,6 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_CheckOutSelesaiTableAdapter" GeneratorDataComponentClassName="vw_CheckOutSelesaiTableAdapter" Name="vw_CheckOutSelesai" UserDataComponentName="vw_CheckOutSelesaiTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="HotelDBConnectionString (MySettings)" DbObjectName="HotelDB.dbo.vw_CheckOutSelesai" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT [ID Reservasi], [Nama Tamu], [Nomor Kamar], [Tgl Check-In], [Tgl Check-Out], [Durasi (Malam)], [Total Bayar], [Denda Telat], [Denda Kerusakan], [Metode Bayar], [Waktu Transaksi], [Diproses Oleh] FROM dbo.vw_CheckOutSelesai</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="ID Reservasi" DataSetColumn="ID Reservasi" />
-              <Mapping SourceColumn="Nama Tamu" DataSetColumn="Nama Tamu" />
-              <Mapping SourceColumn="Nomor Kamar" DataSetColumn="Nomor Kamar" />
-              <Mapping SourceColumn="Tgl Check-In" DataSetColumn="Tgl Check-In" />
-              <Mapping SourceColumn="Tgl Check-Out" DataSetColumn="Tgl Check-Out" />
-              <Mapping SourceColumn="Durasi (Malam)" DataSetColumn="Durasi (Malam)" />
-              <Mapping SourceColumn="Total Bayar" DataSetColumn="Total Bayar" />
-              <Mapping SourceColumn="Denda Telat" DataSetColumn="Denda Telat" />
-              <Mapping SourceColumn="Denda Kerusakan" DataSetColumn="Denda Kerusakan" />
-              <Mapping SourceColumn="Metode Bayar" DataSetColumn="Metode Bayar" />
-              <Mapping SourceColumn="Waktu Transaksi" DataSetColumn="Waktu Transaksi" />
-              <Mapping SourceColumn="Diproses Oleh" DataSetColumn="Diproses Oleh" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_DataKamarTableAdapter" GeneratorDataComponentClassName="vw_DataKamarTableAdapter" Name="vw_DataKamar" UserDataComponentName="vw_DataKamarTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="HotelDBConnectionString (MySettings)" DbObjectName="HotelDB.dbo.vw_DataKamar" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -1213,7 +1186,6 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
               <Mapping SourceColumn="kamar_terisi" DataSetColumn="kamar_terisi" />
               <Mapping SourceColumn="kamar_maintenance" DataSetColumn="kamar_maintenance" />
               <Mapping SourceColumn="reservasi_pending" DataSetColumn="reservasi_pending" />
-              <Mapping SourceColumn="reservasi_confirmed" DataSetColumn="reservasi_confirmed" />
               <Mapping SourceColumn="tamu_checkin" DataSetColumn="tamu_checkin" />
               <Mapping SourceColumn="pendapatan_bulan_ini" DataSetColumn="pendapatan_bulan_ini" />
               <Mapping SourceColumn="properti_rusak" DataSetColumn="properti_rusak" />
@@ -1731,6 +1703,31 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
               <Mapping SourceColumn="Kamar Terisi" DataSetColumn="Kamar Terisi" />
               <Mapping SourceColumn="Kamar Maintenance" DataSetColumn="Kamar Maintenance" />
               <Mapping SourceColumn="Dibuat" DataSetColumn="Dibuat" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_CheckOutSelesaiTableAdapter" GeneratorDataComponentClassName="vw_CheckOutSelesaiTableAdapter" Name="vw_CheckOutSelesai" UserDataComponentName="vw_CheckOutSelesaiTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="HotelDBConnectionString (MySettings)" DbObjectName="HotelDB.dbo.vw_CheckOutSelesai" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [ID Reservasi], [Nama Tamu], [Nomor Kamar], [Tgl Check-In], [Tgl Check-Out], [Durasi (Malam)], [Harga/Malam], [Hari Menginap Sekarang], [Hari Terlambat], Status FROM dbo.vw_CheckOutSelesai</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID Reservasi" DataSetColumn="ID Reservasi" />
+              <Mapping SourceColumn="Nama Tamu" DataSetColumn="Nama Tamu" />
+              <Mapping SourceColumn="Nomor Kamar" DataSetColumn="Nomor Kamar" />
+              <Mapping SourceColumn="Tgl Check-In" DataSetColumn="Tgl Check-In" />
+              <Mapping SourceColumn="Tgl Check-Out" DataSetColumn="Tgl Check-Out" />
+              <Mapping SourceColumn="Durasi (Malam)" DataSetColumn="Durasi (Malam)" />
+              <Mapping SourceColumn="Harga/Malam" DataSetColumn="Harga/Malam" />
+              <Mapping SourceColumn="Hari Menginap Sekarang" DataSetColumn="Hari Menginap Sekarang" />
+              <Mapping SourceColumn="Hari Terlambat" DataSetColumn="Hari Terlambat" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -2404,84 +2401,6 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="vw_CheckOutSelesai" msprop:Generator_RowEvHandlerName="vw_CheckOutSelesaiRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_CheckOutSelesaiRowDeleted" msprop:Generator_RowDeletingName="vw_CheckOutSelesaiRowDeleting" msprop:Generator_RowEvArgName="vw_CheckOutSelesaiRowChangeEvent" msprop:Generator_TablePropName="vw_CheckOutSelesai" msprop:Generator_RowChangedName="vw_CheckOutSelesaiRowChanged" msprop:Generator_UserTableName="vw_CheckOutSelesai" msprop:Generator_RowChangingName="vw_CheckOutSelesaiRowChanging" msprop:Generator_RowClassName="vw_CheckOutSelesaiRow" msprop:Generator_TableClassName="vw_CheckOutSelesaiDataTable" msprop:Generator_TableVarName="tablevw_CheckOutSelesai">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="ID_x0020_Reservasi" msprop:Generator_ColumnPropNameInTable="ID_ReservasiColumn" msprop:Generator_ColumnPropNameInRow="ID_Reservasi" msprop:Generator_UserColumnName="ID Reservasi" msprop:Generator_ColumnVarNameInTable="columnID_Reservasi" type="xs:int" />
-              <xs:element name="Nama_x0020_Tamu" msprop:Generator_ColumnPropNameInTable="Nama_TamuColumn" msprop:Generator_ColumnPropNameInRow="Nama_Tamu" msprop:Generator_UserColumnName="Nama Tamu" msprop:Generator_ColumnVarNameInTable="columnNama_Tamu">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Nomor_x0020_Kamar" msprop:Generator_ColumnPropNameInTable="Nomor_KamarColumn" msprop:Generator_ColumnPropNameInRow="Nomor_Kamar" msprop:Generator_UserColumnName="Nomor Kamar" msprop:Generator_ColumnVarNameInTable="columnNomor_Kamar">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Tgl_x0020_Check-In" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="_Tgl_Check_InColumn" msprop:Generator_ColumnPropNameInRow="_Tgl_Check_In" msprop:Generator_UserColumnName="Tgl Check-In" msprop:Generator_ColumnVarNameInTable="_columnTgl_Check_In" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Tgl_x0020_Check-Out" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="_Tgl_Check_OutColumn" msprop:Generator_ColumnPropNameInRow="_Tgl_Check_Out" msprop:Generator_UserColumnName="Tgl Check-Out" msprop:Generator_ColumnVarNameInTable="_columnTgl_Check_Out" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Durasi_x0020__x0028_Malam_x0029_" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="_Durasi__Malam_Column" msprop:Generator_ColumnPropNameInRow="_Durasi__Malam_" msprop:Generator_UserColumnName="Durasi (Malam)" msprop:Generator_ColumnVarNameInTable="_columnDurasi__Malam_" type="xs:int" minOccurs="0" />
-              <xs:element name="Total_x0020_Bayar" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="Total_BayarColumn" msprop:Generator_ColumnPropNameInRow="Total_Bayar" msprop:Generator_UserColumnName="Total Bayar" msprop:Generator_ColumnVarNameInTable="columnTotal_Bayar" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Denda_x0020_Telat" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="Denda_TelatColumn" msprop:Generator_ColumnPropNameInRow="Denda_Telat" msprop:Generator_UserColumnName="Denda Telat" msprop:Generator_ColumnVarNameInTable="columnDenda_Telat" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Denda_x0020_Kerusakan" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="Denda_KerusakanColumn" msprop:Generator_ColumnPropNameInRow="Denda_Kerusakan" msprop:Generator_UserColumnName="Denda Kerusakan" msprop:Generator_ColumnVarNameInTable="columnDenda_Kerusakan" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Metode_x0020_Bayar" msprop:Generator_ColumnPropNameInTable="Metode_BayarColumn" msprop:Generator_ColumnPropNameInRow="Metode_Bayar" msprop:Generator_UserColumnName="Metode Bayar" msprop:Generator_ColumnVarNameInTable="columnMetode_Bayar">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Waktu_x0020_Transaksi" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="Waktu_TransaksiColumn" msprop:Generator_ColumnPropNameInRow="Waktu_Transaksi" msprop:Generator_UserColumnName="Waktu Transaksi" msprop:Generator_ColumnVarNameInTable="columnWaktu_Transaksi" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="4000" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Diproses_x0020_Oleh" msprop:Generator_ColumnPropNameInTable="Diproses_OlehColumn" msprop:Generator_ColumnPropNameInRow="Diproses_Oleh" msprop:Generator_UserColumnName="Diproses Oleh" msprop:Generator_ColumnVarNameInTable="columnDiproses_Oleh">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -3436,7 +3355,6 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
               <xs:element name="kamar_terisi" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="kamar_terisiColumn" msprop:Generator_ColumnPropNameInRow="kamar_terisi" msprop:Generator_UserColumnName="kamar_terisi" msprop:Generator_ColumnVarNameInTable="columnkamar_terisi" type="xs:int" minOccurs="0" />
               <xs:element name="kamar_maintenance" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="kamar_maintenanceColumn" msprop:Generator_ColumnPropNameInRow="kamar_maintenance" msprop:Generator_UserColumnName="kamar_maintenance" msprop:Generator_ColumnVarNameInTable="columnkamar_maintenance" type="xs:int" minOccurs="0" />
               <xs:element name="reservasi_pending" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="reservasi_pendingColumn" msprop:Generator_ColumnPropNameInRow="reservasi_pending" msprop:Generator_UserColumnName="reservasi_pending" msprop:Generator_ColumnVarNameInTable="columnreservasi_pending" type="xs:int" minOccurs="0" />
-              <xs:element name="reservasi_confirmed" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="reservasi_confirmedColumn" msprop:Generator_ColumnPropNameInRow="reservasi_confirmed" msprop:Generator_UserColumnName="reservasi_confirmed" msprop:Generator_ColumnVarNameInTable="columnreservasi_confirmed" type="xs:int" minOccurs="0" />
               <xs:element name="tamu_checkin" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="tamu_checkinColumn" msprop:Generator_ColumnPropNameInRow="tamu_checkin" msprop:Generator_UserColumnName="tamu_checkin" msprop:Generator_ColumnVarNameInTable="columntamu_checkin" type="xs:int" minOccurs="0" />
               <xs:element name="pendapatan_bulan_ini" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="pendapatan_bulan_iniColumn" msprop:Generator_ColumnPropNameInRow="pendapatan_bulan_ini" msprop:Generator_UserColumnName="pendapatan_bulan_ini" msprop:Generator_ColumnVarNameInTable="columnpendapatan_bulan_ini" type="xs:decimal" minOccurs="0" />
               <xs:element name="properti_rusak" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="properti_rusakColumn" msprop:Generator_ColumnPropNameInRow="properti_rusak" msprop:Generator_UserColumnName="properti_rusak" msprop:Generator_ColumnVarNameInTable="columnproperti_rusak" type="xs:int" minOccurs="0" />
@@ -4134,39 +4052,91 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="vw_DataTipeKamar" msprop:Generator_RowEvHandlerName="vw_DataTipeKamarRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_DataTipeKamarRowDeleted" msprop:Generator_RowDeletingName="vw_DataTipeKamarRowDeleting" msprop:Generator_RowEvArgName="vw_DataTipeKamarRowChangeEvent" msprop:Generator_TablePropName="vw_DataTipeKamar" msprop:Generator_RowChangedName="vw_DataTipeKamarRowChanged" msprop:Generator_RowChangingName="vw_DataTipeKamarRowChanging" msprop:Generator_TableClassName="vw_DataTipeKamarDataTable" msprop:Generator_RowClassName="vw_DataTipeKamarRow" msprop:Generator_TableVarName="tablevw_DataTipeKamar" msprop:Generator_UserTableName="vw_DataTipeKamar">
+        <xs:element name="vw_DataTipeKamar" msprop:Generator_RowClassName="vw_DataTipeKamarRow" msprop:Generator_RowEvHandlerName="vw_DataTipeKamarRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_DataTipeKamarRowDeleted" msprop:Generator_RowDeletingName="vw_DataTipeKamarRowDeleting" msprop:Generator_RowEvArgName="vw_DataTipeKamarRowChangeEvent" msprop:Generator_TablePropName="vw_DataTipeKamar" msprop:Generator_RowChangedName="vw_DataTipeKamarRowChanged" msprop:Generator_UserTableName="vw_DataTipeKamar" msprop:Generator_RowChangingName="vw_DataTipeKamarRowChanging" msprop:Generator_TableClassName="vw_DataTipeKamarDataTable" msprop:Generator_TableVarName="tablevw_DataTipeKamar">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID_x0020_Tipe" msprop:Generator_ColumnPropNameInRow="ID_Tipe" msprop:Generator_ColumnPropNameInTable="ID_TipeColumn" msprop:Generator_ColumnVarNameInTable="columnID_Tipe" msprop:Generator_UserColumnName="ID Tipe" type="xs:int" />
-              <xs:element name="Nama_x0020_Tipe" msprop:Generator_ColumnPropNameInRow="Nama_Tipe" msprop:Generator_ColumnPropNameInTable="Nama_TipeColumn" msprop:Generator_ColumnVarNameInTable="columnNama_Tipe" msprop:Generator_UserColumnName="Nama Tipe">
+              <xs:element name="ID_x0020_Tipe" msprop:Generator_UserColumnName="ID Tipe" msprop:Generator_ColumnPropNameInTable="ID_TipeColumn" msprop:Generator_ColumnPropNameInRow="ID_Tipe" msprop:Generator_ColumnVarNameInTable="columnID_Tipe" type="xs:int" />
+              <xs:element name="Nama_x0020_Tipe" msprop:Generator_UserColumnName="Nama Tipe" msprop:Generator_ColumnPropNameInTable="Nama_TipeColumn" msprop:Generator_ColumnPropNameInRow="Nama_Tipe" msprop:Generator_ColumnVarNameInTable="columnNama_Tipe">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Harga_x0020_per_x0020_Malam" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Harga_per_Malam" msprop:Generator_ColumnPropNameInTable="Harga_per_MalamColumn" msprop:Generator_ColumnVarNameInTable="columnHarga_per_Malam" msprop:Generator_UserColumnName="Harga per Malam" minOccurs="0">
+              <xs:element name="Harga_x0020_per_x0020_Malam" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Harga per Malam" msprop:Generator_ColumnPropNameInTable="Harga_per_MalamColumn" msprop:Generator_ColumnPropNameInRow="Harga_per_Malam" msprop:Generator_ColumnVarNameInTable="columnHarga_per_Malam" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="4000" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Deskripsi" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Deskripsi" msprop:Generator_ColumnPropNameInTable="DeskripsiColumn" msprop:Generator_ColumnVarNameInTable="columnDeskripsi" msprop:Generator_UserColumnName="Deskripsi" minOccurs="0">
+              <xs:element name="Deskripsi" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Deskripsi" msprop:Generator_ColumnPropNameInTable="DeskripsiColumn" msprop:Generator_ColumnPropNameInRow="Deskripsi" msprop:Generator_ColumnVarNameInTable="columnDeskripsi" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Jumlah_x0020_Kamar" msprop:Generator_ColumnPropNameInRow="Jumlah_Kamar" msprop:Generator_ColumnPropNameInTable="Jumlah_KamarColumn" msprop:Generator_ColumnVarNameInTable="columnJumlah_Kamar" msprop:Generator_UserColumnName="Jumlah Kamar" type="xs:int" minOccurs="0" />
-              <xs:element name="Kamar_x0020_Tersedia" msprop:Generator_ColumnPropNameInRow="Kamar_Tersedia" msprop:Generator_ColumnPropNameInTable="Kamar_TersediaColumn" msprop:Generator_ColumnVarNameInTable="columnKamar_Tersedia" msprop:Generator_UserColumnName="Kamar Tersedia" type="xs:int" minOccurs="0" />
-              <xs:element name="Kamar_x0020_Terisi" msprop:Generator_ColumnPropNameInRow="Kamar_Terisi" msprop:Generator_ColumnPropNameInTable="Kamar_TerisiColumn" msprop:Generator_ColumnVarNameInTable="columnKamar_Terisi" msprop:Generator_UserColumnName="Kamar Terisi" type="xs:int" minOccurs="0" />
-              <xs:element name="Kamar_x0020_Maintenance" msprop:Generator_ColumnPropNameInRow="Kamar_Maintenance" msprop:Generator_ColumnPropNameInTable="Kamar_MaintenanceColumn" msprop:Generator_ColumnVarNameInTable="columnKamar_Maintenance" msprop:Generator_UserColumnName="Kamar Maintenance" type="xs:int" minOccurs="0" />
-              <xs:element name="Dibuat" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Dibuat" msprop:Generator_ColumnPropNameInTable="DibuatColumn" msprop:Generator_ColumnVarNameInTable="columnDibuat" msprop:Generator_UserColumnName="Dibuat" minOccurs="0">
+              <xs:element name="Jumlah_x0020_Kamar" msprop:Generator_UserColumnName="Jumlah Kamar" msprop:Generator_ColumnPropNameInTable="Jumlah_KamarColumn" msprop:Generator_ColumnPropNameInRow="Jumlah_Kamar" msprop:Generator_ColumnVarNameInTable="columnJumlah_Kamar" type="xs:int" minOccurs="0" />
+              <xs:element name="Kamar_x0020_Tersedia" msprop:Generator_UserColumnName="Kamar Tersedia" msprop:Generator_ColumnPropNameInTable="Kamar_TersediaColumn" msprop:Generator_ColumnPropNameInRow="Kamar_Tersedia" msprop:Generator_ColumnVarNameInTable="columnKamar_Tersedia" type="xs:int" minOccurs="0" />
+              <xs:element name="Kamar_x0020_Terisi" msprop:Generator_UserColumnName="Kamar Terisi" msprop:Generator_ColumnPropNameInTable="Kamar_TerisiColumn" msprop:Generator_ColumnPropNameInRow="Kamar_Terisi" msprop:Generator_ColumnVarNameInTable="columnKamar_Terisi" type="xs:int" minOccurs="0" />
+              <xs:element name="Kamar_x0020_Maintenance" msprop:Generator_UserColumnName="Kamar Maintenance" msprop:Generator_ColumnPropNameInTable="Kamar_MaintenanceColumn" msprop:Generator_ColumnPropNameInRow="Kamar_Maintenance" msprop:Generator_ColumnVarNameInTable="columnKamar_Maintenance" type="xs:int" minOccurs="0" />
+              <xs:element name="Dibuat" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Dibuat" msprop:Generator_ColumnPropNameInTable="DibuatColumn" msprop:Generator_ColumnPropNameInRow="Dibuat" msprop:Generator_ColumnVarNameInTable="columnDibuat" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="vw_CheckOutSelesai" msprop:Generator_RowEvHandlerName="vw_CheckOutSelesaiRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_CheckOutSelesaiRowDeleted" msprop:Generator_RowDeletingName="vw_CheckOutSelesaiRowDeleting" msprop:Generator_RowEvArgName="vw_CheckOutSelesaiRowChangeEvent" msprop:Generator_TablePropName="vw_CheckOutSelesai" msprop:Generator_RowChangedName="vw_CheckOutSelesaiRowChanged" msprop:Generator_RowChangingName="vw_CheckOutSelesaiRowChanging" msprop:Generator_TableClassName="vw_CheckOutSelesaiDataTable" msprop:Generator_RowClassName="vw_CheckOutSelesaiRow" msprop:Generator_TableVarName="tablevw_CheckOutSelesai" msprop:Generator_UserTableName="vw_CheckOutSelesai">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID_x0020_Reservasi" msprop:Generator_ColumnPropNameInRow="ID_Reservasi" msprop:Generator_ColumnPropNameInTable="ID_ReservasiColumn" msprop:Generator_ColumnVarNameInTable="columnID_Reservasi" msprop:Generator_UserColumnName="ID Reservasi" type="xs:int" />
+              <xs:element name="Nama_x0020_Tamu" msprop:Generator_ColumnPropNameInRow="Nama_Tamu" msprop:Generator_ColumnPropNameInTable="Nama_TamuColumn" msprop:Generator_ColumnVarNameInTable="columnNama_Tamu" msprop:Generator_UserColumnName="Nama Tamu">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Nomor_x0020_Kamar" msprop:Generator_ColumnPropNameInRow="Nomor_Kamar" msprop:Generator_ColumnPropNameInTable="Nomor_KamarColumn" msprop:Generator_ColumnVarNameInTable="columnNomor_Kamar" msprop:Generator_UserColumnName="Nomor Kamar">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tgl_x0020_Check-In" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="_Tgl_Check_In" msprop:Generator_ColumnPropNameInTable="_Tgl_Check_InColumn" msprop:Generator_ColumnVarNameInTable="_columnTgl_Check_In" msprop:Generator_UserColumnName="Tgl Check-In" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tgl_x0020_Check-Out" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="_Tgl_Check_Out" msprop:Generator_ColumnPropNameInTable="_Tgl_Check_OutColumn" msprop:Generator_ColumnVarNameInTable="_columnTgl_Check_Out" msprop:Generator_UserColumnName="Tgl Check-Out" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Durasi_x0020__x0028_Malam_x0029_" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="_Durasi__Malam_" msprop:Generator_ColumnPropNameInTable="_Durasi__Malam_Column" msprop:Generator_ColumnVarNameInTable="_columnDurasi__Malam_" msprop:Generator_UserColumnName="Durasi (Malam)" type="xs:int" minOccurs="0" />
+              <xs:element name="Harga_x002F_Malam" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="_Harga_Malam" msprop:Generator_ColumnPropNameInTable="_Harga_MalamColumn" msprop:Generator_ColumnVarNameInTable="_columnHarga_Malam" msprop:Generator_UserColumnName="Harga/Malam" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Hari_x0020_Menginap_x0020_Sekarang" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Hari_Menginap_Sekarang" msprop:Generator_ColumnPropNameInTable="Hari_Menginap_SekarangColumn" msprop:Generator_ColumnVarNameInTable="columnHari_Menginap_Sekarang" msprop:Generator_UserColumnName="Hari Menginap Sekarang" type="xs:int" minOccurs="0" />
+              <xs:element name="Hari_x0020_Terlambat" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Hari_Terlambat" msprop:Generator_ColumnPropNameInTable="Hari_TerlambatColumn" msprop:Generator_ColumnVarNameInTable="columnHari_Terlambat" msprop:Generator_UserColumnName="Hari Terlambat" type="xs:int" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_UserColumnName="Status">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -4217,10 +4187,6 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
     </xs:unique>
     <xs:unique name="vw_CheckInAktif_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:vw_CheckInAktif" />
-      <xs:field xpath="mstns:ID_x0020_Reservasi" />
-    </xs:unique>
-    <xs:unique name="vw_CheckOutSelesai_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:vw_CheckOutSelesai" />
       <xs:field xpath="mstns:ID_x0020_Reservasi" />
     </xs:unique>
     <xs:unique name="vw_DataKamar_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
@@ -4340,20 +4306,24 @@ SELECT id_user, nama, email, password, role, is_active, created_at FROM [User] W
       <xs:selector xpath=".//mstns:vw_DataTipeKamar" />
       <xs:field xpath="mstns:ID_x0020_Tipe" />
     </xs:unique>
+    <xs:unique name="vw_CheckOutSelesai_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vw_CheckOutSelesai" />
+      <xs:field xpath="mstns:ID_x0020_Reservasi" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK__DendaKeru__id_ka__76969D2E" msdata:parent="Kamar" msdata:child="DendaKerusakan" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_ka__76969D2E" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_ParentPropName="KamarRow" msprop:Generator_UserRelationName="FK__DendaKeru__id_ka__76969D2E" />
-      <msdata:Relationship name="FK__DendaKeru__id_pr__75A278F5" msdata:parent="Properti" msdata:child="DendaKerusakan" msdata:parentkey="id_properti" msdata:childkey="id_properti" msprop:Generator_UserParentTable="Properti" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_pr__75A278F5" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_ParentPropName="PropertiRow" msprop:Generator_UserRelationName="FK__DendaKeru__id_pr__75A278F5" />
-      <msdata:Relationship name="FK__DendaKeru__id_tr__74AE54BC" msdata:parent="Transaksi" msdata:child="DendaKerusakan" msdata:parentkey="id_transaksi" msdata:childkey="id_transaksi" msprop:Generator_UserParentTable="Transaksi" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_tr__74AE54BC" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_ParentPropName="TransaksiRow" msprop:Generator_UserRelationName="FK__DendaKeru__id_tr__74AE54BC" />
-      <msdata:Relationship name="FK__DetailRes__id_ka__656C112C" msdata:parent="Kamar" msdata:child="DetailReservasi" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="DetailReservasi" msprop:Generator_RelationVarName="relationFK__DetailRes__id_ka__656C112C" msprop:Generator_ChildPropName="GetDetailReservasiRows" msprop:Generator_ParentPropName="KamarRow" msprop:Generator_UserRelationName="FK__DetailRes__id_ka__656C112C" />
-      <msdata:Relationship name="FK__DetailRes__id_re__6477ECF3" msdata:parent="Reservasi" msdata:child="DetailReservasi" msdata:parentkey="id_reservasi" msdata:childkey="id_reservasi" msprop:Generator_UserParentTable="Reservasi" msprop:Generator_UserChildTable="DetailReservasi" msprop:Generator_RelationVarName="relationFK__DetailRes__id_re__6477ECF3" msprop:Generator_ChildPropName="GetDetailReservasiRows" msprop:Generator_ParentPropName="ReservasiRow" msprop:Generator_UserRelationName="FK__DetailRes__id_re__6477ECF3" />
-      <msdata:Relationship name="FK__Kamar__id_tipe__47DBAE45" msdata:parent="TipeKamar" msdata:child="Kamar" msdata:parentkey="id_tipe" msdata:childkey="id_tipe" msprop:Generator_UserParentTable="TipeKamar" msprop:Generator_UserChildTable="Kamar" msprop:Generator_RelationVarName="relationFK__Kamar__id_tipe__47DBAE45" msprop:Generator_ChildPropName="GetKamarRows" msprop:Generator_ParentPropName="TipeKamarRow" msprop:Generator_UserRelationName="FK__Kamar__id_tipe__47DBAE45" />
-      <msdata:Relationship name="FK__PropertiK__id_ka__5535A963" msdata:parent="Kamar" msdata:child="PropertiKamar" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="PropertiKamar" msprop:Generator_RelationVarName="relationFK__PropertiK__id_ka__5535A963" msprop:Generator_ChildPropName="GetPropertiKamarRows" msprop:Generator_UserRelationName="FK__PropertiK__id_ka__5535A963" msprop:Generator_ParentPropName="KamarRow" />
-      <msdata:Relationship name="FK__PropertiK__id_pr__5441852A" msdata:parent="Properti" msdata:child="PropertiKamar" msdata:parentkey="id_properti" msdata:childkey="id_properti" msprop:Generator_UserParentTable="Properti" msprop:Generator_UserChildTable="PropertiKamar" msprop:Generator_RelationVarName="relationFK__PropertiK__id_pr__5441852A" msprop:Generator_ChildPropName="GetPropertiKamarRows" msprop:Generator_UserRelationName="FK__PropertiK__id_pr__5441852A" msprop:Generator_ParentPropName="PropertiRow" />
-      <msdata:Relationship name="FK__Reservasi__id_ta__5AEE82B9" msdata:parent="Tamu" msdata:child="Reservasi" msdata:parentkey="id_tamu" msdata:childkey="id_tamu" msprop:Generator_UserParentTable="Tamu" msprop:Generator_UserChildTable="Reservasi" msprop:Generator_RelationVarName="relationFK__Reservasi__id_ta__5AEE82B9" msprop:Generator_ChildPropName="GetReservasiRows" msprop:Generator_ParentPropName="TamuRow" msprop:Generator_UserRelationName="FK__Reservasi__id_ta__5AEE82B9" />
-      <msdata:Relationship name="FK__Transaksi__id_re__6A30C649" msdata:parent="Reservasi" msdata:child="Transaksi" msdata:parentkey="id_reservasi" msdata:childkey="id_reservasi" msprop:Generator_UserParentTable="Reservasi" msprop:Generator_UserChildTable="Transaksi" msprop:Generator_RelationVarName="relationFK__Transaksi__id_re__6A30C649" msprop:Generator_ChildPropName="GetTransaksiRows" msprop:Generator_UserRelationName="FK__Transaksi__id_re__6A30C649" msprop:Generator_ParentPropName="ReservasiRow" />
-      <msdata:Relationship name="FK__Transaksi__id_us__6B24EA82" msdata:parent="User" msdata:child="Transaksi" msdata:parentkey="id_user" msdata:childkey="id_user" msprop:Generator_UserParentTable="User" msprop:Generator_UserChildTable="Transaksi" msprop:Generator_RelationVarName="relationFK__Transaksi__id_us__6B24EA82" msprop:Generator_ChildPropName="GetTransaksiRows" msprop:Generator_ParentPropName="UserRow" msprop:Generator_UserRelationName="FK__Transaksi__id_us__6B24EA82" />
+      <msdata:Relationship name="FK__DendaKeru__id_ka__76969D2E" msdata:parent="Kamar" msdata:child="DendaKerusakan" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_ka__76969D2E" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_UserRelationName="FK__DendaKeru__id_ka__76969D2E" msprop:Generator_ParentPropName="KamarRow" />
+      <msdata:Relationship name="FK__DendaKeru__id_pr__75A278F5" msdata:parent="Properti" msdata:child="DendaKerusakan" msdata:parentkey="id_properti" msdata:childkey="id_properti" msprop:Generator_UserParentTable="Properti" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_pr__75A278F5" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_UserRelationName="FK__DendaKeru__id_pr__75A278F5" msprop:Generator_ParentPropName="PropertiRow" />
+      <msdata:Relationship name="FK__DendaKeru__id_tr__74AE54BC" msdata:parent="Transaksi" msdata:child="DendaKerusakan" msdata:parentkey="id_transaksi" msdata:childkey="id_transaksi" msprop:Generator_UserParentTable="Transaksi" msprop:Generator_UserChildTable="DendaKerusakan" msprop:Generator_RelationVarName="relationFK__DendaKeru__id_tr__74AE54BC" msprop:Generator_ChildPropName="GetDendaKerusakanRows" msprop:Generator_UserRelationName="FK__DendaKeru__id_tr__74AE54BC" msprop:Generator_ParentPropName="TransaksiRow" />
+      <msdata:Relationship name="FK__DetailRes__id_ka__656C112C" msdata:parent="Kamar" msdata:child="DetailReservasi" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="DetailReservasi" msprop:Generator_RelationVarName="relationFK__DetailRes__id_ka__656C112C" msprop:Generator_ChildPropName="GetDetailReservasiRows" msprop:Generator_UserRelationName="FK__DetailRes__id_ka__656C112C" msprop:Generator_ParentPropName="KamarRow" />
+      <msdata:Relationship name="FK__DetailRes__id_re__6477ECF3" msdata:parent="Reservasi" msdata:child="DetailReservasi" msdata:parentkey="id_reservasi" msdata:childkey="id_reservasi" msprop:Generator_UserParentTable="Reservasi" msprop:Generator_UserChildTable="DetailReservasi" msprop:Generator_RelationVarName="relationFK__DetailRes__id_re__6477ECF3" msprop:Generator_ChildPropName="GetDetailReservasiRows" msprop:Generator_UserRelationName="FK__DetailRes__id_re__6477ECF3" msprop:Generator_ParentPropName="ReservasiRow" />
+      <msdata:Relationship name="FK__Kamar__id_tipe__47DBAE45" msdata:parent="TipeKamar" msdata:child="Kamar" msdata:parentkey="id_tipe" msdata:childkey="id_tipe" msprop:Generator_UserParentTable="TipeKamar" msprop:Generator_UserChildTable="Kamar" msprop:Generator_RelationVarName="relationFK__Kamar__id_tipe__47DBAE45" msprop:Generator_ChildPropName="GetKamarRows" msprop:Generator_UserRelationName="FK__Kamar__id_tipe__47DBAE45" msprop:Generator_ParentPropName="TipeKamarRow" />
+      <msdata:Relationship name="FK__PropertiK__id_ka__5535A963" msdata:parent="Kamar" msdata:child="PropertiKamar" msdata:parentkey="id_kamar" msdata:childkey="id_kamar" msprop:Generator_UserParentTable="Kamar" msprop:Generator_UserChildTable="PropertiKamar" msprop:Generator_RelationVarName="relationFK__PropertiK__id_ka__5535A963" msprop:Generator_ChildPropName="GetPropertiKamarRows" msprop:Generator_ParentPropName="KamarRow" msprop:Generator_UserRelationName="FK__PropertiK__id_ka__5535A963" />
+      <msdata:Relationship name="FK__PropertiK__id_pr__5441852A" msdata:parent="Properti" msdata:child="PropertiKamar" msdata:parentkey="id_properti" msdata:childkey="id_properti" msprop:Generator_UserParentTable="Properti" msprop:Generator_UserChildTable="PropertiKamar" msprop:Generator_RelationVarName="relationFK__PropertiK__id_pr__5441852A" msprop:Generator_ChildPropName="GetPropertiKamarRows" msprop:Generator_ParentPropName="PropertiRow" msprop:Generator_UserRelationName="FK__PropertiK__id_pr__5441852A" />
+      <msdata:Relationship name="FK__Reservasi__id_ta__5AEE82B9" msdata:parent="Tamu" msdata:child="Reservasi" msdata:parentkey="id_tamu" msdata:childkey="id_tamu" msprop:Generator_UserParentTable="Tamu" msprop:Generator_UserChildTable="Reservasi" msprop:Generator_RelationVarName="relationFK__Reservasi__id_ta__5AEE82B9" msprop:Generator_ChildPropName="GetReservasiRows" msprop:Generator_UserRelationName="FK__Reservasi__id_ta__5AEE82B9" msprop:Generator_ParentPropName="TamuRow" />
+      <msdata:Relationship name="FK__Transaksi__id_re__6A30C649" msdata:parent="Reservasi" msdata:child="Transaksi" msdata:parentkey="id_reservasi" msdata:childkey="id_reservasi" msprop:Generator_UserParentTable="Reservasi" msprop:Generator_UserChildTable="Transaksi" msprop:Generator_RelationVarName="relationFK__Transaksi__id_re__6A30C649" msprop:Generator_ChildPropName="GetTransaksiRows" msprop:Generator_ParentPropName="ReservasiRow" msprop:Generator_UserRelationName="FK__Transaksi__id_re__6A30C649" />
+      <msdata:Relationship name="FK__Transaksi__id_us__6B24EA82" msdata:parent="User" msdata:child="Transaksi" msdata:parentkey="id_user" msdata:childkey="id_user" msprop:Generator_UserParentTable="User" msprop:Generator_UserChildTable="Transaksi" msprop:Generator_RelationVarName="relationFK__Transaksi__id_us__6B24EA82" msprop:Generator_ChildPropName="GetTransaksiRows" msprop:Generator_UserRelationName="FK__Transaksi__id_us__6B24EA82" msprop:Generator_ParentPropName="UserRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
